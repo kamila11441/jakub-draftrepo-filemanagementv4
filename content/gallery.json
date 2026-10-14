@@ -1,8 +1,56 @@
 {
   "photos": [
     {
-      "image": "images/1792019416504-y8v6w-temp_image_C40E62A2-5CDE-4C1A-BE6F-D994F24F8526.jpeg",
-      "alt": "temp image C40E62A2 5CDE 4C1A BE6F D994F24F8526",
+      "image": "images/1792019436023-l38k3-0CE0BDAD-D926-4440-9EB5-E8B70F2F3407.jpeg",
+      "alt": "0CE0BDAD D926 4440 9EB5 E8B70F2F3407",
+      "category": "people",
+      "showCaption": false
+    },
+    {
+      "image": "images/1792019439821-oh0q4-233A8274-994C-4A00-A5A3-E6BFB06ED169.jpeg",
+      "alt": "233A8274 994C 4A00 A5A3 E6BFB06ED169",
+      "category": "people",
+      "showCaption": false
+    },
+    {
+      "image": "images/1792019441588-jk85m-IMG_4120.jpeg",
+      "alt": "IMG 4120",
+      "category": "people",
+      "showCaption": false
+    },
+    {
+      "image": "images/1792019443381-c3io3-IMG_4121.jpeg",
+      "alt": "IMG 4121",
+      "category": "people",
+      "showCaption": false
+    },
+    {
+      "image": "images/1792019445616-2rxt6-IMG_4128.jpeg",
+      "alt": "IMG 4128",
+      "category": "people",
+      "showCaption": false
+    },
+    {
+      "image": "images/1792019447358-b8px9-temp_image_5D40B997-B3D9-49AB-9F64-B1795FA03592.jpeg",
+      "alt": "temp image 5D40B997 B3D9 49AB 9F64 B1795FA03592",
+      "category": "people",
+      "showCaption": false
+    },
+    {
+      "image": "images/1792019448965-ticcg-temp_image_06F46D78-A70B-43F9-8DF3-D19010B87E98.jpeg",
+      "alt": "temp image 06F46D78 A70B 43F9 8DF3 D19010B87E98",
+      "category": "people",
+      "showCaption": false
+    },
+    {
+      "image": "images/1792019450741-3lg5p-temp_image_86FB89D1-F46E-4C66-BC96-7142E3D96701.jpeg",
+      "alt": "temp image 86FB89D1 F46E 4C66 BC96 7142E3D96701",
+      "category": "people",
+      "showCaption": false
+    },
+    {
+      "image": "images/1792019452487-e3504-temp_image_0858A495-2FDF-4CE8-B702-C5C4D4ECF04D.jpeg",
+      "alt": "temp image 0858A495 2FDF 4CE8 B702 C5C4D4ECF04D",
       "category": "people",
       "showCaption": false
     }
