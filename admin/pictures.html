@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Picture Manager — JK</title>
+<style>
+:root{color-scheme:dark;--bg:#111210;--panel:#1b1c19;--line:#393a34;--text:#f2f1e9;--muted:#a4a59b;--accent:#d5ddc9;--red:#e6a5a0}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,Arial,sans-serif}a{color:inherit;text-decoration:none}button,input,select{font:inherit}button{cursor:pointer;border:1px solid #51524b;background:#262722;color:var(--text);border-radius:8px;padding:10px 13px}button.primary{background:var(--accent);border-color:var(--accent);color:#151611;font-weight:700}button.danger{color:var(--red);border-color:#724a47}button:disabled{opacity:.45;cursor:not-allowed}input:not([type=file]),select{width:100%;background:#11120f;color:var(--text);border:1px solid #45463f;border-radius:8px;padding:11px}input[type=file]{width:100%;padding:13px;border:1px dashed #55564d;border-radius:10px;background:#11120f;color:var(--muted)}.wrap{max-width:1250px;margin:auto;padding:25px 22px 70px}.nav{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:18px;font-size:10px;text-transform:uppercase;letter-spacing:.16em}.nav a:last-child{color:var(--muted)}.hero{display:flex;justify-content:space-between;align-items:end;gap:25px;padding:48px 0 30px}.eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}h1{font:400 clamp(42px,7vw,78px)/.9 Georgia,serif;letter-spacing:-.06em;margin:12px 0 0}.hero p{max-width:320px;color:var(--muted);font-size:13px}.layout{display:grid;grid-template-columns:330px minmax(0,1fr);gap:18px;align-items:start}.panel{border:1px solid var(--line);border-radius:13px;background:var(--panel);padding:18px;margin-bottom:16px}.panel h2{font:400 24px Georgia,serif;letter-spacing:-.04em;margin:0 0 15px}.field{display:flex;flex-direction:column;gap:7px;margin:12px 0}.field label{font-size:11px;color:var(--muted)}.hint{font-size:11px;color:var(--muted)}.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.status{font-size:12px;color:var(--muted);min-height:20px;margin-top:10px;overflow-wrap:anywhere}.status.error{color:#ffaaa3}.status.ok{color:#c9e7b8}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px}.toolbar h2{font:400 31px Georgia,serif;margin:0}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.photo{min-width:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#141511}.photo img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#292a24}.photo-body{padding:12px}.title{font-size:12px;overflow-wrap:anywhere}.meta{font-size:10px;color:var(--muted);margin:5px 0 11px}.photo-actions{display:flex;flex-wrap:wrap;gap:6px}.photo-actions button{font-size:11px;padding:7px 9px}.empty{padding:45px 15px;border:1px dashed #44453e;border-radius:10px;color:var(--muted);text-align:center}.note{font-size:11px;line-height:1.6;color:var(--muted)}code{color:var(--accent)}@media(max-width:800px){.layout{grid-template-columns:1fr}.hero{display:block;padding-top:36px}.hero p{margin-top:22px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:440px){.wrap{padding:18px 12px}.cards{grid-template-columns:1fr}.toolbar{align-items:start;flex-direction:column}}
+</style></head><body><div class="wrap">
+<div class="nav"><a href="../">JK / PHOTOGRAPHY</a><a href="../">← View public portfolio</a></div>
+<section class="hero"><div><div class="eyebrow">Private tools / Gallery operations</div><h1>Picture<br>Manager.</h1></div><p>Upload, organize and publish your selected frames. Changes are committed directly to your GitHub repository.</p></section>
+<div class="layout"><aside>
+<section class="panel"><h2>01 / Connect</h2>
+<div class="field"><label for="repo">GitHub repository</label><input id="repo" value="kamila11441/jakub-draftrepo-filemanagementv2"></div>
+<div class="field"><label for="branch">Branch</label><input id="branch" value="main"></div>
+<div class="field"><label for="galleryPath">Gallery JSON path</label><input id="galleryPath" value="content/gallery.json"></div>
+<div class="field"><label for="token">Fine-grained access token</label><input id="token" type="password" placeholder="Paste token for this session" autocomplete="off"></div>
+<p class="note">Token is held in memory in this tab only. Use a fine-grained token limited to this repository with Contents: Read and write. Never put the token in a file or share it.</p>
+<div class="actions"><button class="primary" id="connect">Connect</button><button id="clear">Clear</button></div><div id="connectStatus" class="status"></div></section>
+<section class="panel"><h2>02 / Add frames</h2><div class="field"><label for="files">Image files</label><input id="files" type="file" accept="image/jpeg,image/png,image/webp,image/avif" multiple></div>
+<div class="field"><label for="category">Category</label><select id="category"><option value="people">People</option><option value="places">Places</option><option value="editorial">Editorial</option><option value="other">Other</option></select></div>
+<div class="field"><label for="alt">Caption / alt text (optional)</label><input id="alt" placeholder="e.g. Evening in the city"></div>
+<div class="field"><label><input id="showCaption" type="checkbox" checked style="width:auto;margin-right:8px"> Show caption below photo</label><p class="hint">Turn this off for a clean image-only tile. The alt text is still kept for accessibility.</p></div>
+<div class="field"><label for="insertPosition">Add position</label><select id="insertPosition"><option value="end">At the end</option></select><p class="hint">Choose where the new photo(s) should appear in the public gallery.</p></div>
+<p class="note">Files are saved to <code>images/</code> and added to <code>content/gallery.json</code>. Maximum 20 MB per image.</p><div class="actions"><button class="primary" id="upload" disabled>Upload selected</button><span id="fileCount" class="hint">No files selected</span></div><div id="uploadStatus" class="status"></div></section>
+</aside><section class="panel"><div class="toolbar"><div><div class="eyebrow">Repository contents</div><h2>Current gallery</h2></div><button id="refresh" disabled>Refresh ↻</button></div><div id="galleryStatus" class="status">Connect to load your gallery.</div><div id="cards" class="cards"></div></section></div>
+<p class="note">Static-site limitation: this page has no private server. GitHub's token provides write access. Keep the URL private, clear the token when finished, and remember GitHub Pages can take a short time to publish a commit.</p>
+</div>
+<script>
+(()=>{const $=id=>document.getElementById(id);let token='',photos=[],connected=false;const repo=()=>$('repo').value.trim(),branch=()=>$('branch').value.trim()||'main',gp=()=>$('galleryPath').value.trim()||'content/gallery.json';const headers=()=>({Authorization:'Bearer '+token,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'});const api=p=>'https://api.github.com/repos/'+repo()+'/contents/'+p.split('/').map(encodeURIComponent).join('/');const say=(id,msg,type='')=>{$(id).textContent=msg;$(id).className='status '+type;};async function req(url,opt={}){
+  let r;
+  try { r = await fetch(url,{...opt,headers:{...headers(),...(opt.headers||{})}}); }
+  catch(e) {
+    // Browsers intentionally hide the precise cause of failed cross-origin requests.
+    // Give actionable guidance without ever exposing the token.
+    const method = (opt.method || 'GET').toUpperCase();
+    throw Error(
+      `Browser could not complete the GitHub API ${method} request. ` +
+      `If loading the gallery works but saving fails, try opening this manager from your published GitHub Pages URL (https), ` +
+      `disable any ad-blocker/privacy extension for this site, and try another browser/network. ` +
+      `Also confirm the fine-grained token has Contents: Read and write access to this exact repository. ` +
+      `Browser detail: ${e && e.message ? e.message : 'network request blocked'}`
+    );
+  }
+  const d=await r.json().catch(()=>({}));
+  if(!r.ok){
+    const detail=d.message||r.statusText||'Unknown GitHub API error';
+    throw Error(`GitHub API ${r.status}: ${detail}`);
+  }
+  return d;
+}function decode(d){return JSON.parse(decodeURIComponent(escape(atob(d.content.replace(/\s/g,'')))));}
+function updateInsertPosition(){
+  const select=$('insertPosition');
+  if(!select)return;
+  const previous=select.value||'end';
+  select.innerHTML='';
+  for(let i=0;i<=photos.length;i++){
+    const option=document.createElement('option');
+    option.value=String(i);
+    option.textContent=i===photos.length
+      ? `At the end (${ordinal(i+1)})`
+      : `Position ${i+1} — before "${photos[i].alt||((photos[i].image||'').split('/').pop())}"`;
+    select.appendChild(option);
+  }
+  const endOption=document.createElement('option');
+  endOption.value='end';
+  endOption.textContent='At the end';
+  select.appendChild(endOption);
+  if(previous==='end')select.value='end';
+  else if(Number.isInteger(Number(previous))&&Number(previous)>=0&&Number(previous)<=photos.length)select.value=previous;
+  else select.value='end';
+}
+function ordinal(n){
+  const v=n%100;
+  if(v>=11&&v<=13)return n+'th';
+  return n+(n%10===1?'st':n%10===2?'nd':n%10===3?'rd':'th');
+}async function load(){const d=await req(api(gp())+'?ref='+encodeURIComponent(branch()));const data=decode(d);photos=Array.isArray(data)?data:(data.photos||[]);updateInsertPosition();render();}
+async function save(message){
+  // Always request a fresh GitHub version/SHA before writing.
+  let lastError;
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const url = api(gp()) + '?ref=' + encodeURIComponent(branch()) + '&_=' + Date.now();
+    const d = await req(url, {cache: 'no-store'});
+    const original = decode(d);
+    const next = Array.isArray(original) ? photos : {...original, photos};
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(next, null, 2) + '\n')));
+    try {
+      await req(api(gp()), {
+        method: 'PUT',
+        body: JSON.stringify({message, content, sha: d.sha, branch: branch()})
+      });
+      render();
+      return;
+    } catch (e) {
+      lastError = e;
+      const conflict = /does not match|sha|409|conflict|reference update failed/i.test(e.message);
+      if (!conflict || attempt === 3) throw e;
+      await new Promise(resolve => setTimeout(resolve, 500 * (attempt + 1)));
+    }
+  }
+  throw lastError;
+}
+function render(){const c=$('cards');c.innerHTML='';$('galleryStatus').textContent=photos.length+` photograph${photos.length===1?'':'s'} in the gallery.`;if(!photos.length){c.innerHTML='<div class="empty">No photographs yet. Add the first frame from the panel.</div>';return;}photos.forEach((p,i)=>{const card=document.createElement('article');card.className='photo';const img=document.createElement('img');img.src=/^https?:/i.test(p.image||'')?p.image:'../'+(p.image||'').replace(/^\/+/,'');img.alt=p.alt||'';img.loading='lazy';img.onerror=()=>{img.style.opacity='.2';};const body=document.createElement('div');body.className='photo-body';const title=document.createElement('div');title.className='title';title.textContent=p.alt||((p.image||'').split('/').pop()||'Untitled frame');const meta=document.createElement('div');meta.className='meta';meta.textContent=(p.category||'other')+' / '+String(i+1).padStart(2,'0');const actions=document.createElement('div');actions.className='photo-actions';const btn=(label,fn,cls='')=>{const b=document.createElement('button');b.textContent=label;b.className=cls;b.onclick=fn;return b;};actions.append(btn('↑',()=>move(i,-1),''),btn('↓',()=>move(i,1),''),btn('Edit',()=>edit(i)),btn('Remove',()=>remove(i),'danger'));actions.children[0].disabled=i===0;actions.children[1].disabled=i===photos.length-1;body.append(title,meta,actions);card.append(img,body);c.append(card);});}
+async function move(i,d){
+  const j=i+d;
+  if(j<0||j>=photos.length)return;
+  [photos[i],photos[j]]=[photos[j],photos[i]];
+  render();
+  say('galleryStatus','Saving new order…');
+  try{
+    await save('Reorder portfolio gallery');
+    say('galleryStatus','New order saved to GitHub. Refresh the public portfolio to see the change.','ok');
+  }catch(e){
+    // Restore the last committed order from GitHub so the interface stays accurate.
+    try{await load();}catch(_){}
+    say('galleryStatus','Could not save the new order: '+e.message+' Check the repository, branch, token Contents: Read and write permission, then refresh and try again.','error');
+  }
+}
+async function edit(i){const alt=prompt('Caption / alt text (used for accessibility too)',photos[i].alt||'');if(alt===null)return;const cat=prompt('Category: people, places, editorial, other',photos[i].category||'other');if(cat===null)return;if(!['people','places','editorial','other'].includes(cat.trim().toLowerCase())){alert('Use people, places, editorial or other.');return;}const showCaption=confirm('Show the caption below this photo?\n\nOK = show caption\nCancel = no visible caption');photos[i].alt=alt.trim();photos[i].category=cat.trim().toLowerCase();photos[i].showCaption=showCaption;try{await save('Edit portfolio photo details');render();say('galleryStatus','Photo details saved.','ok');}catch(e){say('galleryStatus',e.message,'error');}}
+async function remove(i){
+  const photo = photos[i];
+  if (!photo) return;
+  const imagePath = (photo.image || '').replace(/^\/+/, '');
+  if (!confirm('Permanently delete this photo from the public gallery AND the GitHub repository? The image file will be deleted from the repository and cannot be restored from this manager.')) return;
+
+  const oldPhotos = [...photos];
+  photos.splice(i, 1);
+  try {
+    // Save the gallery first so the public site stops referencing the image.
+    await save('Remove photo from portfolio gallery');
+
+    // Keep the file if another gallery entry still references it.
+    const stillReferenced = photos.some(p => (p.image || '').replace(/^\/+/, '') === imagePath);
+    if (imagePath && !stillReferenced) {
+      try {
+        const file = await req(api(imagePath) + '?ref=' + encodeURIComponent(branch()));
+        await req(api(imagePath), {
+          method: 'DELETE',
+          body: JSON.stringify({
+            message: 'Delete photo from portfolio repository',
+            sha: file.sha,
+            branch: branch()
+          })
+        });
+        say('galleryStatus', 'Photo removed from gallery and deleted from the repository.', 'ok');
+      } catch (deleteError) {
+        say('galleryStatus', 'Removed from gallery, but repository file could not be deleted: ' + deleteError.message, 'error');
+      }
+    } else {
+      say('galleryStatus', 'Removed from gallery. The image file was kept because another gallery entry uses it.', 'ok');
+    }
+  } catch (e) {
+    photos = oldPhotos;
+    render();
+    say('galleryStatus', 'Could not update gallery: ' + e.message, 'error');
+  }
+}
+$('connect').onclick=async()=>{token=$('token').value.trim();if(!token){say('connectStatus','Paste your token first.','error');return;}if(!/^[\w.-]+\/[\w.-]+$/.test(repo())){say('connectStatus','Repository must be owner/repository.','error');return;}$('connect').disabled=true;try{await req('https://api.github.com/repos/'+repo());await load();connected=true;$('upload').disabled=!$('files').files.length;$('refresh').disabled=false;say('connectStatus','Connected successfully.','ok');}catch(e){token='';say('connectStatus',e.message+' Check token permissions, repository and branch.','error');}finally{$('connect').disabled=false;}};
+$('clear').onclick=()=>{token='';$('token').value='';photos=[];connected=false;$('cards').innerHTML='';$('upload').disabled=true;$('refresh').disabled=true;say('connectStatus','Token cleared from this page.');say('galleryStatus','Connect to load your gallery.');};
+$('refresh').onclick=async()=>{try{await load();say('galleryStatus','Gallery refreshed.','ok');}catch(e){say('galleryStatus',e.message,'error');}};
+$('files').onchange=()=>{$('fileCount').textContent=$('files').files.length?$('files').files.length+' file(s) selected':'No files selected';$('upload').disabled=!connected||!$('files').files.length;};
+$('upload').onclick=async()=>{
+  const files=[...$('files').files],cat=$('category').value,alt=$('alt').value.trim(),showCaption=$('showCaption').checked;
+  if(!files.length)return;
+  if(files.some(f=>!/^image\/(jpeg|png|webp|avif)$/.test(f.type))){say('uploadStatus','Use JPG, PNG, WebP or AVIF files.','error');return;}
+  if(files.some(f=>f.size>20*1024*1024)){say('uploadStatus','A file exceeds 20 MB. Resize it and try again.','error');return;}
+  $('upload').disabled=true;
+  const originalPhotos=[...photos];
+  const uploadedPaths=[];
+  const newPhotos=[];
+  try{
+    // Verify the latest gallery is readable before creating any repository files.
+    await load();
+    for(let i=0;i<files.length;i++){
+      const f=files[i],safe=f.name.normalize('NFKD').replace(/[^\w.-]+/g,'-')||'photo';
+      const path='images/'+Date.now()+'-'+Math.random().toString(36).slice(2,7)+'-'+safe;
+      const bytes=new Uint8Array(await f.arrayBuffer());
+      let bin='';
+      for(let j=0;j<bytes.length;j+=32768)bin+=String.fromCharCode(...bytes.subarray(j,j+32768));
+      say('uploadStatus',`Uploading ${i+1} / ${files.length}: ${f.name}`);
+      await req(api(path),{method:'PUT',body:JSON.stringify({message:'Add portfolio photo: '+safe,content:btoa(bin),branch:branch()})});
+      uploadedPaths.push(path);
+      newPhotos.push({image:path,alt:alt||safe.replace(/\.[^.]+$/,'').replace(/[-_]+/g,' '),category:cat,showCaption});
+    }
+    const positionValue=$('insertPosition').value;
+    const insertAt=positionValue==='end'?photos.length:Math.min(Math.max(0,Number(positionValue)||0),photos.length);
+    photos.splice(insertAt,0,...newPhotos);
+    await save('Add '+files.length+' portfolio photo(s) at position '+(insertAt+1));
+    $('files').value='';
+    $('fileCount').textContent='No files selected';
+    say('uploadStatus','Upload complete. Gallery updated.','ok');
+  }catch(e){
+    // Preserve any successfully uploaded file paths in the warning so the user can
+    // check the repo before retrying rather than blindly creating duplicates.
+    photos=originalPhotos;
+    try{await load();}catch(_){}
+    const orphanNote=uploadedPaths.length
+      ? ` ${uploadedPaths.length} image file(s) may already be in images/: ${uploadedPaths.join(', ')}. Check the repository before retrying.`
+      : '';
+    say('uploadStatus',e.message+orphanNote,'error');
+  }finally{
+    $('upload').disabled=!connected||!$('files').files.length;
+  }
+};
+})();
+</script></body></html>
