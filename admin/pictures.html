@@ -1,10 +1,11 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><meta name="theme-color" content="#f3f4f6"><title>Picture Manager — Jakub Kowalski</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--paper:#f3f4f6;--card:#fff;--ink:#0d0e10;--mid:#6b7076;--rule:#dcdfe3;--blue:#2a3cff;--red:#b3261e;--green:#17703a;--serif:"Instrument Serif","Iowan Old Style",Georgia,serif;--sans:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+:root{--paper:#f3f4f6;--card:#fff;--ink:#0d0e10;--mid:#6b7076;--rule:#dcdfe3;--blue:#2a3cff;--red:#b3261e;--green:#17703a;--serif:"Fraunces","Iowan Old Style",Georgia,serif;--sans:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 *{box-sizing:border-box}
+.eyebrow,.field label,.hint,.note,.status,.meta,.photo-actions button,.chip,.bulkbar,.nav{letter-spacing:.012em}
 body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 button,input,select{font:inherit}
@@ -26,19 +27,19 @@ input[type=file]::file-selector-button{font:inherit;border:1px solid var(--rule)
 
 .wrap{max-width:1320px;margin:auto;padding:22px clamp(16px,3.4vw,48px) 80px}
 .nav{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:14px}
-.nav a:first-child{font-weight:600;letter-spacing:-.01em}
+.nav a:first-child{font-weight:600;letter-spacing:0}
 .nav a:last-child{color:var(--mid);border:1px solid var(--rule);border-radius:999px;padding:8px 18px;transition:color .2s,border-color .2s}
 .nav a:last-child:hover{color:var(--ink);border-color:var(--ink)}
 
 .hero{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding:clamp(40px,6vw,88px) 0 clamp(28px,4vw,52px);border-bottom:2px solid var(--ink);margin-bottom:clamp(24px,3vw,40px)}
-.eyebrow{font-size:13px;color:var(--mid)}
-h1{font:400 clamp(56px,9vw,132px)/.88 var(--serif);letter-spacing:-.04em;margin:0}
+.eyebrow{font-size:13px;color:var(--mid);margin-bottom:16px}
+h1{font:400 clamp(56px,9vw,132px)/1.06 var(--serif);letter-spacing:-.015em;margin:0}
 .hero p{max-width:320px;margin:0;color:var(--mid);font-size:14px}
 
 .layout{display:grid;grid-template-columns:360px minmax(0,1fr);gap:clamp(16px,2vw,28px);align-items:start}
 aside{display:flex;flex-direction:column;gap:clamp(16px,2vw,28px)}
 .panel{background:var(--card);border-radius:24px;padding:clamp(20px,2.2vw,30px)}
-.panel h2{display:flex;align-items:center;gap:12px;font:400 32px/1 var(--serif);letter-spacing:-.025em;margin:0 0 18px}
+.panel h2{display:flex;align-items:center;gap:14px;font:400 34px/1.15 var(--serif);letter-spacing:0;margin:0 0 20px}
 .step{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font:500 13px/1 var(--sans);letter-spacing:0}
 .field{display:flex;flex-direction:column;gap:7px;margin:14px 0}
 .field label{font-size:13px;color:var(--mid)}
@@ -52,7 +53,7 @@ aside{display:flex;flex-direction:column;gap:clamp(16px,2vw,28px)}
 code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--paper);border-radius:6px;padding:2px 6px;color:var(--ink)}
 .gallery-panel{min-height:420px}
 .toolbar{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:12px;padding-bottom:18px;border-bottom:1px solid var(--rule)}
-.toolbar h2{font:400 clamp(36px,4vw,56px)/.95 var(--serif);letter-spacing:-.03em;margin:6px 0 0;display:block}
+.toolbar h2{font:400 clamp(36px,4vw,56px)/1.1 var(--serif);letter-spacing:-.005em;margin:12px 0 0;display:block}
 
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:clamp(12px,1.6vw,20px);margin-top:20px}
 .photo{min-width:0;border-radius:18px;overflow:hidden;background:var(--paper)}
@@ -61,10 +62,36 @@ code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--pape
 .title{font-size:14px;font-weight:500;overflow-wrap:anywhere;line-height:1.3}
 .meta{font-size:12px;color:var(--mid);margin:4px 0 14px;text-transform:capitalize}
 .photo-actions{display:flex;flex-wrap:wrap;gap:6px}
-.photo-actions button{font-size:13px;padding:6px 14px}
+.photo-actions button{font-size:13px;padding:6px 10px}
 .empty{padding:56px 16px;border:1px dashed #b4b9be;border-radius:18px;color:var(--mid);text-align:center;grid-column:1/-1;font:italic 24px var(--serif)}
 .foot{margin-top:28px;max-width:60em}
 
+[hidden]{display:none!important}
+.filterbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-top:18px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:6px 14px;font-size:13px}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.fb-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.fb-right button{font-size:13px;padding:8px 14px}
+#search{width:200px;max-width:100%;padding:9px 14px}
+.bulkbar{position:sticky;top:10px;z-index:5;display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px;padding:10px 12px;border-radius:16px;background:var(--paper);box-shadow:0 8px 20px rgba(13,14,16,.1);font-size:13px}
+.bulkbar select{width:auto;padding:7px 12px;background:var(--card)}
+.bulkbar button{font-size:13px;padding:6px 14px}
+.sel-count{margin-right:auto;font-weight:500}
+.thumb{position:relative}
+.pick{position:absolute;top:10px;left:10px;width:20px;height:20px;cursor:pointer;z-index:1}
+.photo{transition:box-shadow .2s,opacity .2s}
+.photo.sel{box-shadow:0 0 0 2px var(--blue)}
+.photo[draggable=true]{cursor:grab}
+.photo.dragging{opacity:.4}
+.photo.over{box-shadow:0 0 0 2px var(--ink)}
+.previews{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.previews:empty{display:none}
+.pv{position:relative;width:64px;height:64px;border-radius:10px;overflow:hidden;background:var(--paper)}
+.pv img{width:100%;height:100%;object-fit:cover;display:block}
+.pv button{position:absolute;top:3px;right:3px;width:20px;height:20px;padding:0;border-radius:50%;font-size:12px;line-height:1;background:rgba(13,14,16,.8);color:#fff;border:0}
+.panel.drop{outline:2px dashed var(--blue);outline-offset:-8px}
+@media(min-width:901px){aside{position:sticky;top:20px}}
 @media(max-width:900px){.layout{grid-template-columns:1fr}.hero{display:block}.hero p{margin-top:20px}}
 @media(max-width:440px){.toolbar{align-items:flex-start;flex-direction:column}.cards{grid-template-columns:1fr}}
 </style></head><body><div class="wrap">
@@ -78,17 +105,19 @@ code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--pape
 <div class="field"><label for="token">Fine-grained access token</label><input id="token" type="password" placeholder="Paste token for this session" autocomplete="off"></div>
 <p class="note">Token is held in memory in this tab only. Use a fine-grained token limited to this repository with Contents: Read and write. Never put the token in a file or share it.</p>
 <div class="actions"><button class="primary" id="connect">Connect</button><button id="clear">Clear</button></div><div id="connectStatus" class="status"></div></section>
-<section class="panel"><h2><span class="step">2</span>Add frames</h2><div class="field"><label for="files">Image files</label><input id="files" type="file" accept="image/jpeg,image/png,image/webp,image/avif" multiple></div>
+<section class="panel" id="addPanel"><h2><span class="step">2</span>Add frames</h2><div class="field"><label for="files">Image files</label><input id="files" type="file" accept="image/jpeg,image/png,image/webp,image/avif" multiple><div id="previews" class="previews"></div><p class="hint">Tip: drag image files anywhere onto this panel. Duplicates are skipped.</p></div>
 <div class="field"><label for="category">Category</label><select id="category"><option value="people">People</option><option value="places">Places</option><option value="editorial">Editorial</option><option value="other">Other</option></select></div>
 <div class="field"><label for="alt">Caption / alt text (optional)</label><input id="alt" placeholder="e.g. Evening in the city"></div>
 <div class="field"><label class="check"><input id="showCaption" type="checkbox" checked> Show caption below photo</label><p class="hint">Turn this off for a clean image-only tile. The alt text is still kept for accessibility.</p></div>
 <div class="field"><label for="insertPosition">Add position</label><select id="insertPosition"><option value="end">At the end</option></select><p class="hint">Choose where the new photo(s) should appear in the public gallery.</p></div>
 <p class="note">Files are saved to <code>images/</code> and added to <code>content/gallery.json</code>. Maximum 20 MB per image.</p><div class="actions"><button class="primary" id="upload" disabled>Upload selected</button><span id="fileCount" class="hint">No files selected</span></div><div id="uploadStatus" class="status"></div></section>
-</aside><section class="panel gallery-panel"><div class="toolbar"><div><div class="eyebrow">Repository contents</div><h2>Current gallery</h2></div><button id="refresh" disabled>Refresh ↻</button></div><div id="galleryStatus" class="status">Connect to load your gallery.</div><div id="cards" class="cards"></div></section></div>
+</aside><section class="panel gallery-panel"><div class="toolbar"><div><div class="eyebrow" style="margin-bottom:0">Repository contents</div><h2>Current gallery</h2></div><button id="refresh" disabled>Refresh ↻</button></div><div id="galleryStatus" class="status">Connect to load your gallery.</div><div id="filterbar" class="filterbar" hidden><div id="chips" class="chips"></div><div class="fb-right"><input id="search" type="search" placeholder="Search captions…" autocomplete="off" aria-label="Search captions"><button id="selAll" type="button">Select shown</button></div></div>
+<div id="bulkbar" class="bulkbar" hidden><span id="selCount" class="sel-count"></span><button id="selNone" type="button">Clear</button><select id="bulkCat" aria-label="New category"><option value="people">People</option><option value="places">Places</option><option value="editorial">Editorial</option><option value="other">Other</option></select><button id="bulkApply" type="button">Set category</button><button id="bulkDelete" type="button" class="danger">Delete</button></div>
+<div id="cards" class="cards"></div></section></div>
 <p class="note foot">Static-site limitation: this page has no private server. GitHub's token provides write access. Keep the URL private, clear the token when finished, and remember GitHub Pages can take a short time to publish a commit.</p>
 </div>
 <script>
-(()=>{const $=id=>document.getElementById(id);let token='',photos=[],connected=false;const repo=()=>$('repo').value.trim(),branch=()=>$('branch').value.trim()||'main',gp=()=>$('galleryPath').value.trim()||'content/gallery.json';const headers=()=>({Authorization:'Bearer '+token,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'});const api=p=>'https://api.github.com/repos/'+repo()+'/contents/'+p.split('/').map(encodeURIComponent).join('/');const say=(id,msg,type='')=>{$(id).textContent=msg;$(id).className='status '+type;};async function req(url,opt={}){
+(()=>{const $=id=>document.getElementById(id);let token='',photos=[],connected=false,filterCat='all',query='',dragIdx=null;const selected=new Set();const repo=()=>$('repo').value.trim(),branch=()=>$('branch').value.trim()||'main',gp=()=>$('galleryPath').value.trim()||'content/gallery.json';const headers=()=>({Authorization:'Bearer '+token,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'});const api=p=>'https://api.github.com/repos/'+repo()+'/contents/'+p.split('/').map(encodeURIComponent).join('/');const say=(id,msg,type='')=>{$(id).textContent=msg;$(id).className='status '+type;};async function req(url,opt={}){
   let r;
   try { r = await fetch(url,{...opt,headers:{...headers(),...(opt.headers||{})}}); }
   catch(e) {
@@ -132,7 +161,7 @@ function ordinal(n){
   const v=n%100;
   if(v>=11&&v<=13)return n+'th';
   return n+(n%10===1?'st':n%10===2?'nd':n%10===3?'rd':'th');
-}async function load(){const d=await req(api(gp())+'?ref='+encodeURIComponent(branch()));const data=decode(d);photos=Array.isArray(data)?data:(data.photos||[]);updateInsertPosition();render();}
+}async function load(){const d=await req(api(gp())+'?ref='+encodeURIComponent(branch()));const data=decode(d);photos=Array.isArray(data)?data:(data.photos||[]);selected.clear();updateInsertPosition();render();}
 async function save(message){
   // Always request a fresh GitHub version/SHA before writing.
   let lastError;
@@ -158,12 +187,58 @@ async function save(message){
   }
   throw lastError;
 }
-function render(){const c=$('cards');c.innerHTML='';$('galleryStatus').textContent=photos.length+` photograph${photos.length===1?'':'s'} in the gallery.`;if(!photos.length){c.innerHTML='<div class="empty">No photographs yet. Add the first frame from the panel.</div>';return;}photos.forEach((p,i)=>{const card=document.createElement('article');card.className='photo';const img=document.createElement('img');img.src=/^https?:/i.test(p.image||'')?p.image:'../'+(p.image||'').replace(/^\/+/,'');img.alt=p.alt||'';img.loading='lazy';img.onerror=()=>{img.style.opacity='.2';};const body=document.createElement('div');body.className='photo-body';const title=document.createElement('div');title.className='title';title.textContent=p.alt||((p.image||'').split('/').pop()||'Untitled frame');const meta=document.createElement('div');meta.className='meta';meta.textContent=(p.category||'other')+' / '+String(i+1).padStart(2,'0');const actions=document.createElement('div');actions.className='photo-actions';const btn=(label,fn,cls='')=>{const b=document.createElement('button');b.textContent=label;b.className=cls;b.onclick=fn;return b;};actions.append(btn('↑',()=>move(i,-1),''),btn('↓',()=>move(i,1),''),btn('Edit',()=>edit(i)),btn('Remove',()=>remove(i),'danger'));actions.children[0].disabled=i===0;actions.children[1].disabled=i===photos.length-1;body.append(title,meta,actions);card.append(img,body);c.append(card);});}
-async function move(i,d){
-  const j=i+d;
-  if(j<0||j>=photos.length)return;
-  [photos[i],photos[j]]=[photos[j],photos[i]];
-  render();
+function visible(p){const q=query.trim().toLowerCase();return (filterCat==='all'||(p.category||'other')===filterCat)&&(!q||((p.alt||'')+' '+(p.image||'')).toLowerCase().includes(q));}
+const isFiltering=()=>filterCat!=='all'||query.trim()!=='';
+function renderChips(){
+  const counts={all:photos.length};
+  photos.forEach(p=>{const k=p.category||'other';counts[k]=(counts[k]||0)+1;});
+  const wrap=$('chips');wrap.innerHTML='';
+  ['all','people','places','editorial','other'].forEach(k=>{
+    const b=document.createElement('button');b.type='button';b.className='chip'+(filterCat===k?' on':'');
+    b.textContent=(k==='all'?'All':k.charAt(0).toUpperCase()+k.slice(1))+' '+(counts[k]||0);
+    b.onclick=()=>{filterCat=k;render();};wrap.append(b);
+  });
+}
+function updateBulk(){$('bulkbar').hidden=!selected.size;$('selCount').textContent=selected.size+' selected';}
+function render(){
+  const c=$('cards');c.innerHTML='';
+  const n=photos.length,filt=isFiltering();
+  // selection only ever covers photos that are currently shown
+  [...selected].forEach(p=>{if(!photos.includes(p)||!visible(p))selected.delete(p);});
+  $('filterbar').hidden=!n;renderChips();updateBulk();
+  const shown=[];photos.forEach((p,i)=>{if(visible(p))shown.push(i);});
+  $('galleryStatus').textContent=filt?`${shown.length} of ${n} photograph${n===1?'':'s'} shown.`:n+` photograph${n===1?'':'s'} in the gallery.`;
+  if(!n){c.innerHTML='<div class="empty">No photographs yet. Add the first frame from the panel.</div>';return;}
+  if(!shown.length){c.innerHTML='<div class="empty">No photographs match this filter.</div>';return;}
+  const canDrag=!filt&&n>1;
+  shown.forEach(i=>{
+    const p=photos[i];
+    const card=document.createElement('article');card.className='photo'+(selected.has(p)?' sel':'');
+    const thumb=document.createElement('div');thumb.className='thumb';
+    const img=document.createElement('img');img.src=/^https?:/i.test(p.image||'')?p.image:'../'+(p.image||'').replace(/^\/+/,'');img.alt=p.alt||'';img.loading='lazy';img.draggable=false;img.onerror=()=>{img.style.opacity='.2';};
+    const pick=document.createElement('input');pick.type='checkbox';pick.className='pick';pick.checked=selected.has(p);pick.setAttribute('aria-label','Select photo');
+    pick.onchange=()=>{if(pick.checked)selected.add(p);else selected.delete(p);card.classList.toggle('sel',pick.checked);updateBulk();};
+    thumb.append(img,pick);
+    const body=document.createElement('div');body.className='photo-body';
+    const title=document.createElement('div');title.className='title';title.textContent=p.alt||((p.image||'').split('/').pop()||'Untitled frame');
+    const meta=document.createElement('div');meta.className='meta';meta.textContent=(p.category||'other')+' / '+String(i+1).padStart(2,'0');
+    const actions=document.createElement('div');actions.className='photo-actions';
+    const btn=(label,fn,cls='')=>{const b=document.createElement('button');b.textContent=label;b.className=cls;b.onclick=fn;return b;};
+    actions.append(btn('↑',()=>move(i,-1),''),btn('↓',()=>move(i,1),''),btn('Edit',()=>edit(i)),btn('Remove',()=>remove(i),'danger'));
+    actions.children[0].disabled=filt||i===0;actions.children[1].disabled=filt||i===n-1;
+    body.append(title,meta,actions);card.append(thumb,body);
+    if(canDrag){
+      card.draggable=true;
+      card.ondragstart=e=>{dragIdx=i;card.classList.add('dragging');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',String(i));};
+      card.ondragend=()=>{dragIdx=null;document.querySelectorAll('.photo.dragging,.photo.over').forEach(el=>el.classList.remove('dragging','over'));};
+      card.ondragover=e=>{if(dragIdx===null)return;e.preventDefault();e.dataTransfer.dropEffect='move';card.classList.add('over');};
+      card.ondragleave=e=>{if(!card.contains(e.relatedTarget))card.classList.remove('over');};
+      card.ondrop=e=>{if(dragIdx===null)return;e.preventDefault();const from=dragIdx;dragIdx=null;reorder(from,i);};
+    }
+    c.append(card);
+  });
+}
+async function commitOrder(){
   say('galleryStatus','Saving new order…');
   try{
     await save('Reorder portfolio gallery');
@@ -173,6 +248,19 @@ async function move(i,d){
     try{await load();}catch(_){}
     say('galleryStatus','Could not save the new order: '+e.message+' Check the repository, branch, token Contents: Read and write permission, then refresh and try again.','error');
   }
+}
+async function move(i,d){
+  const j=i+d;
+  if(j<0||j>=photos.length)return;
+  [photos[i],photos[j]]=[photos[j],photos[i]];
+  render();
+  await commitOrder();
+}
+async function reorder(from,to){
+  if(from===to||from<0||to<0||from>=photos.length||to>=photos.length)return;
+  const [m]=photos.splice(from,1);photos.splice(to,0,m);
+  render();
+  await commitOrder();
 }
 async function edit(i){const alt=prompt('Caption / alt text (used for accessibility too)',photos[i].alt||'');if(alt===null)return;const cat=prompt('Category: people, places, editorial, other',photos[i].category||'other');if(cat===null)return;if(!['people','places','editorial','other'].includes(cat.trim().toLowerCase())){alert('Use people, places, editorial or other.');return;}const showCaption=confirm('Show the caption below this photo?\n\nOK = show caption\nCancel = no visible caption');photos[i].alt=alt.trim();photos[i].category=cat.trim().toLowerCase();photos[i].showCaption=showCaption;try{await save('Edit portfolio photo details');render();say('galleryStatus','Photo details saved.','ok');}catch(e){say('galleryStatus',e.message,'error');}}
 async function remove(i){
@@ -214,9 +302,9 @@ async function remove(i){
   }
 }
 $('connect').onclick=async()=>{token=$('token').value.trim();if(!token){say('connectStatus','Paste your token first.','error');return;}if(!/^[\w.-]+\/[\w.-]+$/.test(repo())){say('connectStatus','Repository must be owner/repository.','error');return;}$('connect').disabled=true;try{await req('https://api.github.com/repos/'+repo());await load();connected=true;$('upload').disabled=!$('files').files.length;$('refresh').disabled=false;say('connectStatus','Connected successfully.','ok');}catch(e){token='';say('connectStatus',e.message+' Check token permissions, repository and branch.','error');}finally{$('connect').disabled=false;}};
-$('clear').onclick=()=>{token='';$('token').value='';photos=[];connected=false;$('cards').innerHTML='';$('upload').disabled=true;$('refresh').disabled=true;say('connectStatus','Token cleared from this page.');say('galleryStatus','Connect to load your gallery.');};
+$('clear').onclick=()=>{token='';$('token').value='';photos=[];selected.clear();filterCat='all';query='';$('search').value='';$('filterbar').hidden=true;$('bulkbar').hidden=true;connected=false;$('cards').innerHTML='';$('upload').disabled=true;$('refresh').disabled=true;say('connectStatus','Token cleared from this page.');say('galleryStatus','Connect to load your gallery.');};
 $('refresh').onclick=async()=>{try{await load();say('galleryStatus','Gallery refreshed.','ok');}catch(e){say('galleryStatus',e.message,'error');}};
-$('files').onchange=()=>{$('fileCount').textContent=$('files').files.length?$('files').files.length+' file(s) selected':'No files selected';$('upload').disabled=!connected||!$('files').files.length;};
+$('files').onchange=()=>{syncPreviews();$('fileCount').textContent=$('files').files.length?$('files').files.length+' file(s) selected':'No files selected';$('upload').disabled=!connected||!$('files').files.length;};
 $('upload').onclick=async()=>{
   const files=[...$('files').files],cat=$('category').value,alt=$('alt').value.trim(),showCaption=$('showCaption').checked;
   if(!files.length)return;
@@ -244,7 +332,7 @@ $('upload').onclick=async()=>{
     const insertAt=positionValue==='end'?photos.length:Math.min(Math.max(0,Number(positionValue)||0),photos.length);
     photos.splice(insertAt,0,...newPhotos);
     await save('Add '+files.length+' portfolio photo(s) at position '+(insertAt+1));
-    $('files').value='';
+    $('files').value='';syncPreviews();
     $('fileCount').textContent='No files selected';
     say('uploadStatus','Upload complete. Gallery updated.','ok');
   }catch(e){
@@ -260,5 +348,90 @@ $('upload').onclick=async()=>{
     $('upload').disabled=!connected||!$('files').files.length;
   }
 };
+
+// ---- gallery filter, search, selection ----
+$('search').oninput=e=>{query=e.target.value;render();};
+$('selAll').onclick=()=>{photos.forEach(p=>{if(visible(p))selected.add(p);});render();};
+$('selNone').onclick=()=>{selected.clear();render();};
+$('bulkApply').onclick=async()=>{
+  const list=[...selected],cat=$('bulkCat').value;
+  if(!list.length)return;
+  const old=list.map(p=>p.category);
+  list.forEach(p=>{p.category=cat;});
+  say('galleryStatus','Saving…');
+  try{
+    await save('Set category "'+cat+'" for '+list.length+' photo(s)');
+    selected.clear();render();
+    say('galleryStatus',list.length+' photo(s) moved to "'+cat+'".','ok');
+  }catch(e){
+    list.forEach((p,k)=>{p.category=old[k];});render();
+    say('galleryStatus','Could not update categories: '+e.message,'error');
+  }
+};
+$('bulkDelete').onclick=async()=>{
+  const list=[...selected];
+  if(!list.length)return;
+  if(!confirm('Permanently delete '+list.length+' photo(s) from the public gallery AND the GitHub repository? The image files will be deleted from the repository and cannot be restored from this manager.'))return;
+  const oldPhotos=[...photos];
+  const norm=p=>(p.image||'').replace(/^\/+/,'');
+  const paths=[...new Set(list.map(norm).filter(x=>x&&!/^https?:/i.test(x)))];
+  photos=photos.filter(p=>!selected.has(p));
+  selected.clear();render();
+  say('galleryStatus','Removing '+list.length+' photo(s)…');
+  try{
+    await save('Remove '+list.length+' photos from portfolio gallery');
+    const keep=new Set(photos.map(norm));
+    let failed=0;
+    // Deleted one by one: GitHub rejects simultaneous commits to the same branch.
+    for(const path of paths){
+      if(keep.has(path))continue;
+      try{
+        const f=await req(api(path)+'?ref='+encodeURIComponent(branch()));
+        await req(api(path),{method:'DELETE',body:JSON.stringify({message:'Delete photo from portfolio repository',sha:f.sha,branch:branch()})});
+      }catch(_){failed++;}
+    }
+    say('galleryStatus',failed?'Removed from gallery, but '+failed+' image file(s) could not be deleted from the repository.':list.length+' photo(s) removed from the gallery and repository.',failed?'error':'ok');
+  }catch(e){
+    photos=oldPhotos;render();
+    say('galleryStatus','Could not update gallery: '+e.message,'error');
+  }
+};
+
+// ---- drag & drop upload with previews ----
+let pvUrls=[];
+function syncPreviews(){
+  pvUrls.forEach(u=>URL.revokeObjectURL(u));pvUrls=[];
+  const box=$('previews');box.innerHTML='';
+  [...$('files').files].forEach((f,k)=>{
+    const u=URL.createObjectURL(f);pvUrls.push(u);
+    const d=document.createElement('div');d.className='pv';d.title=f.name;
+    const im=document.createElement('img');im.src=u;im.alt='';
+    const x=document.createElement('button');x.type='button';x.textContent='×';x.setAttribute('aria-label','Remove '+f.name);
+    x.onclick=()=>{const dt=new DataTransfer();[...$('files').files].forEach((g,m)=>{if(m!==k)dt.items.add(g);});$('files').files=dt.files;$('files').onchange();};
+    d.append(im,x);box.append(d);
+  });
+}
+function addFiles(list){
+  const ok=list.filter(f=>/^image\/(jpeg|png|webp|avif)$/.test(f.type));
+  const skipped=list.length-ok.length,key=f=>f.name+'|'+f.size+'|'+f.lastModified;
+  const seen=new Set(),dt=new DataTransfer(),before=$('files').files.length;
+  [...$('files').files,...ok].forEach(f=>{if(seen.has(key(f)))return;seen.add(key(f));dt.items.add(f);});
+  const dupes=before+ok.length-dt.files.length;
+  $('files').files=dt.files;$('files').onchange();
+  if(skipped||dupes)say('uploadStatus',[skipped?skipped+' non-image file(s) ignored':'',dupes?dupes+' duplicate(s) skipped':''].filter(Boolean).join(', ')+'.');
+}
+const addPanel=$('addPanel'),hasFiles=e=>!!e.dataTransfer&&[...e.dataTransfer.types].includes('Files');
+['dragenter','dragover'].forEach(t=>addPanel.addEventListener(t,e=>{if(!hasFiles(e))return;e.preventDefault();addPanel.classList.add('drop');}));
+addPanel.addEventListener('dragleave',e=>{if(!addPanel.contains(e.relatedTarget))addPanel.classList.remove('drop');});
+addPanel.addEventListener('drop',e=>{if(!hasFiles(e))return;e.preventDefault();addPanel.classList.remove('drop');addFiles([...e.dataTransfer.files]);});
+// a missed drop shouldn't navigate away to the image
+addEventListener('dragover',e=>{if(hasFiles(e))e.preventDefault();});
+addEventListener('drop',e=>{if(hasFiles(e))e.preventDefault();});
+
+// ---- keep a tall sidebar usable: once scrolled, pin its bottom edge instead of clipping it ----
+const sideEl=document.querySelector('aside');
+function fitAside(){sideEl.style.top=Math.min(20,innerHeight-sideEl.offsetHeight-20)+'px';}
+if(window.ResizeObserver)new ResizeObserver(fitAside).observe(sideEl);
+addEventListener('resize',fitAside);fitAside();
 })();
 </script></body></html>
