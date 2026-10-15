@@ -1,6 +1,12 @@
 {
   "photos": [
     {
+      "image": "images/1792087801380-g0m22-DSC_0044.jpg",
+      "alt": "DSC 0044",
+      "category": "people",
+      "showCaption": false
+    },
+    {
       "image": "images/1792031699506-94y0x-643BBBE8-137D-4EA6-BA93-3EE90F9113A5.jpeg",
       "alt": "643BBBE8 137D 4EA6 BA93 3EE90F9113A5",
       "category": "people",
@@ -123,12 +129,6 @@
     {
       "image": "images/1792087797608-c75sb-ChatGPT-Image-29-maj-2026-o-14.PNG",
       "alt": "ChatGPT Image 29 maj 2026 o 14",
-      "category": "people",
-      "showCaption": false
-    },
-    {
-      "image": "images/1792087801380-g0m22-DSC_0044.jpg",
-      "alt": "DSC 0044",
       "category": "people",
       "showCaption": false
     },
