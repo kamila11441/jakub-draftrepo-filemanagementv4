@@ -55,6 +55,12 @@
       "showCaption": false
     },
     {
+      "image": "images/1792019448965-ticcg-temp_image_06F46D78-A70B-43F9-8DF3-D19010B87E98.jpeg",
+      "alt": "temp image 06F46D78 A70B 43F9 8DF3 D19010B87E98",
+      "category": "people",
+      "showCaption": false
+    },
+    {
       "image": "images/1792025183864-h86c3-IMG_7926.jpeg",
       "alt": "IMG 7926",
       "category": "editorial",
@@ -87,12 +93,6 @@
     {
       "image": "images/1792019441588-jk85m-IMG_4120.jpeg",
       "alt": "IMG 4120",
-      "category": "people",
-      "showCaption": false
-    },
-    {
-      "image": "images/1792019448965-ticcg-temp_image_06F46D78-A70B-43F9-8DF3-D19010B87E98.jpeg",
-      "alt": "temp image 06F46D78 A70B 43F9 8DF3 D19010B87E98",
       "category": "people",
       "showCaption": false
     },
