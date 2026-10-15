@@ -99,7 +99,17 @@ body{background:transparent}
 <section class="feature reveal" id="feature"><div class="feature-placeholder">A moving study of light</div><img id="heroImg" alt="Featured photograph" hidden><span class="feature-label">Featured frame / 001</span></section>
 <section id="work" class="reveal"><div class="section-head"><h2>Selected work</h2><p id="count">Archive / 00 frames</p></div><div class="filters" id="filters"><button class="filter active" data-category="all">All frames</button><button class="filter" data-category="people">People</button><button class="filter" data-category="places">Places</button><button class="filter" data-category="editorial">Editorial</button><button class="filter" data-category="other">Other</button></div><div class="gallery" id="gallery"><div class="empty">The archive is taking shape.</div></div></section>
 <section class="about reveal" id="about"><div><span class="section-index">01 / Behind the lens</span><h2>Look a little<br>closer.</h2></div><p>I’m Jakub, a photographer drawn to people, places and the fleeting details that give a moment its character. This is an evolving archive of atmosphere, light and human connection.</p></section>
-<section class="contact reveal" id="contact"><div><span class="section-index">02 / Start a conversation</span><h2>Something<br>in mind?</h2></div><div class="contact-right"><a class="cta" href="mailto:igjakyb11@gmail.com">Get in touch ↗</a></div><div class="contact-right"><a class="cta" <a href="https://www.instagram.com/jakyb11/" target="_blank" rel="noopener noreferrer">Instagram ↗</a><p>Jakub Kowalski<br>Photography / Warsaw</p></div></section><footer class="footer"><span>© Jakub Kowalski</span><a href="#top">Back to top ↑</a></footer></div><div class="mobile-hint" id="mobileHint">Scroll to explore · Tap a frame to zoom</div>
+<section class="contact reveal" id="contact"><div><span class="section-index">02 / Start a conversation</span><h2>Something<br>in mind?</h2></div>
+<div class="contact-right">
+  <div class="contact-buttons">
+    <a class="cta" href="mailto:igjakyb11@gmail.com">Get in touch ↗</a>
+    <a class="cta" href="https://www.instagram.com/jakyb11/"
+       target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+  </div>
+
+  <p>Jakub Kowalski<br>Photography / Warsaw</p>
+</div>
+ <footer class="footer"><span>© Jakub Kowalski</span><a href="#top">Back to top ↑</a></footer></div><div class="mobile-hint" id="mobileHint">Scroll to explore · Tap a frame to zoom</div>
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photograph viewer"><button class="close" id="closeLightbox" aria-label="Close image">×</button><button class="prev" id="prevImage" aria-label="Previous image">‹</button><div class="zoom-controls" aria-label="Zoom controls"><button id="zoomOut" aria-label="Zoom out">−</button><span id="zoomLevel">100%</span><button id="zoomIn" aria-label="Zoom in">+</button><button id="zoomReset" aria-label="Reset zoom">↺</button></div><img id="lightboxImg" alt=""><button class="next" id="nextImage" aria-label="Next image">›</button><div class="lightbox-caption" id="lightboxCaption"></div></div>
 <script>
 const galleryEl=document.getElementById('gallery'),countEl=document.getElementById('count');let photos=[],active='all',visiblePhotos=[],lightboxIndex=0;
