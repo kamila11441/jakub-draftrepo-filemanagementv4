@@ -1,6 +1,12 @@
 {
   "photos": [
     {
+      "image": "images/1792065081055-i0cyf-DSC_0378.jpeg",
+      "alt": "DSC 0378",
+      "category": "people",
+      "showCaption": false
+    },
+    {
       "image": "images/1792019443381-c3io3-IMG_4121.jpeg",
       "alt": "IMG 4121",
       "category": "people",
@@ -75,12 +81,6 @@
     {
       "image": "images/1792019450741-3lg5p-temp_image_86FB89D1-F46E-4C66-BC96-7142E3D96701.jpeg",
       "alt": "temp image 86FB89D1 F46E 4C66 BC96 7142E3D96701",
-      "category": "people",
-      "showCaption": false
-    },
-    {
-      "image": "images/1792065081055-i0cyf-DSC_0378.jpeg",
-      "alt": "DSC 0378",
       "category": "people",
       "showCaption": false
     },
