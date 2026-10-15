@@ -31,6 +31,12 @@
       "showCaption": true
     },
     {
+      "image": "images/1792084716783-smmaa-DSC_0328-2.jpg",
+      "alt": "DSC 0328 2",
+      "category": "people",
+      "showCaption": true
+    },
+    {
       "image": "images/1792019436023-l38k3-0CE0BDAD-D926-4440-9EB5-E8B70F2F3407.jpeg",
       "alt": "0CE0BDAD D926 4440 9EB5 E8B70F2F3407",
       "category": "people",
@@ -95,12 +101,6 @@
       "alt": "DSC 0238",
       "category": "people",
       "showCaption": false
-    },
-    {
-      "image": "images/1792084716783-smmaa-DSC_0328-2.jpg",
-      "alt": "DSC 0328 2",
-      "category": "people",
-      "showCaption": true
     }
   ]
 }
