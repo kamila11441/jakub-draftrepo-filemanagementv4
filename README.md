@@ -44,6 +44,5 @@ Categories: `people`, `places`, `editorial`, `other`.
 ## Notes
 - The first gallery photo is used as the large hero image.
 - The public page has no sample stock photographs; neutral grey placeholders are used until you upload your own images.
-- Removing a photo removes it from the gallery JSON but deliberately keeps the image file in the repository.
+- Removing a photo removes it from the gallery json AND repository.
 - Max upload size is 20 MB per file. GitHub API limits and browser memory can make very large uploads unreliable.
-- Email contact uses `hello@example.com`; replace it in `index.html` with your real email.
