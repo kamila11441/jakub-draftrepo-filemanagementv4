@@ -1,6 +1,12 @@
 {
   "photos": [
     {
+      "image": "images/1792025183864-h86c3-IMG_7926.jpeg",
+      "alt": "IMG 7926",
+      "category": "editorial",
+      "showCaption": false
+    },
+    {
       "image": "images/1792019436023-l38k3-0CE0BDAD-D926-4440-9EB5-E8B70F2F3407.jpeg",
       "alt": "0CE0BDAD D926 4440 9EB5 E8B70F2F3407",
       "category": "people",
