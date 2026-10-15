@@ -61,12 +61,6 @@
       "showCaption": false
     },
     {
-      "image": "images/1792084709004-dftcv-DSC_0326-2.jpg",
-      "alt": "DSC 0326 2",
-      "category": "people",
-      "showCaption": true
-    },
-    {
       "image": "images/1792019439821-oh0q4-233A8274-994C-4A00-A5A3-E6BFB06ED169.jpeg",
       "alt": "233A8274 994C 4A00 A5A3 E6BFB06ED169",
       "category": "people",
@@ -95,6 +89,12 @@
       "alt": "DSC 0238",
       "category": "people",
       "showCaption": false
+    },
+    {
+      "image": "images/1792084709004-dftcv-DSC_0326-2.jpg",
+      "alt": "DSC 0326 2",
+      "category": "people",
+      "showCaption": true
     },
     {
       "image": "images/1792084712942-f6n2r-DSC_0327.jpg",
