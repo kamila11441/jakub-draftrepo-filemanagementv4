@@ -2,114 +2,117 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#eceef0"><meta name="description" content="Selected photography by Jakub Kowalski.">
+<meta name="theme-color" content="#f3f4f6"><meta name="description" content="Selected photography by Jakub Kowalski.">
 <title>Jakub Kowalski — Photography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--paper:#eceef0;--panel:#dcdfe2;--ink:#0f1113;--mid:#5d6366;--rule:#b9bec2;--blue:#1c2bd6;--display:"Bodoni 72","Bodoni MT",Didot,"Playfair Display","Iowan Old Style",Georgia,serif;--sans:"Helvetica Neue",Helvetica,Arial,sans-serif}
+:root{--paper:#f3f4f6;--white:#fff;--ink:#0d0e10;--mid:#6b7076;--faint:#b9bec4;--rule:#dcdfe3;--blue:#2a3cff;--soft:#c3caff;--serif:"Instrument Serif","Iowan Old Style",Georgia,serif;--sans:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;--p:0}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:24px}
-body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 var(--sans);-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{margin:0;background:var(--ink);color:var(--ink);font:16px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--blue);outline-offset:3px}
 ::selection{background:var(--blue);color:#fff}
-.wrap{width:min(1500px,calc(100% - 72px));margin:auto}
 
-.mast{padding:22px 0 0;text-align:center}
-.mast-meta{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:13px;color:var(--mid);padding-bottom:14px}
-.mast-meta nav{display:flex;gap:26px}
-.mast-meta a{transition:color .15s}
-.mast-meta a:hover{color:var(--blue)}
-.mast h1{margin:0;padding:clamp(8px,1.5vw,20px) 0 clamp(14px,2vw,28px);font:400 clamp(44px,11.2vw,184px)/.9 var(--display);letter-spacing:-.045em;white-space:nowrap;border-top:1px solid var(--ink)}
-.mast h1 em{font-style:italic;letter-spacing:-.05em}
-.mast-rule{border-top:1px solid var(--ink);border-bottom:3px double var(--ink);height:8px}
-.mast-sub{display:flex;justify-content:space-between;gap:16px;padding:12px 0;font-size:13px;color:var(--mid)}
+.bar{position:fixed;inset:0 0 auto 0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:26px clamp(24px,3.4vw,48px);color:#fff;mix-blend-mode:difference;font-size:14px;pointer-events:none}
+.bar a{pointer-events:auto}
+.bar nav{display:flex;gap:28px;align-items:center}
+.bar a:hover{opacity:.6}
 
-.cover{margin:clamp(24px,3vw,44px) 0 0}
-.cover-frame{position:relative;aspect-ratio:16/8;background:var(--panel);overflow:hidden}
-.hero-img,.hero-placeholder{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block}
-.hero-img{animation:settle 1.1s ease-out both}
-.hero-placeholder{display:flex;align-items:center;justify-content:center;color:var(--mid);font:italic 28px var(--display)}
-@keyframes settle{from{opacity:0;transform:scale(1.035)}to{opacity:1;transform:none}}
-.cover-cap{display:flex;justify-content:space-between;gap:16px;padding-top:10px;font-size:12px;color:var(--mid)}
-.deck{display:grid;grid-template-columns:7fr 4fr;gap:clamp(24px,5vw,90px);padding:clamp(40px,6vw,88px) 0 clamp(56px,8vw,120px);align-items:end}
-.deck p:first-child{margin:0;font:italic 400 clamp(30px,4.6vw,72px)/1.04 var(--display);letter-spacing:-.025em}
-.deck p:last-child{margin:0;max-width:24em;color:var(--mid);font-size:14px}
+.stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--ink)}
+.hero-frame{position:absolute;inset:12px;border-radius:28px;overflow:hidden;background:#1b1d20}
+.hero-img,.hero-placeholder{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block;transform:scale(calc(1.02 + var(--p)*.16))}
+.hero-placeholder{display:flex;align-items:center;justify-content:center;color:#6b7076;font:italic 28px var(--serif)}
+.shade{position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.6),transparent 52%),rgba(0,0,0,calc(var(--p)*.55));pointer-events:none}
+.hero-text{position:absolute;left:clamp(28px,4.4vw,64px);right:24px;bottom:clamp(30px,5vw,64px);color:#fff;transform:translateY(calc(var(--p)*-16vh));opacity:calc(1 - var(--p)*1.15)}
+.hero-text>div{animation:rise 1.1s cubic-bezier(.2,.7,.2,1) both}
+.hero-text h1{margin:0;font:400 clamp(60px,14vw,236px)/.84 var(--serif);letter-spacing:-.035em;white-space:nowrap}
+.hero-text p{margin:18px 0 0;font-size:15px;color:#e6e8ea}
+@keyframes rise{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
 
-.work-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;border-top:3px double var(--ink);padding:18px 0 0}
-.work-head h2{margin:0;font:italic 400 clamp(34px,4.4vw,64px)/1 var(--display);letter-spacing:-.03em}
-.count{font-size:13px;color:var(--mid)}
-.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:6px clamp(18px,3vw,40px);padding:26px 0 clamp(32px,4vw,56px);border-bottom:1px solid var(--rule)}
-.filter{border:0;background:none;padding:2px 0;cursor:pointer;color:var(--mid);font:italic 400 22px/1.2 var(--display);transition:color .15s}
-.filter:hover{color:var(--ink)}
-.filter.active{color:var(--blue);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:7px}
+.sheet{position:relative;z-index:2;background:var(--paper);border-radius:32px 32px 0 0;box-shadow:0 -40px 80px rgba(0,0,0,.35);padding:0 clamp(20px,3.4vw,48px)}
+.inner{width:min(1500px,100%);margin:auto}
 
-.work{padding-bottom:clamp(80px,11vw,160px)}
-.gallery{display:grid;gap:clamp(16px,2vw,32px);align-items:start;padding-top:clamp(28px,4vw,56px)}
-.gallery-column{display:flex;flex-direction:column;gap:clamp(34px,4.5vw,72px);min-width:0}
-.gallery-column:nth-child(even){padding-top:clamp(36px,8vw,140px)}
-.tile{margin:0;min-width:0}
-.tile-visual{background:var(--panel)}
+.work-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;padding:clamp(56px,8vw,112px) 0 28px}
+.work-head h2{margin:0;font:400 clamp(48px,7vw,104px)/.9 var(--serif);letter-spacing:-.03em}
+.count{display:block;margin-top:12px;font-size:14px;color:var(--mid)}
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filter{border:1px solid var(--rule);background:transparent;border-radius:999px;padding:9px 18px;font-size:14px;cursor:pointer;color:var(--ink);transition:background .2s,color .2s,border-color .2s}
+.filter:hover{border-color:var(--ink)}
+.filter.active{background:var(--ink);border-color:var(--ink);color:#fff}
+
+.gallery{display:grid;gap:clamp(14px,1.8vw,28px);align-items:start;padding:20px 0 clamp(80px,10vw,150px)}
+.gallery-column{display:flex;flex-direction:column;gap:clamp(14px,1.8vw,28px);min-width:0;will-change:transform}
+.tile{margin:0;min-width:0;opacity:0;transform:translateY(36px);transition:opacity .9s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+.tile.in{opacity:1;transform:none}
+.tile-visual{background:#e3e5e8;border-radius:16px;overflow:hidden}
 .tile-visual a{display:block;line-height:0}
-.tile img{display:block;width:100%;height:auto;max-width:100%;transition:opacity .2s}
-.tile a:hover img{opacity:.9}
-.tile-info{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:baseline;padding-top:10px;border-bottom:1px solid var(--rule);padding-bottom:9px}
-.tile-info .no{font:italic 15px var(--display);color:var(--blue)}
-.tile-info .ttl{font:italic 17px/1.25 var(--display);overflow-wrap:anywhere}
-.tile-info .cat{font-size:11px;color:var(--mid)}
-.empty{padding:40px 0;color:var(--mid);font:italic 26px var(--display);grid-column:1/-1;text-align:center}
+.tile img{display:block;width:100%;height:auto;max-width:100%;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.tile a:hover img{transform:scale(1.04)}
+.tile-info{display:flex;justify-content:space-between;gap:12px;padding:10px 4px 6px;font-size:14px;line-height:1.3}
+.tile-info span:first-child{overflow-wrap:anywhere}
+.tile-info span:last-child{color:var(--mid);flex-shrink:0}
+.empty{padding:40px 0;color:var(--mid);font:italic 28px var(--serif);grid-column:1/-1}
 
-.about{display:grid;grid-template-columns:5fr 6fr;gap:clamp(28px,6vw,110px);border-top:1px solid var(--ink);padding:clamp(44px,7vw,100px) 0}
-.about h2{margin:0;font:italic 400 clamp(52px,7.6vw,128px)/.92 var(--display);letter-spacing:-.04em}
-.about p{margin:0;max-width:30em;font:400 clamp(19px,1.7vw,24px)/1.6 var(--display);color:#2b2f32}
-.about p:first-letter{float:left;font:400 5.4em/.8 var(--display);padding:.07em .1em 0 0;color:var(--blue)}
+.about{padding:clamp(40px,7vw,100px) 0 clamp(80px,12vw,180px);border-top:1px solid var(--rule)}
+.about h2{margin:0 0 clamp(20px,3vw,40px);font:italic 400 clamp(26px,3vw,40px)/1 var(--serif);color:var(--mid)}
+.about p{margin:0;max-width:20em;font:400 clamp(34px,5.6vw,88px)/1.04 var(--serif);letter-spacing:-.02em}
+.about .w{color:var(--faint);transition:color .35s}
+.about .w.on{color:var(--ink)}
 
-.contact{background:var(--blue);color:#f2f3ff}
-.contact-in{padding:clamp(56px,9vw,130px) 0 clamp(40px,5vw,72px)}
-.contact h2{margin:0;font:italic 400 clamp(64px,15vw,260px)/.85 var(--display);letter-spacing:-.055em}
-.contact-row{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-top:clamp(28px,4vw,56px);padding-top:22px;border-top:1px solid #8b93f0}
-.contact p{margin:0;max-width:27em;color:#d3d6ff;font-size:14px}
-.contact-links{display:flex;gap:34px}
-.contact-links a{font:italic 26px/1 var(--display);border-bottom:1px solid #f2f3ff;padding-bottom:6px;transition:opacity .15s}
-.contact-links a:hover{opacity:.65}
+.contact{position:relative;z-index:2;background:var(--paper);padding:0 12px 12px}
+.panel{width:min(1500px,100%);margin:auto;background:var(--ink);color:#fff;border-radius:32px;padding:clamp(40px,7vw,100px) clamp(24px,5vw,72px) clamp(28px,4vw,48px)}
+.panel h2{margin:0;font:400 clamp(72px,16vw,280px)/.82 var(--serif);letter-spacing:-.04em}
+.panel-row{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-top:clamp(32px,5vw,72px)}
+.panel p{margin:0;max-width:26em;color:#a4a9ae;font-size:15px}
+.links{display:flex;gap:10px;flex-wrap:wrap}
+.links a{border:1px solid #3a3e43;border-radius:999px;padding:14px 26px;font-size:16px;transition:background .25s,color .25s,border-color .25s}
+.links a:hover{background:var(--soft);border-color:var(--soft);color:var(--ink)}
+.footer{display:flex;justify-content:space-between;gap:20px;margin-top:clamp(48px,7vw,96px);padding-top:20px;border-top:1px solid #2b2e32;font-size:13px;color:#7c8187}
+.footer a:hover{color:#fff}
 
-.footer{display:flex;justify-content:space-between;gap:20px;padding:20px 0 28px;font-size:12px;color:var(--mid)}
-.footer a:hover{color:var(--blue)}
-
-@media(max-width:900px){
-.wrap{width:calc(100% - 32px)}
-.mast-meta nav{gap:16px}
-.mast-meta .manage{display:none}
-.mast h1{white-space:normal;text-align:left;font-size:clamp(52px,17vw,110px);line-height:.88}
-.mast h1 em{display:block}
-.mast-sub span:last-child{display:none}
-.cover-frame{aspect-ratio:4/5}
-.deck{grid-template-columns:1fr;align-items:start}
-.gallery{gap:12px}
-.gallery-column:nth-child(even){padding-top:40px}
-.filter{font-size:19px}
-.tile-info{grid-template-columns:auto 1fr}
-.tile-info .cat{grid-column:2}
-.about{grid-template-columns:1fr}
-.contact-links{gap:24px}
+@media(max-width:760px){
+.bar{padding:20px}
+.bar nav{gap:18px}
+.bar .manage{display:none}
+.hero-frame{inset:8px;border-radius:22px}
+.hero-text h1{white-space:normal;font-size:clamp(64px,22vw,120px)}
+.hero-text h1 span{display:block}
+.sheet{border-radius:24px 24px 0 0}
+.panel{border-radius:24px}
 .footer{flex-direction:column;gap:6px}
 }
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero-text>div{animation:none}.tile{opacity:1;transform:none;transition:none}.about .w{color:var(--ink);transition:none}}
 </style></head>
 <body>
-<div class="wrap" id="top">
-<header class="mast"><div class="mast-meta"><span>Photography</span><nav aria-label="Main navigation"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav><a class="manage" href="admin/pictures.html">Manage ↗</a></div><h1>Jakub <em>Kowalski</em></h1><div class="mast-rule"></div><div class="mast-sub"><span>Warsaw, Poland</span><span>People, places and editorial</span></div></header>
-<section class="cover" aria-label="Introduction"><div class="cover-frame"><div class="hero-placeholder" id="heroPlaceholder">Selected frame</div><img class="hero-img" id="heroImg" alt="" hidden></div><div class="cover-cap"><span id="heroCap">Cover</span><span>Selected frame</span></div>
-<div class="deck"><p>Portraits, places and fleeting moments, seen in a different light.</p><p>Independent photographer based in Warsaw, working on portraits, places and editorial commissions.</p></div></section>
-<section class="work" id="work"><div class="work-head"><h2>Selected work</h2><span class="count" id="count">00 photographs</span></div><div class="filters" id="filters"><button class="filter active" data-category="all">All</button><button class="filter" data-category="people">People</button><button class="filter" data-category="places">Places</button><button class="filter" data-category="editorial">Editorial</button><button class="filter" data-category="other">Other</button></div><div class="gallery" id="gallery"><div class="empty">Your photographs will appear here.</div></div></section>
-<section class="about" id="about"><h2>Looking closer.</h2><p>I’m Jakub, a photographer drawn to people, places and the quiet moments in between. My work explores the way light, atmosphere and human connection shape a story.</p></section>
+<header class="bar"><span>Photographer</span><nav aria-label="Main navigation"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a><a class="manage" href="admin/pictures.html">Manage ↗</a></nav></header>
+<main>
+<section class="stage" id="top" aria-label="Introduction"><div class="hero-frame"><div class="hero-placeholder" id="heroPlaceholder">Selected frame</div><img class="hero-img" id="heroImg" alt="" hidden><div class="shade"></div></div><div class="hero-text"><div><h1><span>Jakub </span><span>Kowalski</span></h1><p>Photography from Warsaw, Poland</p></div></div></section>
+<div class="sheet">
+<section class="inner" id="work"><div class="work-head"><div><h2>Selected work</h2><span class="count" id="count">00 photographs</span></div><div class="filters" id="filters"><button class="filter active" data-category="all">All</button><button class="filter" data-category="people">People</button><button class="filter" data-category="places">Places</button><button class="filter" data-category="editorial">Editorial</button><button class="filter" data-category="other">Other</button></div></div><div class="gallery" id="gallery"><div class="empty">Your photographs will appear here.</div></div></section>
+<section class="inner about" id="about"><h2>Looking closer.</h2><p id="aboutText">I’m Jakub, a photographer drawn to people, places and the quiet moments in between. My work explores the way light, atmosphere and human connection shape a story.</p></section>
 </div>
-<section class="contact" id="contact"><div class="wrap contact-in"><h2>Let’s talk.</h2><div class="contact-row"><p>For commissions, collaborations or any inquiries, feel free to get in touch. I’m always open to new projects and ideas.</p><div class="contact-links"><a href="mailto:igjakyb11@gmail.com">Email</a><a href="https://www.instagram.com/jakyb11/" target="_blank" rel="noopener noreferrer">Instagram</a></div></div></div></section>
-<div class="wrap"><footer class="footer"><span>© Jakub Kowalski</span><span>Independent photographer</span><a href="#top">Back to top ↑</a></footer></div>
+<section class="contact" id="contact"><div class="panel"><h2>Let’s talk.</h2><div class="panel-row"><p>For commissions, collaborations or any inquiries, feel free to get in touch. I’m always open to new projects and ideas.</p><div class="links"><a href="mailto:igjakyb11@gmail.com">Email</a><a href="https://www.instagram.com/jakyb11/" target="_blank" rel="noopener noreferrer">Instagram</a></div></div><footer class="footer"><span>© Jakub Kowalski</span><span>Independent photographer</span><a href="#top">Back to top ↑</a></footer></div></section>
+</main>
 <script>
-const galleryEl=document.getElementById('gallery'),countEl=document.getElementById('count');let photos=[],active='all';
+const galleryEl=document.getElementById('gallery'),countEl=document.getElementById('count'),root=document.documentElement;let photos=[],active='all';
+const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
 function pathFor(src){if(!src)return '';if(/^https?:\/\//i.test(src))return src;return src.replace(/^\/+/,'');}
-function draw(){const items=photos.filter(p=>active==='all'||String(p.category||'other').toLowerCase()===active);countEl.textContent=`${String(items.length).padStart(2,'0')} photograph${items.length===1?'':'s'}`;galleryEl.innerHTML='';if(!items.length){galleryEl.style.gridTemplateColumns='1fr';galleryEl.innerHTML='<div class="empty">No photographs in this selection yet.</div>';return;}const minColumnWidth=300,gap=28;const columnCount=Math.max(1,Math.floor((galleryEl.clientWidth+gap)/(minColumnWidth+gap)));galleryEl.style.gridTemplateColumns=`repeat(${columnCount},minmax(0,1fr))`;const columns=Array.from({length:columnCount},()=>{const col=document.createElement('div');col.className='gallery-column';galleryEl.appendChild(col);return col;});items.forEach((p,i)=>{const tile=document.createElement('article');tile.className='tile';const visual=document.createElement('div');visual.className='tile-visual';const a=document.createElement('a');a.href=pathFor(p.image);a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label',p.alt||'Open photograph');const img=document.createElement('img');img.src=pathFor(p.image);img.alt=p.alt||'';img.loading='lazy';img.decoding='async';img.onerror=()=>{tile.style.display='none';};a.appendChild(img);visual.appendChild(a);tile.appendChild(visual);if(p.showCaption!==false){const info=document.createElement('div');info.className='tile-info';const no=document.createElement('span');no.className='no';no.textContent=String(i+1).padStart(2,'0');const title=document.createElement('span');title.className='ttl';title.textContent=p.alt||(p.image||'').split('/').pop();const category=document.createElement('span');category.className='cat';const c=String(p.category||'Other');category.textContent=c.charAt(0).toUpperCase()+c.slice(1);info.append(no,title,category);tile.appendChild(info);}columns[i%columnCount].appendChild(tile);});}
-let resizeFrame;window.addEventListener('resize',()=>{cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(draw);});document.getElementById('filters').addEventListener('click',e=>{const button=e.target.closest('button[data-category]');if(!button)return;active=button.dataset.category;document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('active',b===button));draw();});
-fetch(`content/gallery.json?v=${Date.now()}`,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Could not load gallery');return r.json();}).then(data=>{photos=Array.isArray(data)?data:(data.photos||[]);draw();if(photos[0]?.image){const hero=document.getElementById('heroImg');hero.src=pathFor(photos[0].image);hero.hidden=false;document.getElementById('heroPlaceholder').style.display='none';if(photos[0].alt)document.getElementById('heroCap').textContent=photos[0].alt;}}).catch(err=>{console.error('Gallery could not be loaded:',err);photos=[];countEl.textContent='Unavailable';galleryEl.innerHTML='<div class="empty">The gallery could not be loaded. Check that <code>content/gallery.json</code> exists in the published site.</div>';});
+const io=still?null:new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{rootMargin:'0px 0px -6% 0px',threshold:.08});
+function draw(){const items=photos.filter(p=>active==='all'||String(p.category||'other').toLowerCase()===active);countEl.textContent=`${String(items.length).padStart(2,'0')} photograph${items.length===1?'':'s'}`;galleryEl.innerHTML='';if(!items.length){galleryEl.style.gridTemplateColumns='1fr';galleryEl.innerHTML='<div class="empty">No photographs in this selection yet.</div>';return;}const minColumnWidth=280,gap=24;const columnCount=Math.max(1,Math.floor((galleryEl.clientWidth+gap)/(minColumnWidth+gap)));galleryEl.style.gridTemplateColumns=`repeat(${columnCount},minmax(0,1fr))`;const columns=Array.from({length:columnCount},()=>{const col=document.createElement('div');col.className='gallery-column';galleryEl.appendChild(col);return col;});items.forEach((p,i)=>{const tile=document.createElement('article');tile.className='tile';const visual=document.createElement('div');visual.className='tile-visual';const a=document.createElement('a');a.href=pathFor(p.image);a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label',p.alt||'Open photograph');const img=document.createElement('img');img.src=pathFor(p.image);img.alt=p.alt||'';img.loading='lazy';img.decoding='async';img.onerror=()=>{tile.style.display='none';};a.appendChild(img);visual.appendChild(a);tile.appendChild(visual);if(p.showCaption!==false){const info=document.createElement('div');info.className='tile-info';const title=document.createElement('span');title.textContent=p.alt||(p.image||'').split('/').pop();const category=document.createElement('span');const c=String(p.category||'Other');category.textContent=c.charAt(0).toUpperCase()+c.slice(1);info.append(title,category);tile.appendChild(info);}columns[i%columnCount].appendChild(tile);if(io)io.observe(tile);});}
+/* about: words light up as you scroll */
+const aboutP=document.getElementById('aboutText');aboutP.innerHTML=aboutP.textContent.trim().split(/\s+/).map(w=>`<span class="w">${w}</span>`).join(' ');const words=[...aboutP.querySelectorAll('.w')];
+/* scroll depth */
+let ticking=false;
+function frame(){ticking=false;const h=innerHeight;root.style.setProperty('--p',Math.min(1,Math.max(0,scrollY/h)).toFixed(4));
+const gr=galleryEl.getBoundingClientRect();if(gr.bottom>-200&&gr.top<h+200){const t=(gr.top+gr.height/2-h/2)/h;galleryEl.querySelectorAll('.gallery-column').forEach((c,i)=>{c.style.transform=(i%2&&!still)?`translate3d(0,${(t*-90).toFixed(1)}px,0)`:'';});}
+const r=aboutP.getBoundingClientRect();const prog=Math.min(1,Math.max(0,(h*.85-r.top)/(r.height+h*.35)));const n=Math.round(prog*words.length);words.forEach((w,i)=>w.classList.toggle('on',still||i<n));}
+function tick(){if(!ticking){ticking=true;requestAnimationFrame(frame);}}
+addEventListener('scroll',tick,{passive:true});
+let resizeFrame;addEventListener('resize',()=>{cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(()=>{draw();tick();});});
+document.getElementById('filters').addEventListener('click',e=>{const button=e.target.closest('button[data-category]');if(!button)return;active=button.dataset.category;document.querySelectorAll('.filter').forEach(b=>b.classList.toggle('active',b===button));draw();tick();});
+fetch(`content/gallery.json?v=${Date.now()}`,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('Could not load gallery');return r.json();}).then(data=>{photos=Array.isArray(data)?data:(data.photos||[]);draw();if(photos[0]?.image){const hero=document.getElementById('heroImg');hero.src=pathFor(photos[0].image);hero.hidden=false;document.getElementById('heroPlaceholder').style.display='none';}tick();}).catch(err=>{console.error('Gallery could not be loaded:',err);photos=[];countEl.textContent='Unavailable';galleryEl.innerHTML='<div class="empty">The gallery could not be loaded. Check that <code>content/gallery.json</code> exists in the published site.</div>';});
+frame();
 </script></body></html>
