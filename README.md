@@ -39,7 +39,7 @@ The homepage reads `content/gallery.json` and supports:
   ]
 }
 ```
-Categories: `people`, `places`, `editorial`, `other`.
+Categories: `people`, `events`, `editorial`, `other`.
 
 ## Notes
 - The first gallery photo is used as the large hero image.
