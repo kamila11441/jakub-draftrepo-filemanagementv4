@@ -1,14 +1,14 @@
 {
   "photos": [
     {
-      "image": "images/1792087789062-ajksp-90F77E6F-FAF0-4589-A110-2D63B836E881-2.JPG",
-      "alt": "90F77E6F FAF0 4589 A110 2D63B836E881 2",
+      "image": "images/1792087801380-g0m22-DSC_0044.jpg",
+      "alt": "DSC 0044",
       "category": "people",
       "showCaption": false
     },
     {
-      "image": "images/1792087801380-g0m22-DSC_0044.jpg",
-      "alt": "DSC 0044",
+      "image": "images/1792087789062-ajksp-90F77E6F-FAF0-4589-A110-2D63B836E881-2.JPG",
+      "alt": "90F77E6F FAF0 4589 A110 2D63B836E881 2",
       "category": "people",
       "showCaption": false
     },
