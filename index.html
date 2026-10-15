@@ -169,7 +169,7 @@ html{-webkit-tap-highlight-color:transparent}
 .cursor.big i{transform:none;opacity:1}
 @media(hover:hover) and (pointer:fine){
 html.cursor-on .tile-visual a,html.cursor-on .frame{cursor:none}
-.filter{transition:background .2s,color .2s,border-color .2s,transform .25s cubic-bezier(.2,.7,.2,1)}
+.filter{transition:background .2s,color .2s,border-color .2s}
 }
 @media(hover:none),(pointer:coarse){.cursor{display:none}}
 </style></head>
@@ -217,12 +217,11 @@ function swipeFrame(){const m=stripTrack.scrollWidth-stripTrack.clientWidth;setS
 function layoutStrip(){if(stripEl.hidden)return;if(stripEl.classList.contains('swipe')){swipeFrame();return;}if(stripEl.classList.contains('plain'))return;stripDist=Math.max(0,stripTrack.scrollWidth-innerWidth);stripEl.style.height=(stripDist+innerHeight)+'px';stripFrame();}
 function stripFrame(){if(stripEl.hidden||stripEl.classList.contains('plain')||stripEl.classList.contains('swipe'))return;const r=stripEl.getBoundingClientRect(),span=r.height-innerHeight,pr=span>0?Math.min(1,Math.max(0,-r.top/span)):0;stripTrack.style.transform=`translate3d(${(-pr*stripDist).toFixed(1)}px,0,0)`;stripBar.style.transform=`scaleX(${pr.toFixed(4)})`;const n=stripEntries.length,idx=Math.min(n-1,Math.round(pr*(n-1)));if(idx!==stripIdx){stripIdx=idx;stripNo.textContent=`${String(idx+1).padStart(2,'0')} / ${String(n).padStart(2,'0')}`;}}
 stripTrack.addEventListener('scroll',()=>{if(stripEl.classList.contains('swipe'))swipeFrame();},{passive:true});swipeMQ.addEventListener('change',()=>{stripIdx=-1;setMode();layoutStrip();stripFrame();});
-/* desktop: View cursor over photos, magnetic filter pills */
+/* desktop: View cursor over photos */
 if(matchMedia('(hover:hover) and (pointer:fine)').matches&&!still){const cur=document.getElementById('cursor');let x=0,y=0,cx=0,cy=0,raf=0,seen=false;
 function loop(){cx+=(x-cx)*.2;cy+=(y-cy)*.2;cur.style.transform=`translate3d(${cx.toFixed(1)}px,${cy.toFixed(1)}px,0)`;raf=(Math.abs(x-cx)>.2||Math.abs(y-cy)>.2)?requestAnimationFrame(loop):0;}
 addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;x=e.clientX;y=e.clientY;if(!seen){seen=true;cx=x;cy=y;root.classList.add('cursor-on');}
-const hot=!lbOpen&&e.target.closest&&e.target.closest('.tile-visual a,.frame');cur.classList.toggle('big',!!hot);if(!raf)raf=requestAnimationFrame(loop);
-const fl=document.getElementById('filters');if(fl.offsetParent!==null){fl.querySelectorAll('.filter').forEach(b=>{const r=b.getBoundingClientRect(),dx=x-(r.left+r.width/2),dy=y-(r.top+r.height/2);b.style.transform=Math.hypot(dx,dy)<90?`translate(${(dx*.18).toFixed(1)}px,${(dy*.25).toFixed(1)}px)`:'';});}});
+const hot=!lbOpen&&e.target.closest&&e.target.closest('.tile-visual a,.frame');cur.classList.toggle('big',!!hot);if(!raf)raf=requestAnimationFrame(loop);});
 document.addEventListener('mouseleave',()=>cur.classList.remove('big'));}
 /* about: words light up as you scroll */
 const aboutP=document.getElementById('aboutText');aboutP.innerHTML=aboutP.textContent.trim().split(/\s+/).map(w=>`<span class="w">${w}</span>`).join(' ');const words=[...aboutP.querySelectorAll('.w')];
