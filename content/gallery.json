@@ -103,6 +103,12 @@
       "showCaption": false
     },
     {
+      "image": "images/1792087970665-779u6-DSC_0903-6.JPG",
+      "alt": "DSC 0903 6",
+      "category": "people",
+      "showCaption": false
+    },
+    {
       "image": "images/1792084709004-dftcv-DSC_0326-2.jpg",
       "alt": "DSC 0326 2",
       "category": "people",
@@ -285,12 +291,6 @@
     {
       "image": "images/1792087963574-63eoa-DSC_0903-5.JPG",
       "alt": "DSC 0903 5",
-      "category": "people",
-      "showCaption": false
-    },
-    {
-      "image": "images/1792087970665-779u6-DSC_0903-6.JPG",
-      "alt": "DSC 0903 6",
       "category": "people",
       "showCaption": false
     },
