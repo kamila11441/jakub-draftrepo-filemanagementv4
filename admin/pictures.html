@@ -106,13 +106,13 @@ code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--pape
 <p class="note">Token is held in memory in this tab only. Use a fine-grained token limited to this repository with Contents: Read and write. Never put the token in a file or share it.</p>
 <div class="actions"><button class="primary" id="connect">Connect</button><button id="clear">Clear</button></div><div id="connectStatus" class="status"></div></section>
 <section class="panel" id="addPanel"><h2><span class="step">2</span>Add frames</h2><div class="field"><label for="files">Image files</label><input id="files" type="file" accept="image/jpeg,image/png,image/webp,image/avif" multiple><div id="previews" class="previews"></div><p class="hint">Tip: drag image files anywhere onto this panel. Duplicates are skipped.</p></div>
-<div class="field"><label for="category">Category</label><select id="category"><option value="people">People</option><option value="places">Places</option><option value="editorial">Editorial</option><option value="other">Other</option></select></div>
+<div class="field"><label for="category">Category</label><select id="category"><option value="people">People</option><option value="events">events</option><option value="editorial">Editorial</option><option value="other">Other</option></select></div>
 <div class="field"><label for="alt">Caption / alt text (optional)</label><input id="alt" placeholder="e.g. Evening in the city"></div>
 <div class="field"><label class="check"><input id="showCaption" type="checkbox" checked> Show caption below photo</label><p class="hint">Turn this off for a clean image-only tile. The alt text is still kept for accessibility.</p></div>
 <div class="field"><label for="insertPosition">Add position</label><select id="insertPosition"><option value="end">At the end</option></select><p class="hint">Choose where the new photo(s) should appear in the public gallery.</p></div>
 <p class="note">Files are saved to <code>images/</code> and added to <code>content/gallery.json</code>. Maximum 20 MB per image.</p><div class="actions"><button class="primary" id="upload" disabled>Upload selected</button><span id="fileCount" class="hint">No files selected</span></div><div id="uploadStatus" class="status"></div></section>
 </aside><section class="panel gallery-panel"><div class="toolbar"><div><div class="eyebrow" style="margin-bottom:0">Repository contents</div><h2>Current gallery</h2></div><button id="refresh" disabled>Refresh ↻</button></div><div id="galleryStatus" class="status">Connect to load your gallery.</div><div id="filterbar" class="filterbar" hidden><div id="chips" class="chips"></div><div class="fb-right"><input id="search" type="search" placeholder="Search captions…" autocomplete="off" aria-label="Search captions"><button id="selAll" type="button">Select shown</button></div></div>
-<div id="bulkbar" class="bulkbar" hidden><span id="selCount" class="sel-count"></span><button id="selNone" type="button">Clear</button><select id="bulkCat" aria-label="New category"><option value="people">People</option><option value="places">Places</option><option value="editorial">Editorial</option><option value="other">Other</option></select><button id="bulkApply" type="button">Set category</button><button id="bulkDelete" type="button" class="danger">Delete</button></div>
+<div id="bulkbar" class="bulkbar" hidden><span id="selCount" class="sel-count"></span><button id="selNone" type="button">Clear</button><select id="bulkCat" aria-label="New category"><option value="people">People</option><option value="events">events</option><option value="editorial">Editorial</option><option value="other">Other</option></select><button id="bulkApply" type="button">Set category</button><button id="bulkDelete" type="button" class="danger">Delete</button></div>
 <div id="cards" class="cards"></div></section></div>
 <p class="note foot">Static-site limitation: this page has no private server. GitHub's token provides write access. Keep the URL private, clear the token when finished, and remember GitHub Pages can take a short time to publish a commit.</p>
 </div>
@@ -193,7 +193,7 @@ function renderChips(){
   const counts={all:photos.length};
   photos.forEach(p=>{const k=p.category||'other';counts[k]=(counts[k]||0)+1;});
   const wrap=$('chips');wrap.innerHTML='';
-  ['all','people','places','editorial','other'].forEach(k=>{
+  ['all','people','events','editorial','other'].forEach(k=>{
     const b=document.createElement('button');b.type='button';b.className='chip'+(filterCat===k?' on':'');
     b.textContent=(k==='all'?'All':k.charAt(0).toUpperCase()+k.slice(1))+' '+(counts[k]||0);
     b.onclick=()=>{filterCat=k;render();};wrap.append(b);
@@ -262,7 +262,7 @@ async function reorder(from,to){
   render();
   await commitOrder();
 }
-async function edit(i){const alt=prompt('Caption / alt text (used for accessibility too)',photos[i].alt||'');if(alt===null)return;const cat=prompt('Category: people, places, editorial, other',photos[i].category||'other');if(cat===null)return;if(!['people','places','editorial','other'].includes(cat.trim().toLowerCase())){alert('Use people, places, editorial or other.');return;}const showCaption=confirm('Show the caption below this photo?\n\nOK = show caption\nCancel = no visible caption');photos[i].alt=alt.trim();photos[i].category=cat.trim().toLowerCase();photos[i].showCaption=showCaption;try{await save('Edit portfolio photo details');render();say('galleryStatus','Photo details saved.','ok');}catch(e){say('galleryStatus',e.message,'error');}}
+async function edit(i){const alt=prompt('Caption / alt text (used for accessibility too)',photos[i].alt||'');if(alt===null)return;const cat=prompt('Category: people, events, editorial, other',photos[i].category||'other');if(cat===null)return;if(!['people','events','editorial','other'].includes(cat.trim().toLowerCase())){alert('Use people, events, editorial or other.');return;}const showCaption=confirm('Show the caption below this photo?\n\nOK = show caption\nCancel = no visible caption');photos[i].alt=alt.trim();photos[i].category=cat.trim().toLowerCase();photos[i].showCaption=showCaption;try{await save('Edit portfolio photo details');render();say('galleryStatus','Photo details saved.','ok');}catch(e){say('galleryStatus',e.message,'error');}}
 async function remove(i){
   const photo = photos[i];
   if (!photo) return;
