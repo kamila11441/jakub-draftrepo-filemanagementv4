@@ -1,26 +1,91 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Picture Manager — JK</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><meta name="theme-color" content="#f3f4f6"><title>Picture Manager — Jakub Kowalski</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:dark;--bg:#111210;--panel:#1b1c19;--line:#393a34;--text:#f2f1e9;--muted:#a4a59b;--accent:#d5ddc9;--red:#e6a5a0}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,Arial,sans-serif}a{color:inherit;text-decoration:none}button,input,select{font:inherit}button{cursor:pointer;border:1px solid #51524b;background:#262722;color:var(--text);border-radius:8px;padding:10px 13px}button.primary{background:var(--accent);border-color:var(--accent);color:#151611;font-weight:700}button.danger{color:var(--red);border-color:#724a47}button:disabled{opacity:.45;cursor:not-allowed}input:not([type=file]),select{width:100%;background:#11120f;color:var(--text);border:1px solid #45463f;border-radius:8px;padding:11px}input[type=file]{width:100%;padding:13px;border:1px dashed #55564d;border-radius:10px;background:#11120f;color:var(--muted)}.wrap{max-width:1250px;margin:auto;padding:25px 22px 70px}.nav{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:18px;font-size:10px;text-transform:uppercase;letter-spacing:.16em}.nav a:last-child{color:var(--muted)}.hero{display:flex;justify-content:space-between;align-items:end;gap:25px;padding:48px 0 30px}.eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}h1{font:400 clamp(42px,7vw,78px)/.9 Georgia,serif;letter-spacing:-.06em;margin:12px 0 0}.hero p{max-width:320px;color:var(--muted);font-size:13px}.layout{display:grid;grid-template-columns:330px minmax(0,1fr);gap:18px;align-items:start}.panel{border:1px solid var(--line);border-radius:13px;background:var(--panel);padding:18px;margin-bottom:16px}.panel h2{font:400 24px Georgia,serif;letter-spacing:-.04em;margin:0 0 15px}.field{display:flex;flex-direction:column;gap:7px;margin:12px 0}.field label{font-size:11px;color:var(--muted)}.hint{font-size:11px;color:var(--muted)}.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.status{font-size:12px;color:var(--muted);min-height:20px;margin-top:10px;overflow-wrap:anywhere}.status.error{color:#ffaaa3}.status.ok{color:#c9e7b8}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:13px}.toolbar h2{font:400 31px Georgia,serif;margin:0}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.photo{min-width:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#141511}.photo img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#292a24}.photo-body{padding:12px}.title{font-size:12px;overflow-wrap:anywhere}.meta{font-size:10px;color:var(--muted);margin:5px 0 11px}.photo-actions{display:flex;flex-wrap:wrap;gap:6px}.photo-actions button{font-size:11px;padding:7px 9px}.empty{padding:45px 15px;border:1px dashed #44453e;border-radius:10px;color:var(--muted);text-align:center}.note{font-size:11px;line-height:1.6;color:var(--muted)}code{color:var(--accent)}@media(max-width:800px){.layout{grid-template-columns:1fr}.hero{display:block;padding-top:36px}.hero p{margin-top:22px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:440px){.wrap{padding:18px 12px}.cards{grid-template-columns:1fr}.toolbar{align-items:start;flex-direction:column}}
+:root{--paper:#f3f4f6;--card:#fff;--ink:#0d0e10;--mid:#6b7076;--rule:#dcdfe3;--blue:#2a3cff;--red:#b3261e;--green:#17703a;--serif:"Instrument Serif","Iowan Old Style",Georgia,serif;--sans:"Inter Tight",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+::selection{background:var(--blue);color:#fff}
+
+button{cursor:pointer;border:1px solid var(--rule);background:var(--card);color:var(--ink);border-radius:999px;padding:10px 20px;transition:background .2s,color .2s,border-color .2s}
+button:hover:not(:disabled){border-color:var(--ink)}
+button.primary{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:500}
+button.primary:hover:not(:disabled){background:var(--blue);border-color:var(--blue)}
+button.danger{color:var(--red);border-color:#e6bcb8}
+button.danger:hover:not(:disabled){background:var(--red);border-color:var(--red);color:#fff}
+button:disabled{opacity:.4;cursor:not-allowed}
+input:not([type=file]):not([type=checkbox]),select{width:100%;background:var(--paper);color:var(--ink);border:1px solid var(--rule);border-radius:12px;padding:12px 14px;transition:border-color .2s,background .2s}
+input:not([type=file]):not([type=checkbox]):focus,select:focus{outline:0;border-color:var(--blue);background:#fff}
+input[type=checkbox]{accent-color:var(--blue)}
+input[type=file]{width:100%;padding:14px;border:1px dashed #b4b9be;border-radius:14px;background:var(--paper);color:var(--mid)}
+input[type=file]::file-selector-button{font:inherit;border:1px solid var(--rule);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 16px;margin-right:12px;cursor:pointer}
+
+.wrap{max-width:1320px;margin:auto;padding:22px clamp(16px,3.4vw,48px) 80px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:14px}
+.nav a:first-child{font-weight:600;letter-spacing:-.01em}
+.nav a:last-child{color:var(--mid);border:1px solid var(--rule);border-radius:999px;padding:8px 18px;transition:color .2s,border-color .2s}
+.nav a:last-child:hover{color:var(--ink);border-color:var(--ink)}
+
+.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;padding:clamp(40px,6vw,88px) 0 clamp(28px,4vw,52px);border-bottom:2px solid var(--ink);margin-bottom:clamp(24px,3vw,40px)}
+.eyebrow{font-size:13px;color:var(--mid)}
+h1{font:400 clamp(56px,9vw,132px)/.88 var(--serif);letter-spacing:-.04em;margin:0}
+.hero p{max-width:320px;margin:0;color:var(--mid);font-size:14px}
+
+.layout{display:grid;grid-template-columns:360px minmax(0,1fr);gap:clamp(16px,2vw,28px);align-items:start}
+aside{display:flex;flex-direction:column;gap:clamp(16px,2vw,28px)}
+.panel{background:var(--card);border-radius:24px;padding:clamp(20px,2.2vw,30px)}
+.panel h2{display:flex;align-items:center;gap:12px;font:400 32px/1 var(--serif);letter-spacing:-.025em;margin:0 0 18px}
+.step{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font:500 13px/1 var(--sans);letter-spacing:0}
+.field{display:flex;flex-direction:column;gap:7px;margin:14px 0}
+.field label{font-size:13px;color:var(--mid)}
+.field label.check{display:flex;align-items:center;gap:10px;color:var(--ink);font-size:14px}
+.hint{font-size:12px;color:var(--mid);margin:0}
+.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:18px}
+.status{font-size:13px;color:var(--mid);min-height:20px;margin-top:12px;overflow-wrap:anywhere}
+.status.error{color:var(--red)}
+.status.ok{color:var(--green)}
+.note{font-size:12px;line-height:1.6;color:var(--mid);margin:0}
+code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--paper);border-radius:6px;padding:2px 6px;color:var(--ink)}
+.gallery-panel{min-height:420px}
+.toolbar{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:12px;padding-bottom:18px;border-bottom:1px solid var(--rule)}
+.toolbar h2{font:400 clamp(36px,4vw,56px)/.95 var(--serif);letter-spacing:-.03em;margin:6px 0 0;display:block}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:clamp(12px,1.6vw,20px);margin-top:20px}
+.photo{min-width:0;border-radius:18px;overflow:hidden;background:var(--paper)}
+.photo img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:#e3e5e8}
+.photo-body{padding:14px}
+.title{font-size:14px;font-weight:500;overflow-wrap:anywhere;line-height:1.3}
+.meta{font-size:12px;color:var(--mid);margin:4px 0 14px;text-transform:capitalize}
+.photo-actions{display:flex;flex-wrap:wrap;gap:6px}
+.photo-actions button{font-size:13px;padding:6px 14px}
+.empty{padding:56px 16px;border:1px dashed #b4b9be;border-radius:18px;color:var(--mid);text-align:center;grid-column:1/-1;font:italic 24px var(--serif)}
+.foot{margin-top:28px;max-width:60em}
+
+@media(max-width:900px){.layout{grid-template-columns:1fr}.hero{display:block}.hero p{margin-top:20px}}
+@media(max-width:440px){.toolbar{align-items:flex-start;flex-direction:column}.cards{grid-template-columns:1fr}}
 </style></head><body><div class="wrap">
-<div class="nav"><a href="../">JK / PHOTOGRAPHY</a><a href="../">← View public portfolio</a></div>
-<section class="hero"><div><div class="eyebrow">Private tools / Gallery operations</div><h1>Picture<br>Manager.</h1></div><p>Upload, organize and publish your selected frames. Changes are committed directly to your GitHub repository.</p></section>
+<div class="nav"><a href="../">Jakub Kowalski</a><a href="../">← View public portfolio</a></div>
+<section class="hero"><div><div class="eyebrow">Private gallery tools</div><h1>Picture<br>manager.</h1></div><p>Upload, organize and publish your selected frames. Changes are committed directly to your GitHub repository.</p></section>
 <div class="layout"><aside>
-<section class="panel"><h2>01 / Connect</h2>
+<section class="panel"><h2><span class="step">1</span>Connect</h2>
 <div class="field"><label for="repo">GitHub repository</label><input id="repo" value="kamila11441/jakub-draftrepo-filemanagementv4"></div>
 <div class="field"><label for="branch">Branch</label><input id="branch" value="main"></div>
 <div class="field"><label for="galleryPath">Gallery JSON path</label><input id="galleryPath" value="content/gallery.json"></div>
 <div class="field"><label for="token">Fine-grained access token</label><input id="token" type="password" placeholder="Paste token for this session" autocomplete="off"></div>
 <p class="note">Token is held in memory in this tab only. Use a fine-grained token limited to this repository with Contents: Read and write. Never put the token in a file or share it.</p>
 <div class="actions"><button class="primary" id="connect">Connect</button><button id="clear">Clear</button></div><div id="connectStatus" class="status"></div></section>
-<section class="panel"><h2>02 / Add frames</h2><div class="field"><label for="files">Image files</label><input id="files" type="file" accept="image/jpeg,image/png,image/webp,image/avif" multiple></div>
+<section class="panel"><h2><span class="step">2</span>Add frames</h2><div class="field"><label for="files">Image files</label><input id="files" type="file" accept="image/jpeg,image/png,image/webp,image/avif" multiple></div>
 <div class="field"><label for="category">Category</label><select id="category"><option value="people">People</option><option value="places">Places</option><option value="editorial">Editorial</option><option value="other">Other</option></select></div>
 <div class="field"><label for="alt">Caption / alt text (optional)</label><input id="alt" placeholder="e.g. Evening in the city"></div>
-<div class="field"><label><input id="showCaption" type="checkbox" checked style="width:auto;margin-right:8px"> Show caption below photo</label><p class="hint">Turn this off for a clean image-only tile. The alt text is still kept for accessibility.</p></div>
+<div class="field"><label class="check"><input id="showCaption" type="checkbox" checked> Show caption below photo</label><p class="hint">Turn this off for a clean image-only tile. The alt text is still kept for accessibility.</p></div>
 <div class="field"><label for="insertPosition">Add position</label><select id="insertPosition"><option value="end">At the end</option></select><p class="hint">Choose where the new photo(s) should appear in the public gallery.</p></div>
 <p class="note">Files are saved to <code>images/</code> and added to <code>content/gallery.json</code>. Maximum 20 MB per image.</p><div class="actions"><button class="primary" id="upload" disabled>Upload selected</button><span id="fileCount" class="hint">No files selected</span></div><div id="uploadStatus" class="status"></div></section>
-</aside><section class="panel"><div class="toolbar"><div><div class="eyebrow">Repository contents</div><h2>Current gallery</h2></div><button id="refresh" disabled>Refresh ↻</button></div><div id="galleryStatus" class="status">Connect to load your gallery.</div><div id="cards" class="cards"></div></section></div>
-<p class="note">Static-site limitation: this page has no private server. GitHub's token provides write access. Keep the URL private, clear the token when finished, and remember GitHub Pages can take a short time to publish a commit.</p>
+</aside><section class="panel gallery-panel"><div class="toolbar"><div><div class="eyebrow">Repository contents</div><h2>Current gallery</h2></div><button id="refresh" disabled>Refresh ↻</button></div><div id="galleryStatus" class="status">Connect to load your gallery.</div><div id="cards" class="cards"></div></section></div>
+<p class="note foot">Static-site limitation: this page has no private server. GitHub's token provides write access. Keep the URL private, clear the token when finished, and remember GitHub Pages can take a short time to publish a commit.</p>
 </div>
 <script>
 (()=>{const $=id=>document.getElementById(id);let token='',photos=[],connected=false;const repo=()=>$('repo').value.trim(),branch=()=>$('branch').value.trim()||'main',gp=()=>$('galleryPath').value.trim()||'content/gallery.json';const headers=()=>({Authorization:'Bearer '+token,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'});const api=p=>'https://api.github.com/repos/'+repo()+'/contents/'+p.split('/').map(encodeURIComponent).join('/');const say=(id,msg,type='')=>{$(id).textContent=msg;$(id).className='status '+type;};async function req(url,opt={}){
@@ -49,6 +114,7 @@ function updateInsertPosition(){
   const select=$('insertPosition');
   if(!select)return;
   const previous=select.value||'end';
+  const wasEnd=previous==='end'||(select.lastElementChild&&previous===select.lastElementChild.value);
   select.innerHTML='';
   for(let i=0;i<=photos.length;i++){
     const option=document.createElement('option');
@@ -58,13 +124,9 @@ function updateInsertPosition(){
       : `Position ${i+1} — before "${photos[i].alt||((photos[i].image||'').split('/').pop())}"`;
     select.appendChild(option);
   }
-  const endOption=document.createElement('option');
-  endOption.value='end';
-  endOption.textContent='At the end';
-  select.appendChild(endOption);
-  if(previous==='end')select.value='end';
+  if(wasEnd)select.value=String(photos.length);
   else if(Number.isInteger(Number(previous))&&Number(previous)>=0&&Number(previous)<=photos.length)select.value=previous;
-  else select.value='end';
+  else select.value=String(photos.length);
 }
 function ordinal(n){
   const v=n%100;
