@@ -1,6 +1,12 @@
 {
   "photos": [
     {
+      "image": "images/1792019447358-b8px9-temp_image_5D40B997-B3D9-49AB-9F64-B1795FA03592.jpeg",
+      "alt": "temp image 5D40B997 B3D9 49AB 9F64 B1795FA03592",
+      "category": "people",
+      "showCaption": false
+    },
+    {
       "image": "images/1792025226637-v1uv7-IMG_4128.jpeg",
       "alt": "IMG 4128",
       "category": "editorial",
@@ -57,12 +63,6 @@
     {
       "image": "images/1792019443381-c3io3-IMG_4121.jpeg",
       "alt": "IMG 4121",
-      "category": "people",
-      "showCaption": false
-    },
-    {
-      "image": "images/1792019447358-b8px9-temp_image_5D40B997-B3D9-49AB-9F64-B1795FA03592.jpeg",
-      "alt": "temp image 5D40B997 B3D9 49AB 9F64 B1795FA03592",
       "category": "people",
       "showCaption": false
     },
