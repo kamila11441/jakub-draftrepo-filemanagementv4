@@ -19,12 +19,6 @@
       "showCaption": false
     },
     {
-      "image": "images/1792089519603-797qe-IMG_4513.jpg",
-      "alt": "IMG 4513",
-      "category": "people",
-      "showCaption": false
-    },
-    {
       "image": "images/1792019450741-3lg5p-temp_image_86FB89D1-F46E-4C66-BC96-7142E3D96701.jpeg",
       "alt": "temp image 86FB89D1 F46E 4C66 BC96 7142E3D96701",
       "category": "people",
@@ -406,6 +400,12 @@
       "image": "images/1792089445052-4gmta-IMG_4513.jpg",
       "alt": "IMG 4513",
       "category": "editorial",
+      "showCaption": false
+    },
+    {
+      "image": "images/1792089567401-9hdr7-IMG_4513.jpg",
+      "alt": "IMG 4513",
+      "category": "people",
       "showCaption": false
     }
   ]
