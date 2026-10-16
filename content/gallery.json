@@ -259,6 +259,12 @@
       "showCaption": false
     },
     {
+      "image": "images/1792087963574-63eoa-DSC_0903-5.JPG",
+      "alt": "DSC 0903 5",
+      "category": "people",
+      "showCaption": false
+    },
+    {
       "image": "images/1792087930697-dhlcx-DSC_0838-3.jpg",
       "alt": "DSC 0838 3",
       "category": "people",
@@ -286,12 +292,6 @@
       "image": "images/1792088015105-t730m-DSC_1033-3.jpg",
       "alt": "DSC 1033 3",
       "category": "events",
-      "showCaption": false
-    },
-    {
-      "image": "images/1792087963574-63eoa-DSC_0903-5.JPG",
-      "alt": "DSC 0903 5",
-      "category": "people",
       "showCaption": false
     },
     {
