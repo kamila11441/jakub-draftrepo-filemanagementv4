@@ -25,7 +25,12 @@
       "showCaption": true,
       "model": "@alleksandra.jozwiak",
       "description": "",
-      "date": ""
+      "date": "",
+      "title": "",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
     },
     {
       "image": "images/1792089567401-9hdr7-IMG_4513.jpg",
