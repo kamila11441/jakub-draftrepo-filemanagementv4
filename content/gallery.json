@@ -377,9 +377,12 @@
     },
     {
       "image": "images/1792088019150-vpk94-DSC_1039-2.JPG",
-      "alt": "Model - @ziemeeek_",
+      "alt": "",
       "category": "people",
-      "showCaption": true
+      "showCaption": true,
+      "model": "@ziemeeek_",
+      "description": "",
+      "date": ""
     },
     {
       "image": "images/1792088009868-tsyyk-DSC_1033-2.JPG",
