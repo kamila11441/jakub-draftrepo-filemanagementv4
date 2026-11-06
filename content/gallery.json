@@ -29,9 +29,12 @@
     },
     {
       "image": "images/1792089567401-9hdr7-IMG_4513.jpg",
-      "alt": "IMG 4513",
+      "alt": "",
       "category": "people",
-      "showCaption": false
+      "showCaption": false,
+      "model": "",
+      "description": "",
+      "date": ""
     },
     {
       "image": "images/1792019447358-b8px9-temp_image_5D40B997-B3D9-49AB-9F64-B1795FA03592.jpeg",
