@@ -56,9 +56,12 @@
     },
     {
       "image": "images/1792087837044-og2xm-DSC_0234-2.jpg",
-      "alt": "Model - @alleksandra.jozwiak",
+      "alt": "",
       "category": "people",
-      "showCaption": true
+      "showCaption": true,
+      "model": "@alleksandra.jozwiak",
+      "description": "",
+      "date": ""
     },
     {
       "image": "images/1792087830577-t4md4-DSC_0223-2.jpg",
