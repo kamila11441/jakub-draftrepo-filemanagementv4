@@ -67,7 +67,8 @@ button{font:inherit;color:inherit}
   pointer-events:none;
 }
 
-.bar a{pointer-events:auto}
+.bar a,.bar button{pointer-events:auto}
+.language-toggle{border:1px solid rgba(255,255,255,.48);border-radius:999px;padding:7px 11px;background:rgba(245,246,248,.24);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:#fff;font:500 11px var(--sans);cursor:pointer}
 .bar nav{display:flex;gap:28px;align-items:center}
 .bar a:hover{opacity:.6}
 
@@ -256,10 +257,10 @@ button{font:inherit;color:inherit}
 }
 
 .tile-visual a{
-  display:block;
-  line-height:0;
-  cursor:zoom-in;
+  display:block;position:relative;line-height:0;cursor:zoom-in;overflow:hidden;border-radius:12px;
 }
+.tile-visual a:after{content:"";position:absolute;inset:0;background:rgba(247,248,250,.24);backdrop-filter:blur(1.5px);-webkit-backdrop-filter:blur(1.5px);opacity:0;transition:opacity .35s;pointer-events:none}
+.tile-visual a:hover:after{opacity:1}
 
 .tile img{
   display:block;
@@ -593,7 +594,9 @@ button{font:inherit;color:inherit}
   height:84px;
   margin:-42px 0 0 -42px;
   border-radius:50%;
-  background:#fff;
+  background:rgba(247,248,250,.42);
+  border:1px solid rgba(255,255,255,.58);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   color:var(--ink);
   font:500 13px/1 var(--sans);
   font-style:normal;
@@ -776,7 +779,7 @@ html.lock{overflow:hidden}
     <a href="#work">Work</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
-    <a class="manage" href="admin/pictures.html">Manage ↗</a>
+    <button class="language-toggle" id="languageToggle" type="button" aria-label="Switch language">PL</button><a class="manage" href="admin/pictures.html">Manage ↗</a>
   </nav>
 </header>
 
@@ -872,7 +875,6 @@ html.lock{overflow:hidden}
   <div class="lb-cap">
     <div>
       <span id="lbTitle"></span>
-      <span id="lbCat"></span>
     </div>
     <span id="lbNo"></span>
   </div>
@@ -887,6 +889,15 @@ let photos=[],active='all';
 
 const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const themeMeta=document.querySelector('meta[name="theme-color"]');
+
+const languageToggle=document.getElementById('languageToggle');
+const locale={en:{nav:['Work','About','Contact','Manage ↗'],brand:'Public portfolio',heroMeta:'@jakyb11 | Warsaw | Poland',heroPlaceholder:'Selected frame',navLabel:'Main navigation',featured:'Featured frames',count:'00 photographs',work:'Selected work',filters:['All','People','Events','Editorial','Other'],about:'Looking closer.',aboutText:'I’m Jakub, a photographer drawn to people, places and the quiet moments in between. My work explores the way light, atmosphere and human connection shape a story.',contact:'Let’s talk.',contactText:'For commissions, collaborations or any inquiries, feel free to get in touch. I’m always open to new projects and ideas.',email:'Email',instagram:'Instagram',footer:'Independent photographer',top:'Back to top ↑',empty:'No photographs in this selection yet.',view:'View',close:'Close',photographs:'photographs'},pl:{nav:['Prace','O mnie','Kontakt','Zarządzaj ↗'],brand:'Portfolio',heroMeta:'@jakyb11 | Warszawa | Polska',heroPlaceholder:'Wybrane zdjęcie',navLabel:'Nawigacja główna',featured:'Wybrane kadry',count:'00 zdjęć',work:'Wybrane prace',filters:['Wszystkie','Ludzie','Wydarzenia','Edytorial','Inne'],about:'Patrzeć uważniej.',aboutText:'Jakub, jestem fotografem zainteresowanym ludźmi, miejscami i spokojnymi chwilami pomiędzy. W moich zdjęciach odkrywam, jak światło, atmosfera i relacje międzyludzkie budują opowieść.',contact:'Let's talk.',contactText:'W sprawie zleceń, współpracy lub pytań napisz do mnie. Chętnie podejmę nowe projekty i pomysły.',email:'E-mail',instagram:'Instagram',footer:'Niezależny fotograf',top:'Wróć na górę ↑',empty:'Brak zdjęć w tym wyborze.',view:'Zobacz',close:'Zamknij',photographs:'zdjęć'}};
+function setLanguage(lang){const t=locale[lang];document.documentElement.lang=lang;languageToggle.textContent=lang==='en'?'PL':'EN';languageToggle.setAttribute('aria-label',lang==='en'?'Przełącz język na polski':'Switch language to English');document.querySelector('.bar>span').textContent=t.brand;document.querySelector('.bar nav').setAttribute('aria-label',t.navLabel);document.querySelector('.hero-text p').textContent=t.heroMeta;document.getElementById('heroPlaceholder').textContent=t.heroPlaceholder;document.querySelector('.strip').setAttribute('aria-label',t.featured);document.getElementById('count').textContent=t.count;document.querySelectorAll('.bar nav a').forEach((a,i)=>{if(t.nav[i])a.textContent=t.nav[i]});document.querySelector('.work-head h2').textContent=t.work;document.querySelectorAll('.filter').forEach((b,i)=>{if(t.filters[i])b.textContent=t.filters[i]});document.querySelector('.about h2').textContent=t.about;document.getElementById('aboutText').textContent=t.aboutText;document.querySelector('.contact h2').textContent=t.contact;document.querySelector('.panel-row p').textContent=t.contactText;document.querySelector('.links a').textContent=t.email;document.querySelectorAll('.links a')[1].textContent=t.instagram;document.querySelector('.footer span:nth-child(2)').textContent=t.footer;document.querySelector('.footer a').textContent=t.top;document.querySelector('.cursor i').textContent=t.view;document.querySelector('.lb-close').textContent=t.close;document.querySelector('.lb').setAttribute('aria-label',lang==='en'?'Photograph viewer':'Przeglądarka zdjęć');try{localStorage.setItem('jk-portfolio-language',lang)}catch(e){}}
+let currentLanguage=(()=>{try{return localStorage.getItem('jk-portfolio-language')||'en'}catch(e){return'en'}})();
+setLanguage(currentLanguage);
+languageToggle.addEventListener('click',()=>{currentLanguage=currentLanguage==='en'?'pl':'en';setLanguage(currentLanguage)});
+document.querySelector('.footer a[href="#top"]').addEventListener('click',e=>{e.preventDefault();document.getElementById('top').scrollIntoView({behavior:still?'auto':'smooth',block:'start'});history.replaceState(null,'',location.pathname+location.search)});
+
 
 const buzz=ms=>{
   try{
@@ -918,14 +929,14 @@ function draw(){
   );
 
   countEl.textContent=
-    `${String(items.length).padStart(2,'0')} photograph${items.length===1?'':'s'}`;
+    `${String(items.length).padStart(2,'0')} ${locale[currentLanguage].photographs}`;
 
   galleryEl.innerHTML='';
   galleryEl.style.transform='none';
 
   if(!items.length){
     galleryEl.style.gridTemplateColumns='1fr';
-    galleryEl.innerHTML='<div class="empty">No photographs in this selection yet.</div>';
+    galleryEl.innerHTML='<div class="empty"></div>';galleryEl.querySelector('.empty').textContent=locale[currentLanguage].empty;
     return;
   }
 
@@ -973,20 +984,8 @@ function draw(){
     visual.appendChild(a);
     tile.appendChild(visual);
 
-    if(p.showCaption!==false){
-      const info=document.createElement('div');
-      info.className='tile-info';
-
-      const title=document.createElement('span');
-      title.textContent=p.alt||(p.image||'').split('/').pop();
-
-      const category=document.createElement('span');
-      const c=String(p.category||'Other');
-      category.textContent=c.charAt(0).toUpperCase()+c.slice(1);
-
-      info.append(title,category);
-      tile.appendChild(info);
-    }
+    const details=[p.model,p.description,p.date].filter(v=>String(v||'').trim());
+    if(details.length){const info=document.createElement('div');info.className='tile-info';info.style.display='block';info.textContent=details.join(' · ');tile.appendChild(info);}
 
     columns[i%columnCount].appendChild(tile);
 
@@ -1036,8 +1035,7 @@ function lbShow(i,first){
   const p=lbList[lbI].p;
   const c=String(p.category||'Other');
 
-  lbTitle.textContent=p.alt||'';
-  lbCat.textContent=c.charAt(0).toUpperCase()+c.slice(1);
+  lbTitle.textContent=[p.model,p.description,p.date].filter(v=>String(v||'').trim()).join(' · ');
   lbNo.textContent=`${String(lbI+1).padStart(2,'0')} / ${String(lbList.length).padStart(2,'0')}`;
 
   lbImg.alt=p.alt||'';
