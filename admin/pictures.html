@@ -62,7 +62,7 @@ code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--pape
 .title{font-size:14px;font-weight:500;overflow-wrap:anywhere;line-height:1.3}
 .meta{font-size:12px;color:var(--mid);margin:4px 0 14px;text-transform:capitalize}
 .photo-actions{display:flex;flex-wrap:wrap;gap:6px}
-.photo-actions button{font-size:13px;padding:6px 10px}
+.photo-actions button{font-size:13px;padding:6px 10px}.preview-button{background:rgba(255,255,255,.64);backdrop-filter:blur(12px)}.preview-dialog{width:min(1000px,calc(100% - 28px));max-height:94vh;padding:0;border:1px solid rgba(255,255,255,.7);border-radius:20px;background:var(--paper);color:var(--ink);box-shadow:0 28px 90px rgba(13,14,16,.36)}.preview-dialog::backdrop{background:rgba(13,14,16,.62);backdrop-filter:blur(10px)}.preview-top{display:flex;justify-content:flex-end;padding:10px 12px}.preview-image{display:block;width:100%;max-height:76vh;object-fit:contain;background:#111}.preview-details{padding:16px 22px 20px;color:var(--mid)}.preview-details:empty{display:none}
 .empty{padding:56px 16px;border:1px dashed #b4b9be;border-radius:18px;color:var(--mid);text-align:center;grid-column:1/-1;font:italic 24px var(--serif)}
 .foot{margin-top:28px;max-width:60em}
 
@@ -107,8 +107,8 @@ code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--pape
 <div class="actions"><button class="primary" id="connect">Connect</button><button id="clear">Clear</button></div><div id="connectStatus" class="status"></div></section>
 <section class="panel" id="addPanel"><h2><span class="step">2</span>Add frames</h2><div class="field"><label for="files">Image files</label><input id="files" type="file" accept="image/jpeg,image/png,image/webp,image/avif" multiple><div id="previews" class="previews"></div><p class="hint">Tip: drag image files anywhere onto this panel. Duplicates are skipped.</p></div>
 <div class="field"><label for="category">Category</label><select id="category"><option value="people">People</option><option value="events">events</option><option value="editorial">Editorial</option><option value="other">Other</option></select></div>
-<div class="field"><label for="alt">Caption / alt text (optional)</label><input id="alt" placeholder="e.g. Evening in the city"></div>
-<div class="field"><label class="check"><input id="showCaption" type="checkbox" checked> Show caption below photo</label><p class="hint">Turn this off for a clean image-only tile. The alt text is still kept for accessibility.</p></div>
+<div class="field"><label for="alt">Accessibility alt text (optional)</label><input id="alt" placeholder="Describe the image for screen readers"></div><div class="field"><label for="model">Model (optional)</label><input id="model" placeholder="Model name"></div><div class="field"><label for="description">Description (optional)</label><input id="description" placeholder="Short description"></div><div class="field"><label for="date">Date (optional)</label><input id="date" type="date"></div>
+
 <div class="field"><label for="insertPosition">Add position</label><select id="insertPosition"><option value="end">At the end</option></select><p class="hint">Choose where the new photo(s) should appear in the public gallery.</p></div>
 <p class="note">Files are saved to <code>images/</code> and added to <code>content/gallery.json</code>. Maximum 20 MB per image.</p><div class="actions"><button class="primary" id="upload" disabled>Upload selected</button><span id="fileCount" class="hint">No files selected</span></div><div id="uploadStatus" class="status"></div></section>
 </aside><section class="panel gallery-panel"><div class="toolbar"><div><div class="eyebrow" style="margin-bottom:0">Repository contents</div><h2>Current gallery</h2></div><button id="refresh" disabled>Refresh ↻</button></div><div id="galleryStatus" class="status">Connect to load your gallery.</div><div id="filterbar" class="filterbar" hidden><div id="chips" class="chips"></div><div class="fb-right"><input id="search" type="search" placeholder="Search captions…" autocomplete="off" aria-label="Search captions"><button id="selAll" type="button">Select shown</button></div></div>
@@ -116,6 +116,7 @@ code{font:12px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--pape
 <div id="cards" class="cards"></div></section></div>
 <p class="note foot">Static-site limitation: this page has no private server. GitHub's token provides write access. Keep the URL private, clear the token when finished, and remember GitHub Pages can take a short time to publish a commit.</p>
 </div>
+<dialog class="preview-dialog" id="previewDialog" aria-label="Photo preview"><div class="preview-top"><button id="previewClose" type="button">Close ×</button></div><img class="preview-image" id="previewImage" alt=""><div class="preview-details" id="previewDetails"></div></dialog>
 <script>
 (()=>{const $=id=>document.getElementById(id);let token='',photos=[],connected=false,filterCat='all',query='',dragIdx=null;const selected=new Set();const repo=()=>$('repo').value.trim(),branch=()=>$('branch').value.trim()||'main',gp=()=>$('galleryPath').value.trim()||'content/gallery.json';const headers=()=>({Authorization:'Bearer '+token,Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'});const api=p=>'https://api.github.com/repos/'+repo()+'/contents/'+p.split('/').map(encodeURIComponent).join('/');const say=(id,msg,type='')=>{$(id).textContent=msg;$(id).className='status '+type;};async function req(url,opt={}){
   let r;
@@ -150,7 +151,7 @@ function updateInsertPosition(){
     option.value=String(i);
     option.textContent=i===photos.length
       ? `At the end (${ordinal(i+1)})`
-      : `Position ${i+1} — before "${photos[i].alt||((photos[i].image||'').split('/').pop())}"`;
+      : `Position ${i+1} — before ${photos[i].model||photos[i].date||("photo "+(i+1))}`;
     select.appendChild(option);
   }
   if(wasEnd)select.value=String(photos.length);
@@ -220,13 +221,12 @@ function render(){
     pick.onchange=()=>{if(pick.checked)selected.add(p);else selected.delete(p);card.classList.toggle('sel',pick.checked);updateBulk();};
     thumb.append(img,pick);
     const body=document.createElement('div');body.className='photo-body';
-    const title=document.createElement('div');title.className='title';title.textContent=p.alt||((p.image||'').split('/').pop()||'Untitled frame');
-    const meta=document.createElement('div');meta.className='meta';meta.textContent=(p.category||'other')+' / '+String(i+1).padStart(2,'0');
+    const meta=document.createElement('div');meta.className='meta';const details=[p.model,p.description,p.date].filter(v=>String(v||'').trim());meta.textContent=details.join(' · ');meta.hidden=!details.length;
     const actions=document.createElement('div');actions.className='photo-actions';
     const btn=(label,fn,cls='')=>{const b=document.createElement('button');b.textContent=label;b.className=cls;b.onclick=fn;return b;};
-    actions.append(btn('↑',()=>move(i,-1),''),btn('↓',()=>move(i,1),''),btn('Edit',()=>edit(i)),btn('Remove',()=>remove(i),'danger'));
+    actions.append(btn('Preview',()=>preview(i),'preview-button'),btn('↑',()=>move(i,-1),''),btn('↓',()=>move(i,1),''),btn('Edit',()=>edit(i)),btn('Remove',()=>remove(i),'danger'));
     actions.children[0].disabled=filt||i===0;actions.children[1].disabled=filt||i===n-1;
-    body.append(title,meta,actions);card.append(thumb,body);
+    body.append(meta,actions);card.append(thumb,body);
     if(canDrag){
       card.draggable=true;
       card.ondragstart=e=>{dragIdx=i;card.classList.add('dragging');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',String(i));};
@@ -238,6 +238,9 @@ function render(){
     c.append(card);
   });
 }
+function preview(i){const p=photos[i];if(!p)return;const image=$('previewImage');image.src=/^https?:/i.test(p.image||'')?p.image:'../'+(p.image||'').replace(/^\/+/, '');image.alt=p.alt||'';$('previewDetails').textContent=[p.model,p.description,p.date].filter(v=>String(v||'').trim()).join(' · ');$('previewDialog').showModal();}
+$('previewClose').addEventListener('click',()=>$('previewDialog').close());
+$('previewDialog').addEventListener('click',e=>{if(e.target===$('previewDialog'))$('previewDialog').close();});
 async function commitOrder(){
   say('galleryStatus','Saving new order…');
   try{
@@ -262,7 +265,7 @@ async function reorder(from,to){
   render();
   await commitOrder();
 }
-async function edit(i){const alt=prompt('Caption / alt text (used for accessibility too)',photos[i].alt||'');if(alt===null)return;const cat=prompt('Category: people, events, editorial, other',photos[i].category||'other');if(cat===null)return;if(!['people','events','editorial','other'].includes(cat.trim().toLowerCase())){alert('Use people, events, editorial or other.');return;}const showCaption=confirm('Show the caption below this photo?\n\nOK = show caption\nCancel = no visible caption');photos[i].alt=alt.trim();photos[i].category=cat.trim().toLowerCase();photos[i].showCaption=showCaption;try{await save('Edit portfolio photo details');render();say('galleryStatus','Photo details saved.','ok');}catch(e){say('galleryStatus',e.message,'error');}}
+async function edit(i){const p=photos[i];const alt=prompt('Accessibility alt text (optional)',p.alt||'');if(alt===null)return;const cat=prompt('Category: people, events, editorial, other',p.category||'other');if(cat===null)return;if(!['people','events','editorial','other'].includes(cat.trim().toLowerCase())){alert('Use people, events, editorial or other.');return;}const model=prompt('Model (optional)',p.model||'');if(model===null)return;const description=prompt('Description (optional)',p.description||'');if(description===null)return;const date=prompt('Date (optional, YYYY-MM-DD)',p.date||'');if(date===null)return;p.alt=alt.trim();p.category=cat.trim().toLowerCase();p.model=model.trim();p.description=description.trim();p.date=date.trim();try{await save('Edit portfolio photo details');render();say('galleryStatus','Photo details saved.','ok');}catch(e){say('galleryStatus',e.message,'error');}}
 async function remove(i){
   const photo = photos[i];
   if (!photo) return;
@@ -306,7 +309,7 @@ $('clear').onclick=()=>{token='';$('token').value='';photos=[];selected.clear();
 $('refresh').onclick=async()=>{try{await load();say('galleryStatus','Gallery refreshed.','ok');}catch(e){say('galleryStatus',e.message,'error');}};
 $('files').onchange=()=>{syncPreviews();$('fileCount').textContent=$('files').files.length?$('files').files.length+' file(s) selected':'No files selected';$('upload').disabled=!connected||!$('files').files.length;};
 $('upload').onclick=async()=>{
-  const files=[...$('files').files],cat=$('category').value,alt=$('alt').value.trim(),showCaption=$('showCaption').checked;
+  const files=[...$('files').files],cat=$('category').value,alt=$('alt').value.trim(),model=$('model').value.trim(),description=$('description').value.trim(),date=$('date').value;
   if(!files.length)return;
   if(files.some(f=>!/^image\/(jpeg|png|webp|avif)$/.test(f.type))){say('uploadStatus','Use JPG, PNG, WebP or AVIF files.','error');return;}
   if(files.some(f=>f.size>20*1024*1024)){say('uploadStatus','A file exceeds 20 MB. Resize it and try again.','error');return;}
@@ -326,7 +329,7 @@ $('upload').onclick=async()=>{
       say('uploadStatus',`Uploading ${i+1} / ${files.length}: ${f.name}`);
       await req(api(path),{method:'PUT',body:JSON.stringify({message:'Add portfolio photo: '+safe,content:btoa(bin),branch:branch()})});
       uploadedPaths.push(path);
-      newPhotos.push({image:path,alt:alt||safe.replace(/\.[^.]+$/,'').replace(/[-_]+/g,' '),category:cat,showCaption});
+      newPhotos.push({image:path,alt,category:cat,model,description,date});
     }
     const positionValue=$('insertPosition').value;
     const insertAt=positionValue==='end'?photos.length:Math.min(Math.max(0,Number(positionValue)||0),photos.length);
