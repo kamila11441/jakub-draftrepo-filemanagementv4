@@ -95,9 +95,12 @@
     },
     {
       "image": "images/1792065081055-i0cyf-DSC_0378.jpeg",
-      "alt": "Model - @alleksandra.jozwiak",
+      "alt": "",
       "category": "events",
-      "showCaption": true
+      "showCaption": true,
+      "model": "@alleksandra.jozwiak",
+      "description": "",
+      "date": ""
     },
     {
       "image": "images/1792019443381-c3io3-IMG_4121.jpeg",
