@@ -281,8 +281,8 @@ button{font:inherit;color:inherit}
   line-height:1.3;
 }
 
-.tile-info span:first-child{overflow-wrap:anywhere}
-.tile-info span:last-child{color:var(--mid);flex-shrink:0}
+.tile-info{display:flex;flex-direction:column;gap:4px}.tile-info .meta-row{display:flex;gap:6px;flex-wrap:wrap}.tile-info strong{font-weight:600;color:var(--ink)}
+.show-more{display:block;margin:0 auto clamp(70px,9vw,130px);border:1px solid var(--rule);border-radius:999px;padding:12px 24px;background:transparent;color:var(--ink);cursor:pointer;transition:background .2s,color .2s,border-color .2s}.show-more:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
 
 .empty{
   padding:40px 0;
@@ -832,6 +832,7 @@ html.lock{overflow:hidden}
       <div class="gallery" id="gallery">
         <div class="empty">Your photographs will appear here.</div>
       </div>
+      <button class="show-more" id="showMore" type="button" hidden>Show more</button>
     </section>
 
     <section class="inner about" id="about">
@@ -885,13 +886,13 @@ const galleryEl=document.getElementById('gallery');
 const countEl=document.getElementById('count');
 const root=document.documentElement;
 
-let photos=[],active='all';
+let photos=[],active='all',visibleLimit=12;
 
 const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const themeMeta=document.querySelector('meta[name="theme-color"]');
 
 const languageToggle=document.getElementById('languageToggle');
-const locale={en:{nav:['Work','About','Contact','Manage ↗'],brand:'Public portfolio',heroMeta:'@jakyb11 | Warsaw | Poland',heroPlaceholder:'Selected frame',navLabel:'Main navigation',featured:'Featured frames',count:'00 photographs',work:'Selected work',filters:['All','People','Events','Editorial','Other'],about:'Looking closer.',aboutText:'I’m Jakub, a photographer drawn to people, places and the quiet moments in between. My work explores the way light, atmosphere and human connection shape a story.',contact:'Let’s talk.',contactText:'For commissions, collaborations or any inquiries, feel free to get in touch. I’m always open to new projects and ideas.',email:'Email',instagram:'Instagram',footer:'Independent photographer',top:'Back to top ↑',empty:'No photographs in this selection yet.',view:'View',close:'Close',photographs:'photographs'},pl:{nav:['Prace','O mnie','Kontakt','Zarządzaj ↗'],brand:'Portfolio',heroMeta:'@jakyb11 | Warszawa | Polska',heroPlaceholder:'Wybrane zdjęcie',navLabel:'Nawigacja główna',featured:'Wybrane kadry',count:'00 zdjęć',work:'Wybrane prace',filters:['Wszystkie','Ludzie','Wydarzenia','Edytorial','Inne'],about:'Patrzeć uważniej.',aboutText:'Jakub, jestem fotografem zainteresowanym ludźmi, miejscami i spokojnymi chwilami pomiędzy. W moich zdjęciach odkrywam, jak światło, atmosfera i relacje międzyludzkie budują opowieść.',contact:'Let's talk.',contactText:'W sprawie zleceń, współpracy lub pytań napisz do mnie. Chętnie podejmę nowe projekty i pomysły.',email:'E-mail',instagram:'Instagram',footer:'Niezależny fotograf',top:'Wróć na górę ↑',empty:'Brak zdjęć w tym wyborze.',view:'Zobacz',close:'Zamknij',photographs:'zdjęć'}};
+const locale={en:{nav:['Work','About','Contact','Manage ↗'],brand:'Public portfolio',heroMeta:'@jakyb11 | Warsaw | Poland',heroPlaceholder:'Selected frame',navLabel:'Main navigation',featured:'Featured frames',count:'00 photographs',work:'Selected work',filters:['All','People','Events','Editorial','Other'],about:'Looking closer.',aboutText:'I’m Jakub, a photographer drawn to people, places and the quiet moments in between. My work explores the way light, atmosphere and human connection shape a story.',contact:'Let’s talk.',contactText:'For commissions, collaborations or any inquiries, feel free to get in touch. I’m always open to new projects and ideas.',email:'Email',instagram:'Instagram',footer:'Independent photographer',top:'Back to top ↑',empty:'No photographs in this selection yet.',view:'View',close:'Close',photographs:'photographs',showMore:'Show more',infoLabels:['Title','Model','Description','Date']},pl:{nav:['Prace','O mnie','Kontakt','Zarządzaj ↗'],brand:'Portfolio',heroMeta:'@jakyb11 | Warszawa | Polska',heroPlaceholder:'Wybrane zdjęcie',navLabel:'Nawigacja główna',featured:'Wybrane kadry',count:'00 zdjęć',work:'Wybrane prace',filters:['Wszystkie','Ludzie','Wydarzenia','Edytorial','Inne'],about:'Patrzeć uważniej.',aboutText:'Jestem fotografem zainteresowanym ludźmi, miejscami i spokojnymi chwilami pomiędzy. W moich zdjęciach odkrywam, jak światło, atmosfera i relacje międzyludzkie budują opowieść.',contact:'Let's talk.',contactText:'W sprawie zleceń, współpracy lub pytań napisz do mnie. Chętnie podejmę nowe projekty i pomysły.',email:'E-mail',instagram:'Instagram',footer:'Niezależny fotograf',top:'Wróć na górę ↑',empty:'Brak zdjęć w tym wyborze.',view:'Zobacz',close:'Zamknij',photographs:'zdjęć',showMore:'Pokaż więcej',infoLabels:['Tytuł','Model','Opis','Data']}};
 function setLanguage(lang){
   const t=locale[lang]||locale.en;
   document.documentElement.lang=lang in locale?lang:'en';
@@ -903,7 +904,7 @@ function setLanguage(lang){
   put('.work-head h2',t.work);document.querySelectorAll('.filter').forEach((b,i)=>{if(t.filters[i])b.textContent=t.filters[i];});
   put('.about h2',t.about);put('#aboutText',t.aboutText);put('.contact h2',t.contact);put('.panel-row p',t.contactText);
   const links=document.querySelectorAll('.links a');if(links[0])links[0].textContent=t.email;if(links[1])links[1].textContent=t.instagram;
-  put('.footer span:nth-child(2)',t.footer);put('.footer a',t.top);put('.cursor i',t.view);put('.lb-close',t.close);attr('.lb','aria-label',lang==='en'?'Photograph viewer':'Przeglądarka zdjęć');
+  put('.footer span:nth-child(2)',t.footer);put('#showMore',t.showMore);put('.footer a',t.top);put('.cursor i',t.view);put('.lb-close',t.close);attr('.lb','aria-label',lang==='en'?'Photograph viewer':'Przeglądarka zdjęć');
   try{localStorage.setItem('jk-portfolio-language',document.documentElement.lang);}catch(e){}
 }
 let currentLanguage=(()=>{try{return localStorage.getItem('jk-portfolio-language')==='pl'?'pl':'en'}catch(e){return'en'}})();
@@ -935,6 +936,10 @@ const io=still?null:new IntersectionObserver(es=>{
   });
 },{rootMargin:'0px 0px -6% 0px',threshold:.08});
 
+function metadataFor(p){const labels=(locale[currentLanguage]||locale.en).infoLabels;return [
+  ['title',labels[0],p.title,p.showTitle],['model',labels[1],p.model,p.showModel],['description',labels[2],p.description,p.showDescription],['date',labels[3],p.date,p.showDate]
+].filter(([,label,value,show])=>String(value||'').trim()&&show!==false).map(([key,label,value])=>[label,String(value).trim()]);}
+
 function draw(){
   const items=photos.filter(p=>
     active==='all'||
@@ -946,6 +951,7 @@ function draw(){
 
   galleryEl.innerHTML='';
   galleryEl.style.transform='none';
+  document.getElementById('showMore').hidden=items.length<=visibleLimit;
 
   if(!items.length){
     galleryEl.style.gridTemplateColumns='1fr';
@@ -967,9 +973,10 @@ function draw(){
     return col;
   });
 
-  const entries=items.map(p=>({p,thumb:null}));
+  const visibleItems=items.slice(0,visibleLimit);
+  const entries=visibleItems.map(p=>({p,thumb:null}));
 
-  items.forEach((p,i)=>{
+  visibleItems.forEach((p,i)=>{
     const tile=document.createElement('article');
     tile.className='tile';
 
@@ -997,8 +1004,8 @@ function draw(){
     visual.appendChild(a);
     tile.appendChild(visual);
 
-    const details=[p.model,p.description,p.date].filter(v=>String(v||'').trim());
-    if(details.length){const info=document.createElement('div');info.className='tile-info';info.style.display='block';info.textContent=details.join(' · ');tile.appendChild(info);}
+    const details=metadataFor(p);
+    if(details.length){const info=document.createElement('div');info.className='tile-info';details.forEach(([label,value])=>{const row=document.createElement('div');row.className='meta-row';const key=document.createElement('strong');key.textContent=label+':';const text=document.createElement('span');text.textContent=value;row.append(key,text);info.appendChild(row);});tile.appendChild(info);}
 
     columns[i%columnCount].appendChild(tile);
 
@@ -1048,7 +1055,7 @@ function lbShow(i,first){
   const p=lbList[lbI].p;
   const c=String(p.category||'Other');
 
-  lbTitle.textContent=[p.model,p.description,p.date].filter(v=>String(v||'').trim()).join(' · ');
+  lbTitle.textContent=metadataFor(p).map(([label,value])=>label+': '+value).join(' · ');
   lbNo.textContent=`${String(lbI+1).padStart(2,'0')} / ${String(lbList.length).padStart(2,'0')}`;
 
   lbImg.alt=p.alt||'';
@@ -1467,6 +1474,8 @@ addEventListener('resize',()=>{
   });
 });
 
+document.getElementById('showMore').addEventListener('click',()=>{visibleLimit+=12;draw();});
+
 /* CATEGORY FILTERS */
 
 document.getElementById('filters').addEventListener('click',e=>{
@@ -1476,6 +1485,7 @@ document.getElementById('filters').addEventListener('click',e=>{
   buzz(8);
 
   active=button.dataset.category;
+  visibleLimit=12;
 
   document.querySelectorAll('.filter').forEach(b=>{
     b.classList.toggle('active',b===button);
