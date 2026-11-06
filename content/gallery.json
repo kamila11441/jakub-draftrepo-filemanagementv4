@@ -149,9 +149,12 @@
     },
     {
       "image": "images/1792084709004-dftcv-DSC_0326-2.jpg",
-      "alt": "Model - @alleksandra.jozwiak",
+      "alt": "",
       "category": "people",
-      "showCaption": true
+      "showCaption": true,
+      "model": "@alleksandra.jozwiak",
+      "description": "",
+      "date": ""
     },
     {
       "image": "images/1792084712942-f6n2r-DSC_0327.jpg",
