@@ -242,9 +242,12 @@
     },
     {
       "image": "images/1792087963574-63eoa-DSC_0903-5.JPG",
-      "alt": "Model - @ziemeeek_",
+      "alt": "",
       "category": "people",
-      "showCaption": true
+      "showCaption": true,
+      "model": "@ziemeeek_",
+      "description": "",
+      "date": ""
     },
     {
       "image": "images/1792087851065-0u7fl-DSC_0288-3.jpg",
