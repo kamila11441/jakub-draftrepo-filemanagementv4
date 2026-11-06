@@ -275,9 +275,12 @@
     },
     {
       "image": "images/1792087845834-6qt5s-DSC_0243.jpg",
-      "alt": "Model - @alleksandra.jozwiak",
+      "alt": "",
       "category": "people",
-      "showCaption": true
+      "showCaption": true,
+      "model": "@alleksandra.jozwiak",
+      "description": "",
+      "date": ""
     },
     {
       "image": "images/1792087892357-rityl-DSC_0361.JPG",
