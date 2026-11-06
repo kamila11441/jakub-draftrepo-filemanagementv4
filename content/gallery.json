@@ -113,9 +113,12 @@
     },
     {
       "image": "images/1792087793085-hqk47-97DCF157-A98B-4459-B956-B6D19EABC5AA.JPG",
-      "alt": "Model - @ziemeeek_",
+      "alt": "",
       "category": "people",
-      "showCaption": true
+      "showCaption": true,
+      "model": "@ziemeeek_",
+      "description": "",
+      "date": ""
     },
     {
       "image": "images/1792029744455-2nfc1-temp_image_0858A495-2FDF-4CE8-B702-C5C4D4ECF04D.jpeg",
