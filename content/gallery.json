@@ -20,9 +20,12 @@
     },
     {
       "image": "images/1792087840989-qvyub-DSC_0238-2.jpg",
-      "alt": "Model - @alleksandra.jozwiak",
+      "alt": "",
       "category": "people",
-      "showCaption": true
+      "showCaption": true,
+      "model": "@alleksandra.jozwiak",
+      "description": "",
+      "date": ""
     },
     {
       "image": "images/1792089567401-9hdr7-IMG_4513.jpg",
