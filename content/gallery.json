@@ -395,9 +395,12 @@
     },
     {
       "image": "images/1792088025439-mrm59-DSC_1065-3.jpg",
-      "alt": "Model - @ziemeeek_",
+      "alt": "",
       "category": "people",
-      "showCaption": true
+      "showCaption": true,
+      "model": "@ziemeeek_",
+      "description": "",
+      "date": ""
     },
     {
       "image": "images/1792088030317-5lzw7-DSC_1290.jpg",
