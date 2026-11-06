@@ -27,7 +27,7 @@ function setLanguage(lang){
   }catch(error){console.error('Language update failed:',error);}
 }
 let currentLanguage=(()=>{try{return localStorage.getItem('jk-portfolio-language')==='pl'?'pl':'en'}catch(e){return'en'}})();
-document.querySelector('.footer a[href="#top"]').addEventListener('click',e=>{e.preventDefault();document.getElementById('top').scrollIntoView({behavior:still?'auto':'smooth',block:'start'});history.replaceState(null,'',location.pathname+location.search)});
+document.querySelector('.footer a[href="#top"]').addEventListener('click',e=>{e.preventDefault();window.scrollTo({top:0,behavior:still?'auto':'smooth'});history.replaceState(null,'',location.pathname+location.search)});
 
 
 const buzz=ms=>{
