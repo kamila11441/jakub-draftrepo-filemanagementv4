@@ -1,4 +1,4 @@
- 
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -891,9 +891,22 @@ const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const themeMeta=document.querySelector('meta[name="theme-color"]');
 
 const languageToggle=document.getElementById('languageToggle');
-const locale={en:{nav:['Work','About','Contact','Manage ↗'],brand:'Public portfolio',heroMeta:'@jakyb11 | Warsaw | Poland',heroPlaceholder:'Selected frame',navLabel:'Main navigation',featured:'Featured frames',count:'00 photographs',work:'Selected work',filters:['All','People','Events','Editorial','Other'],about:'Looking closer.',aboutText:'I’m Jakub, a photographer drawn to people, places and the quiet moments in between. My work explores the way light, atmosphere and human connection shape a story.',contact:'Let’s talk.',contactText:'For commissions, collaborations or any inquiries, feel free to get in touch. I’m always open to new projects and ideas.',email:'Email',instagram:'Instagram',footer:'Independent photographer',top:'Back to top ↑',empty:'No photographs in this selection yet.',view:'View',close:'Close',photographs:'photographs'},pl:{nav:['Prace','O mnie','Kontakt','Zarządzaj ↗'],brand:'Portfolio',heroMeta:'@jakyb11 | Warszawa | Polska',heroPlaceholder:'Wybrane zdjęcie',navLabel:'Nawigacja główna',featured:'Wybrane kadry',count:'00 zdjęć',work:'Wybrane prace',filters:['Wszystkie','Ludzie','Wydarzenia','Edytorial','Inne'],about:'Patrzeć uważniej.',aboutText:'Jakub, jestem fotografem zainteresowanym ludźmi, miejscami i spokojnymi chwilami pomiędzy. W moich zdjęciach odkrywam, jak światło, atmosfera i relacje międzyludzkie budują opowieść.',contact:'Let's talk.',contactText:'W sprawie zleceń, współpracy lub pytań napisz do mnie. Chętnie podejmę nowe projekty i pomysły.',email:'E-mail',instagram:'Instagram',footer:'Niezależny fotograf',top:'Wróć na górę ↑',empty:'Brak zdjęć w tym wyborze.',view:'Zobacz',close:'Zamknij',photographs:'zdjęć'}};
-function setLanguage(lang){const t=locale[lang];document.documentElement.lang=lang;languageToggle.textContent=lang==='en'?'PL':'EN';languageToggle.setAttribute('aria-label',lang==='en'?'Przełącz język na polski':'Switch language to English');document.querySelector('.bar>span').textContent=t.brand;document.querySelector('.bar nav').setAttribute('aria-label',t.navLabel);document.querySelector('.hero-text p').textContent=t.heroMeta;document.getElementById('heroPlaceholder').textContent=t.heroPlaceholder;document.querySelector('.strip').setAttribute('aria-label',t.featured);document.getElementById('count').textContent=t.count;document.querySelectorAll('.bar nav a').forEach((a,i)=>{if(t.nav[i])a.textContent=t.nav[i]});document.querySelector('.work-head h2').textContent=t.work;document.querySelectorAll('.filter').forEach((b,i)=>{if(t.filters[i])b.textContent=t.filters[i]});document.querySelector('.about h2').textContent=t.about;document.getElementById('aboutText').textContent=t.aboutText;document.querySelector('.contact h2').textContent=t.contact;document.querySelector('.panel-row p').textContent=t.contactText;document.querySelector('.links a').textContent=t.email;document.querySelectorAll('.links a')[1].textContent=t.instagram;document.querySelector('.footer span:nth-child(2)').textContent=t.footer;document.querySelector('.footer a').textContent=t.top;document.querySelector('.cursor i').textContent=t.view;document.querySelector('.lb-close').textContent=t.close;document.querySelector('.lb').setAttribute('aria-label',lang==='en'?'Photograph viewer':'Przeglądarka zdjęć');try{localStorage.setItem('jk-portfolio-language',lang)}catch(e){}}
-let currentLanguage=(()=>{try{return localStorage.getItem('jk-portfolio-language')||'en'}catch(e){return'en'}})();
+const locale={en:{nav:['Work','About','Contact','Manage ↗'],brand:'Public portfolio',heroMeta:'@jakyb11 | Warsaw | Poland',heroPlaceholder:'Selected frame',navLabel:'Main navigation',featured:'Featured frames',count:'00 photographs',work:'Selected work',filters:['All','People','Events','Editorial','Other'],about:'Looking closer.',aboutText:'I’m Jakub, a photographer drawn to people, places and the quiet moments in between. My work explores the way light, atmosphere and human connection shape a story.',contact:'Let’s talk.',contactText:'For commissions, collaborations or any inquiries, feel free to get in touch. I’m always open to new projects and ideas.',email:'Email',instagram:'Instagram',footer:'Independent photographer',top:'Back to top ↑',empty:'No photographs in this selection yet.',view:'View',close:'Close',photographs:'photographs'},pl:{nav:['Prace','O mnie','Kontakt','Zarządzaj ↗'],brand:'Portfolio',heroMeta:'@jakyb11 | Warszawa | Polska',heroPlaceholder:'Wybrane zdjęcie',navLabel:'Nawigacja główna',featured:'Wybrane kadry',count:'00 zdjęć',work:'Wybrane prace',filters:['Wszystkie','Ludzie','Wydarzenia','Edytorial','Inne'],about:'Patrzeć uważniej.',aboutText:'Jestem Jakubem, fotografem zainteresowanym ludźmi, miejscami i spokojnymi chwilami pomiędzy. W moich zdjęciach odkrywam, jak światło, atmosfera i relacje międzyludzkie budują opowieść.',contact:'Porozmawiajmy.',contactText:'W sprawie zleceń, współpracy lub pytań napisz do mnie. Chętnie podejmę nowe projekty i pomysły.',email:'E-mail',instagram:'Instagram',footer:'Niezależny fotograf',top:'Wróć na górę ↑',empty:'Brak zdjęć w tym wyborze.',view:'Zobacz',close:'Zamknij',photographs:'zdjęć'}};
+function setLanguage(lang){
+  const t=locale[lang]||locale.en;
+  document.documentElement.lang=lang in locale?lang:'en';
+  const put=(selector,value)=>{const el=document.querySelector(selector);if(el)el.textContent=value;};
+  const attr=(selector,name,value)=>{const el=document.querySelector(selector);if(el)el.setAttribute(name,value);};
+  if(languageToggle){languageToggle.textContent=lang==='en'?'PL':'EN';languageToggle.setAttribute('aria-label',lang==='en'?'Przełącz język na polski':'Switch language to English');}
+  put('.bar>span',t.brand);attr('.bar nav','aria-label',t.navLabel);put('.hero-text p',t.heroMeta);put('#heroPlaceholder',t.heroPlaceholder);attr('.strip','aria-label',t.featured);put('#count',t.count);
+  document.querySelectorAll('.bar nav a').forEach((a,i)=>{if(t.nav[i])a.textContent=t.nav[i];});
+  put('.work-head h2',t.work);document.querySelectorAll('.filter').forEach((b,i)=>{if(t.filters[i])b.textContent=t.filters[i];});
+  put('.about h2',t.about);put('#aboutText',t.aboutText);put('.contact h2',t.contact);put('.panel-row p',t.contactText);
+  const links=document.querySelectorAll('.links a');if(links[0])links[0].textContent=t.email;if(links[1])links[1].textContent=t.instagram;
+  put('.footer span:nth-child(2)',t.footer);put('.footer a',t.top);put('.cursor i',t.view);put('.lb-close',t.close);attr('.lb','aria-label',lang==='en'?'Photograph viewer':'Przeglądarka zdjęć');
+  try{localStorage.setItem('jk-portfolio-language',document.documentElement.lang);}catch(e){}
+}
+let currentLanguage=(()=>{try{return localStorage.getItem('jk-portfolio-language')==='pl'?'pl':'en'}catch(e){return'en'}})();
 setLanguage(currentLanguage);
 languageToggle.addEventListener('click',()=>{currentLanguage=currentLanguage==='en'?'pl':'en';setLanguage(currentLanguage)});
 document.querySelector('.footer a[href="#top"]').addEventListener('click',e=>{e.preventDefault();document.getElementById('top').scrollIntoView({behavior:still?'auto':'smooth',block:'start'});history.replaceState(null,'',location.pathname+location.search)});
@@ -929,14 +942,14 @@ function draw(){
   );
 
   countEl.textContent=
-    `${String(items.length).padStart(2,'0')} ${locale[currentLanguage].photographs}`;
+    `${String(items.length).padStart(2,'0')} ${(locale[currentLanguage]||locale.en).photographs}`;
 
   galleryEl.innerHTML='';
   galleryEl.style.transform='none';
 
   if(!items.length){
     galleryEl.style.gridTemplateColumns='1fr';
-    galleryEl.innerHTML='<div class="empty"></div>';galleryEl.querySelector('.empty').textContent=locale[currentLanguage].empty;
+    galleryEl.innerHTML='<div class="empty"></div>';galleryEl.querySelector('.empty').textContent=(locale[currentLanguage]||locale.en).empty;
     return;
   }
 
@@ -1474,7 +1487,8 @@ document.getElementById('filters').addEventListener('click',e=>{
 
 /* LOAD PHOTOGRAPHS */
 
-fetch(`content/gallery.json?v=${Date.now()}`,{cache:'no-store'})
+const galleryUrl=location.protocol==='file:'?'https://kamila11441.github.io/jakub-draftrepo-filemanagementv4/content/gallery.json':new URL('content/gallery.json',new URL('.',location.href)).href;
+fetch(`${galleryUrl}?v=${Date.now()}`,{cache:'no-store'})
   .then(r=>{
     if(!r.ok)throw Error('Could not load gallery');
     return r.json();
