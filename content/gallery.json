@@ -65,9 +65,12 @@
     },
     {
       "image": "images/1792087830577-t4md4-DSC_0223-2.jpg",
-      "alt": "Model - @alleksandra.jozwiak",
+      "alt": "",
       "category": "people",
-      "showCaption": true
+      "showCaption": true,
+      "model": "@alleksandra.jozwiak",
+      "description": "",
+      "date": ""
     },
     {
       "image": "images/1792019448965-ticcg-temp_image_06F46D78-A70B-43F9-8DF3-D19010B87E98.jpeg",
