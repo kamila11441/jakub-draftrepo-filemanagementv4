@@ -188,9 +188,12 @@
     },
     {
       "image": "images/1792087797608-c75sb-ChatGPT-Image-29-maj-2026-o-14.PNG",
-      "alt": "Model - @ziemeeek_",
+      "alt": "",
       "category": "people",
-      "showCaption": true
+      "showCaption": true,
+      "model": "@ziemeeek_",
+      "description": "",
+      "date": ""
     },
     {
       "image": "images/1792087811002-prc40-DSC_0046.jpg",
