@@ -167,9 +167,12 @@
     },
     {
       "image": "images/1792084716783-smmaa-DSC_0328-2.jpg",
-      "alt": "Model - @alleksandra.jozwiak",
+      "alt": "",
       "category": "events",
-      "showCaption": true
+      "showCaption": true,
+      "model": "@alleksandra.jozwiak",
+      "description": "",
+      "date": ""
     },
     {
       "image": "images/1792087786911-d9wbp-0A46427D-8BB8-4338-B439-D06839CD2129.JPG",
