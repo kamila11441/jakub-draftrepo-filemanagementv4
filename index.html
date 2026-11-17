@@ -497,6 +497,7 @@ button{font:inherit;color:inherit}
 
 .panel h2{
   position:relative;
+  top:clamp(18px,3vh,36px);
   z-index:1;
   margin:0;
   font:400 clamp(72px,16vw,280px)/.82 var(--serif);
@@ -889,7 +890,7 @@ button{font:inherit;color:inherit}
   .panel h2{font-size:clamp(76px,19vw,112px);line-height:.86}
   .contact-kicker{margin-bottom:clamp(88px,20vw,112px)}
   .contact-head{margin-top:auto;margin-bottom:clamp(12px,3svh,24px)}
-  .panel-row{flex-direction:column;align-items:flex-start;gap:18px;width:100%;margin-top:0}
+  .panel-row{flex-direction:column;align-items:flex-start;gap:18px;width:100%;margin-top:auto}
   .panel p{max-width:100%}
 
   .links{width:100%}
@@ -900,8 +901,6 @@ button{font:inherit;color:inherit}
     text-align:center;
     padding:13px 10px;
   }
-
-  .panel-row{margin-top:auto}
 
   .footer{
     flex-direction:row;
