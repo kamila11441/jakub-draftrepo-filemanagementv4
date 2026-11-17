@@ -6,8 +6,13 @@
       "category": "people",
       "showCaption": true,
       "model": "@ziemeeek_",
-      "description": "",
-      "date": ""
+      "description": "nature",
+      "date": "summer 25'",
+      "title": "nostalgic walk",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
     },
     {
       "image": "images/1792087789062-ajksp-90F77E6F-FAF0-4589-A110-2D63B836E881-2.JPG",
