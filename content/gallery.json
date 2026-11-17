@@ -47,9 +47,14 @@
       "alt": "",
       "category": "people",
       "showCaption": false,
-      "model": "",
-      "description": "",
-      "date": ""
+      "model": "@zakkmaja",
+      "description": "studio",
+      "date": "autumn 26'",
+      "title": "W portrait",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
     },
     {
       "image": "images/1794003166061-djeex-DSC_0080.jpg",
