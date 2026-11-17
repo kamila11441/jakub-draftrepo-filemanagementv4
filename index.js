@@ -772,7 +772,10 @@ if(!still&&window.gsap&&window.ScrollTrigger){
         .fromTo(contactStage,{opacity:0},{opacity:1,duration:.16,ease:'none'},.72)
         .to({}, {duration:.12},.88);
     }
-    ScrollTrigger.refresh();
+    // The eye pin uses a fixed scroll distance, so loading video metadata
+    // does not change its geometry. Avoid refreshing pins here: Chrome can
+    // finish loading metadata after the user has started scrolling, and a
+    // late pin recalculation can move the document to a different position.
     if(eyeTrigger)updateEyeTransition(eyeTrigger);
   },{once:true});
   eyeVideo?.addEventListener('loadeddata',()=>{if(eyeTrigger)updateEyeTransition(eyeTrigger);if(eyeTrigger?.isActive)primeEyeVideo();},{once:true});
