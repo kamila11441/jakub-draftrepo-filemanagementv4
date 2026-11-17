@@ -785,10 +785,15 @@ if(!still&&window.gsap&&window.ScrollTrigger){
 if(still||!window.gsap||!window.ScrollTrigger){
   const panel=document.querySelector('.contact-panel-stage');
   const video=document.querySelector('.contact-eye-video');
+  const scene=document.querySelector('.contact-eye-scene');
   const blackout=document.querySelector('.contact-eye-blackout');
   if(panel){panel.inert=false;panel.setAttribute('aria-hidden','false');panel.style.opacity='1';panel.style.pointerEvents='auto';}
+  // If an animation library fails to load (or motion is reduced), keep the eye
+  // poster visible as a still image instead of leaving a blank black scene.
   if(video)video.style.display='none';
-  if(blackout)blackout.style.opacity='1';
+  if(scene){scene.style.height='auto';scene.style.minHeight='0';scene.style.paddingTop='45svh';scene.style.backgroundSize='100% 45svh';scene.style.backgroundPosition='top center';}
+  if(panel){panel.style.position='relative';panel.style.inset='auto';panel.style.minHeight='100svh';panel.style.background='var(--ink)';}
+  if(blackout)blackout.style.opacity='0';
 }
 let ticking=false;
 
