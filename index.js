@@ -1,14 +1,20 @@
 const galleryEl=document.getElementById('gallery');
 const countEl=document.getElementById('count');
+const workModal=document.getElementById('workModal');
+const workModalGrid=document.getElementById('workModalGrid');
+const workModalModel=document.getElementById('workModalModel');
+const showMoreButton=document.getElementById('showMore');
 const root=document.documentElement;
 
-let photos=[],active='all',visibleLimit=12;
+let photos=[],active='all',visibleLimit=12,modalEntries=[],modalActive='all',modalActiveModel='';
 
 const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
 const themeMeta=document.querySelector('meta[name="theme-color"]');
 
 const languageToggle=document.getElementById('languageToggle');
-const locale={en:{nav:['Work','About','Contact','Manage ↗'],brand:'Public portfolio',heroMeta:'@jakyb11 | Warsaw | Poland',heroPlaceholder:'Selected frame',navLabel:'Main navigation',featured:'Featured frames',count:'00 photographs',work:'Selected work',filters:['All','People','Events','Editorial','Other'],about:'Looking closer.',aboutText:'I’m Jakub, a photographer drawn to people, places and the quiet moments in between. My work explores the way light, atmosphere and human connection shape a story.',contact:'Let’s talk.',contactText:'For commissions, collaborations or any inquiries, feel free to get in touch. I’m always open to new projects and ideas.',email:'Email',instagram:'Instagram',footer:'Independent photographer',top:'Back to top ↑',empty:'No photographs in this selection yet.',imageUnavailable:'Photo temporarily unavailable',view:'View',close:'Close',photographs:'photographs',showMore:'Show more',infoLabels:['Title','Model','Description','Date']},pl:{nav:['Prace','O mnie','Kontakt','Zarządzaj ↗'],brand:'Portfolio',heroMeta:'@jakyb11 | Warszawa | Polska',heroPlaceholder:'Wybrane zdjęcie',navLabel:'Nawigacja główna',featured:'Wybrane kadry',count:'00 zdjęć',work:'Wybrane prace',filters:['Wszystkie','Ludzie','Wydarzenia','Edytorial','Inne'],about:'Patrzeć uważniej.',aboutText:'Jestem fotografem zainteresowanym ludźmi, miejscami i spokojnymi chwilami pomiędzy. W moich zdjęciach odkrywam, jak światło, atmosfera i relacje międzyludzkie budują opowieść.',contact:"Let's talk.",contactText:'W sprawie zleceń, współpracy lub pytań napisz do mnie. Chętnie podejmę nowe projekty i pomysły.',email:'E-mail',instagram:'Instagram',footer:'Niezależny fotograf',top:'Wróć na górę ↑',empty:'Brak zdjęć w tym wyborze.',imageUnavailable:'Zdjęcie chwilowo niedostępne',view:'Zobacz',close:'Zamknij',photographs:'zdjęć',showMore:'Pokaż więcej',infoLabels:['Tytuł','Model','Opis','Data']}};
+const locale={en:{nav:['Work','About','Contact','Manage ↗'],brand:'Public portfolio',heroMeta:'@jakyb11 | Warsaw | Poland',heroPlaceholder:'Selected frame',irisKicker:'PHOTOGRAPHER · WARSAW, POLAND',irisTitle:'Jakub Kowalski',irisCopy:'Portraits, places and the quiet moments in between.',transitionCta:'Explore selected work ↓',navLabel:'Main navigation',featured:'Featured frames',count:'00 photographs',work:'Selected work',filters:['All','People','Events','Editorial','Other'],about:'Looking closer.',aboutText:'I’m Jakub, a photographer drawn to people, places and the quiet moments in between. My work explores the way light, atmosphere and human connection shape a story.',contactKicker:'Portraiture · Warsaw, Poland',contact:'Let’s talk.',contactText:'For commissions, collaborations or any inquiries, feel free to get in touch. I’m always open to new projects and ideas.',email:'Email',instagram:'Instagram',footer:'Independent photographer',top:'Back to top ↑',empty:'No photographs in this selection yet.',imageUnavailable:'Photo temporarily unavailable',view:'View',close:'Close',photographs:'photographs',showMore:'Show more',infoLabels:['Title','Model','Description','Date']},pl:{nav:['Prace','O mnie','Kontakt','Zarządzaj ↗'],brand:'Portfolio',heroMeta:'@jakyb11 | Warszawa | Polska',heroPlaceholder:'Wybrane zdjęcie',irisKicker:'FOTOGRAF · WARSZAWA, POLSKA',irisTitle:'Jakub Kowalski',irisCopy:'Portrety, miejsca i spokojne chwile pomiędzy.',transitionCta:'Zobacz wybrane prace ↓',navLabel:'Nawigacja główna',featured:'Wybrane kadry',count:'00 zdjęć',work:'Wybrane prace',filters:['Wszystkie','Ludzie','Wydarzenia','Edytorial','Inne'],about:'Patrzeć uważniej.',aboutText:'Jestem fotografem zainteresowanym ludźmi, miejscami i spokojnymi chwilami pomiędzy. W moich zdjęciach odkrywam, jak światło, atmosfera i relacje międzyludzkie budują opowieść.',contactKicker:'Portrety · Warszawa, Polska',contact:"Let's talk.",contactText:'W sprawie zleceń, współpracy lub pytań napisz do mnie. Chętnie podejmę nowe projekty i pomysły.',email:'E-mail',instagram:'Instagram',footer:'Niezależny fotograf',top:'Wróć na górę ↑',empty:'Brak zdjęć w tym wyborze.',imageUnavailable:'Zdjęcie chwilowo niedostępne',view:'Zobacz',close:'Zamknij',photographs:'zdjęć',showMore:'Pokaż więcej',infoLabels:['Tytuł','Model','Opis','Data']}};
+locale.en.allModels='All models';
+locale.pl.allModels='Wszystkie modele';
 function setLanguage(lang){
   try{
   lang=locale[lang]?lang:'en';
@@ -17,10 +23,13 @@ function setLanguage(lang){
   const put=(selector,value)=>{const el=document.querySelector(selector);if(el)el.textContent=value;};
   const attr=(selector,name,value)=>{const el=document.querySelector(selector);if(el)el.setAttribute(name,value);};
   if(languageToggle){languageToggle.textContent=lang==='en'?'PL':'EN';languageToggle.setAttribute('aria-label',lang==='en'?'Przełącz język na polski':'Switch language to English');}
-  put('.bar>span',t.brand);attr('.bar nav','aria-label',t.navLabel);put('.hero-text p',t.heroMeta);put('#heroPlaceholder',t.heroPlaceholder);attr('.strip','aria-label',t.featured);put('#count',t.count);
+  put('.bar>span',t.brand);attr('.bar nav','aria-label',t.navLabel);put('#irisKicker',t.irisKicker);put('#irisTitle',t.irisTitle);put('#irisCopy',t.irisCopy);put('#transitionCta',t.transitionCta);attr('.strip','aria-label',t.featured);put('#count',t.count);
   document.querySelectorAll('.bar nav a').forEach((a,i)=>{if(t.nav[i])a.textContent=t.nav[i];});
-  put('.work-head h2',t.work);document.querySelectorAll('.filter').forEach((b,i)=>{if(t.filters[i])b.textContent=t.filters[i];});
-  put('.about h2',t.about);put('#aboutText',t.aboutText);put('.contact h2',t.contact);put('.panel-row p',t.contactText);
+  put('.work-head h2',t.work);put('#workModalTitle',t.work);put('#workModalEyebrow',lang==='pl'?'PEŁNE ARCHIWUM':'COMPLETE ARCHIVE');put('#closeWorkModal',`${t.close} ×`);document.querySelectorAll('.filter').forEach((b,i)=>{if(t.filters[i])b.textContent=t.filters[i];});
+  document.querySelectorAll('.work-modal-filter').forEach((b,i)=>{if(t.filters[i])b.textContent=t.filters[i];});
+  const allModelsOption=document.getElementById('workModalModelAll');if(allModelsOption)allModelsOption.textContent=t.allModels;
+  const modelFilter=document.getElementById('workModalModel');if(modelFilter)modelFilter.setAttribute('aria-label',lang==='pl'?'Filtruj według modelu':'Filter by model');
+  put('.about h2',t.about);put('#aboutText',t.aboutText);put('.contact-kicker',t.contactKicker);put('.contact h2',t.contact);put('.panel-row p',t.contactText);
   const links=document.querySelectorAll('.links a');if(links[0])links[0].textContent=t.email;if(links[1])links[1].textContent=t.instagram;
   put('.footer span:nth-child(2)',t.footer);put('#showMore',t.showMore);put('.footer a',t.top);put('.cursor i',t.view);put('.lb-close',t.close);attr('.lb','aria-label',lang==='en'?'Photograph viewer':'Przeglądarka zdjęć');
   try{localStorage.setItem('jk-portfolio-language',document.documentElement.lang);}catch(e){}
@@ -58,6 +67,12 @@ function metadataFor(p){const labels=(locale[currentLanguage]||locale.en).infoLa
 ].filter(([,label,value,show])=>String(value||'').trim()&&show!==false).map(([key,label,value])=>[label,String(value).trim()]);}
 
 function draw(){
+  const previousRects=new Map([...galleryEl.querySelectorAll('.tile')].map(tile=>[tile.dataset.key,tile.getBoundingClientRect()]));
+  if(window.ScrollTrigger){
+    ScrollTrigger.getAll().forEach(trigger=>{
+      if(trigger.trigger&&galleryEl.contains(trigger.trigger))trigger.kill();
+    });
+  }
   const items=photos.filter(p=>
     active==='all'||
     String(p.category||'other').toLowerCase()===active.toLowerCase()
@@ -73,6 +88,7 @@ function draw(){
   if(!items.length){
     galleryEl.style.gridTemplateColumns='1fr';
     galleryEl.innerHTML='<div class="empty"></div>';galleryEl.querySelector('.empty').textContent=(locale[currentLanguage]||locale.en).empty;
+    if(window.ScrollTrigger)requestAnimationFrame(()=>ScrollTrigger.refresh());
     return;
   }
 
@@ -96,9 +112,12 @@ function draw(){
   visibleItems.forEach((p,i)=>{
     const tile=document.createElement('article');
     tile.className='tile';
+    tile.dataset.key=p.image;
 
     const visual=document.createElement('div');
     visual.className='tile-visual';
+    const lakePortrait=p.image.includes('DSC_0903-6.JPG');
+    if(lakePortrait)visual.classList.add('lake-emerge');
 
     const a=document.createElement('a');
     a.href=pathFor(p.image);
@@ -125,6 +144,7 @@ function draw(){
 
     a.appendChild(img);
     visual.appendChild(a);
+    if(lakePortrait){const waterline=document.createElement('span');waterline.className='lake-waterline';waterline.setAttribute('aria-hidden','true');visual.appendChild(waterline);}
     tile.appendChild(visual);
 
     const details=metadataFor(p);
@@ -135,7 +155,152 @@ function draw(){
     if(io)io.observe(tile);
     else tile.classList.add('in');
   });
+  if(window.gsap&&!still){
+    const tiles=[...galleryEl.querySelectorAll('.tile')];
+    tiles.forEach((tile,i)=>{
+      const old=previousRects.get(tile.dataset.key);
+      if(old){
+        const now=tile.getBoundingClientRect(),delta=old.top-now.top;
+        if(Math.abs(delta)>2)gsap.fromTo(tile,{y:delta},{y:0,duration:.65,ease:'power2.out',overwrite:true});
+      }else{
+        const columnStagger=(i%columnCount)*3;
+        gsap.fromTo(tile,
+          {y:64,opacity:0,clipPath:'inset(0% 0% 9% 0%)'},
+          {y:0,opacity:1,clipPath:'inset(0% 0% 0% 0%)',ease:'none',
+            scrollTrigger:{trigger:tile,start:`top ${92-columnStagger}%`,end:'top 54%',scrub:.75,invalidateOnRefresh:true}}
+        );
+      }
+      const img=tile.querySelector('img');
+      if(img&&!tile.querySelector('.lake-emerge'))gsap.to(img,{yPercent:7,ease:'none',scrollTrigger:{trigger:tile,start:'top bottom',end:'bottom top',scrub:.7}});
+    });
+    galleryEl.querySelectorAll('.lake-emerge').forEach(visual=>{
+      const image=visual.querySelector('img');
+      const waterline=visual.querySelector('.lake-waterline');
+      gsap.timeline({scrollTrigger:{trigger:visual,start:'top 88%',end:'center 45%',scrub:.7,invalidateOnRefresh:true}})
+        .fromTo(image,{clipPath:'inset(100% 0% 0% 0%)',yPercent:12,scale:1.12},{clipPath:'inset(0% 0% 0% 0%)',yPercent:0,scale:1,duration:1,ease:'none'},0)
+        .fromTo(waterline,{bottom:'0%',opacity:0},{bottom:'100%',opacity:.9,duration:.82,ease:'none'},.08)
+        .to(waterline,{opacity:0,duration:.16,ease:'none'},.78);
+    });
+  }
+  if(window.ScrollTrigger)requestAnimationFrame(()=>ScrollTrigger.refresh());
 }
+
+function populateWorkModal(){
+  workModalGrid.innerHTML='';
+  modalEntries=photos.map(p=>({p,thumb:null,item:null}));
+  const t=locale[currentLanguage]||locale.en;
+  const models=new Map();
+  photos.forEach(p=>{
+    const name=String(p.model||'').trim();
+    if(name&&!models.has(name.toLocaleLowerCase()))models.set(name.toLocaleLowerCase(),name);
+  });
+  const allOption=document.createElement('option');
+  allOption.id='workModalModelAll';allOption.value='';allOption.textContent=t.allModels;
+  workModalModel.replaceChildren(allOption);
+  [...models.entries()].sort((a,b)=>a[1].localeCompare(b[1],currentLanguage)).forEach(([key,name])=>{
+    const option=document.createElement('option');option.value=key;option.textContent=name;workModalModel.appendChild(option);
+  });
+  workModalModel.disabled=models.size===0;
+
+  modalEntries.forEach((entry,i)=>{
+    const p=entry.p;
+    const item=document.createElement('article');
+    item.className='work-modal-item';
+    item.dataset.category=String(p.category||'other').toLowerCase();
+    entry.item=item;
+    const visual=document.createElement('div');
+    visual.className='work-modal-visual';
+    const link=document.createElement('a');
+    link.href=pathFor(p.image);
+    link.setAttribute('aria-label',`${t.view} ${i+1} / ${photos.length}`);
+    const img=document.createElement('img');
+    img.src=pathFor(p.image);
+    img.alt=p.alt||'';
+    img.loading='lazy';
+    img.decoding='async';
+    img.onerror=()=>{img.hidden=true;};
+    entry.thumb=img;
+    link.addEventListener('click',e=>{
+      if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button)return;
+      e.preventDefault();
+      const visibleEntries=modalEntries.filter(candidate=>{
+        const category=String(candidate.p.category||'other').toLowerCase();
+        const model=String(candidate.p.model||'').trim().toLocaleLowerCase();
+        return(modalActive==='all'||category===modalActive)&&(!modalActiveModel||model===modalActiveModel);
+      });
+      const visibleIndex=visibleEntries.indexOf(entry);
+      workModal.close();
+      requestAnimationFrame(()=>openLB(visibleEntries,visibleIndex));
+    });
+    link.appendChild(img);
+    visual.appendChild(link);
+    item.appendChild(visual);
+
+    const details=metadataFor(p);
+    if(details.length){
+      const info=document.createElement('div');
+      info.className='work-modal-info';
+      details.forEach(([label,value])=>{
+        const row=document.createElement('div');row.className='meta-row';
+        const key=document.createElement('strong');key.textContent=label+':';
+        const text=document.createElement('span');text.textContent=value;
+        row.append(key,text);info.appendChild(row);
+      });
+      item.appendChild(info);
+    }
+    workModalGrid.appendChild(item);
+  });
+  applyWorkModalFilter();
+}
+
+function applyWorkModalFilter(){
+  let visible=0;
+  modalEntries.forEach(entry=>{
+    const model=String(entry.p.model||'').trim().toLocaleLowerCase();
+    const show=(modalActive==='all'||entry.item?.dataset.category===modalActive)&&(!modalActiveModel||model===modalActiveModel);
+    if(entry.item)entry.item.hidden=!show;
+    if(show)visible++;
+  });
+  const t=locale[currentLanguage]||locale.en;
+  document.getElementById('workModalCount').textContent=`${visible} ${t.photographs}`;
+}
+
+function openWorkModal(){
+  modalActive='all';
+  modalActiveModel='';
+  document.querySelectorAll('.work-modal-filter').forEach((button,index)=>{
+    button.classList.toggle('active',index===0);
+    button.setAttribute('aria-pressed',String(index===0));
+  });
+  populateWorkModal();
+  root.classList.add('lock');
+  if(lenis)lenis.stop();
+  if(!workModal.open)workModal.showModal();
+  document.getElementById('closeWorkModal').focus({preventScroll:true});
+}
+
+showMoreButton.addEventListener('click',openWorkModal);
+document.getElementById('closeWorkModal').addEventListener('click',()=>workModal.close());
+workModal.addEventListener('close',()=>{if(lenis)lenis.start();});
+workModal.addEventListener('close',()=>root.classList.remove('lock'));
+workModal.addEventListener('click',e=>{if(e.target===workModal)workModal.close();});
+document.getElementById('workModalFilters').addEventListener('click',e=>{
+  const button=e.target.closest('.work-modal-filter');
+  if(!button)return;
+  modalActive=button.dataset.category;
+  document.querySelectorAll('.work-modal-filter').forEach(candidate=>{
+    const selected=candidate===button;
+    candidate.classList.toggle('active',selected);
+    candidate.setAttribute('aria-pressed',String(selected));
+  });
+  applyWorkModalFilter();
+  document.querySelector('.work-modal-scroll').scrollTop=0;
+});
+workModalModel.addEventListener('change',()=>{
+  modalActiveModel=workModalModel.value;
+  applyWorkModalFilter();
+  document.querySelector('.work-modal-scroll').scrollTop=0;
+});
 
 /* LIGHTBOX */
 
@@ -536,6 +701,75 @@ const words=[...aboutP.querySelectorAll('.w')];
    Gallery columns no longer move vertically.
 */
 
+let lenis=null;
+if(!still&&window.Lenis){
+  try{
+    lenis=new Lenis({duration:1.05,smoothWheel:true,syncTouch:false,gestureOrientation:'vertical'});
+    lenis.on('scroll',()=>{tick();if(window.ScrollTrigger)ScrollTrigger.update();});
+    if(window.gsap){gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);}
+    window.portfolioLenis=lenis;
+  }catch(error){console.warn('Smooth scrolling unavailable:',error);}
+}
+if(!still&&window.gsap&&window.ScrollTrigger){
+  gsap.registerPlugin(ScrollTrigger);
+  root.classList.add('gsap-ready');
+  const ctaWrap=document.querySelector('.transition-cta');
+  const ctaLink=document.getElementById('transitionCta');
+  const setTransitionCta=visible=>{
+    if(ctaWrap)ctaWrap.classList.toggle('is-visible',visible);
+    if(ctaLink){ctaLink.tabIndex=visible?0:-1;ctaLink.setAttribute('aria-hidden',String(!visible));}
+  };
+  gsap.timeline({scrollTrigger:{trigger:'#top',start:'top top',end:'+=165%',pin:true,pinSpacing:true,scrub:.75,anticipatePin:1,invalidateOnRefresh:true,onUpdate:self=>setTransitionCta(self.progress>=.68&&self.progress<1)}})
+    .to('.hero-iris',{scale:1.04,duration:.18,ease:'none'},0)
+    .fromTo('.iris-copy',{y:34,opacity:0},{y:0,opacity:1,duration:.16,ease:'none'},.18)
+    .to('.iris-copy',{y:-28,opacity:0,duration:.12,ease:'none'},.54)
+    .to('.hero-iris',{scale:14,duration:.68,ease:'none'},.18)
+    .to('.hero-iris',{opacity:0,duration:.14,ease:'none'},.88);
+
+  const eyeVideo=document.querySelector('.contact-eye-video');
+  const contactStage=document.querySelector('.contact-panel-stage');
+  let eyeTrigger;
+  const updateEyeTransition=self=>{
+    const progress=self.progress;
+    if(eyeVideo&&eyeVideo.readyState>=2&&Number.isFinite(eyeVideo.duration)){
+      const videoProgress=Math.min(1,progress/.72);
+      const time=Math.min(eyeVideo.duration-.02,videoProgress*eyeVideo.duration);
+      if(Math.abs(eyeVideo.currentTime-time)>.035)eyeVideo.currentTime=time;
+    }
+    const blackout=document.querySelector('.contact-eye-blackout');
+    if(blackout)blackout.style.opacity=String(Math.max(0,Math.min(1,(progress-.52)/.2)));
+    const reveal=Math.max(0,Math.min(1,(progress-.72)/.16));
+    if(contactStage){
+      contactStage.style.opacity=String(reveal);
+      contactStage.style.pointerEvents=reveal>.98?'auto':'none';
+      contactStage.inert=reveal<.98;
+      contactStage.setAttribute('aria-hidden',String(reveal<.98));
+    }
+  };
+  eyeVideo?.addEventListener('loadedmetadata',()=>{
+    if(eyeTrigger)updateEyeTransition(eyeTrigger);
+    ScrollTrigger.refresh();
+  },{once:true});
+  eyeTrigger=ScrollTrigger.create({trigger:'#contact-eye',start:'top top',end:'+=140%',pin:true,pinSpacing:true,scrub:.7,anticipatePin:1,invalidateOnRefresh:true,onUpdate:updateEyeTransition,onRefresh:updateEyeTransition});
+
+  document.querySelectorAll('a[href="#contact-panel"]').forEach(link=>link.addEventListener('click',event=>{
+    event.preventDefault();
+    const destination=eyeTrigger.end;
+    if(lenis)lenis.scrollTo(destination,{duration:.9});
+    else scrollTo({top:destination,behavior:still?'auto':'smooth'});
+    history.replaceState(null,'','#contact-panel');
+  }));
+
+  gsap.fromTo('.work-head',{y:48,opacity:0},{y:0,opacity:1,ease:'none',scrollTrigger:{trigger:'.work-head',start:'top 88%',end:'top 50%',scrub:.75,invalidateOnRefresh:true}});
+}
+if(still||!window.gsap||!window.ScrollTrigger){
+  const panel=document.querySelector('.contact-panel-stage');
+  const video=document.querySelector('.contact-eye-video');
+  const blackout=document.querySelector('.contact-eye-blackout');
+  if(panel){panel.inert=false;panel.setAttribute('aria-hidden','false');panel.style.opacity='1';panel.style.pointerEvents='auto';}
+  if(video)video.style.display='none';
+  if(blackout)blackout.style.opacity='1';
+}
 let ticking=false;
 
 function frame(){
@@ -545,11 +779,11 @@ function frame(){
 
   root.style.setProperty(
     '--p',
-    Math.min(1,Math.max(0,scrollY/h)).toFixed(4)
+    Math.min(1,Math.max(0,(lenis?lenis.scroll:scrollY)/h)).toFixed(4)
   );
 
   if(themeMeta){
-    themeMeta.content=scrollY<h*.6?'#0d0e10':'#f3f4f6';
+    themeMeta.content=scrollY<h*(root.classList.contains('gsap-ready')?1.8:.6)?'#0d0e10':'#f3f4f6';
   }
 
   /* Keep selected work stationary beneath its heading. */
@@ -601,7 +835,7 @@ addEventListener('resize',()=>{
   });
 });
 
-document.getElementById('showMore').addEventListener('click',()=>{visibleLimit+=12;draw();});
+/* Show more opens the complete collection in the accessible work dialog. */
 
 /* CATEGORY FILTERS */
 
@@ -642,16 +876,7 @@ fetchGallery()
 
     draw();
     buildStrip();
-
-    if(photos[0]?.image){
-      const hero=document.getElementById('heroImg');
-
-      hero.onerror=()=>{hero.hidden=true;document.getElementById('heroPlaceholder').style.display='flex';};
-      hero.src=pathFor(photos[0].image);
-      hero.hidden=false;
-
-      document.getElementById('heroPlaceholder').style.display='none';
-    }
+    if(window.ScrollTrigger)ScrollTrigger.refresh();
 
     tick();
   })
