@@ -733,6 +733,8 @@ if(!still&&window.gsap&&window.ScrollTrigger){
   const eyeVideo=document.querySelector('.contact-eye-video');
   const contactStage=document.querySelector('.contact-panel-stage');
   const blackout=document.querySelector('.contact-eye-blackout');
+  const isChrome=/Chrome|Chromium/.test(navigator.userAgent)&&!/Edg|OPR/.test(navigator.userAgent);
+  const eyeScrub=isChrome ? 0.12 : 0.7;
   let eyeTrigger,videoPriming=false;
   const primeEyeVideo=()=>{
     if(!eyeVideo||videoPriming||eyeVideo.dataset.primed)return;
@@ -760,7 +762,7 @@ if(!still&&window.gsap&&window.ScrollTrigger){
       contactStage.setAttribute('aria-hidden',String(reveal<.98));
     }
   };
-  const eyeTimeline=gsap.timeline({scrollTrigger:{trigger:'#contact-eye',start:'top top',end:'+=140%',pin:true,pinSpacing:true,scrub:.7,anticipatePin:1,invalidateOnRefresh:true,onEnter:primeEyeVideo,onUpdate:updateEyeTransition,onRefresh:updateEyeTransition}});
+  const eyeTimeline=gsap.timeline({scrollTrigger:{trigger:'#contact-eye',start:'top top',end:'+=140%',pin:true,pinSpacing:true,scrub:eyeScrub,anticipatePin:1,invalidateOnRefresh:true,onEnter:primeEyeVideo,onUpdate:updateEyeTransition,onRefresh:updateEyeTransition}});
   eyeTrigger=eyeTimeline.scrollTrigger;
   eyeVideo?.addEventListener('loadedmetadata',()=>{
     if(Number.isFinite(eyeVideo.duration)&&eyeVideo.duration>0){
