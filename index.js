@@ -732,21 +732,8 @@ if(!still&&window.gsap&&window.ScrollTrigger){
 
   const eyeVideo=document.querySelector('.contact-eye-video');
   const contactStage=document.querySelector('.contact-panel-stage');
+  const blackout=document.querySelector('.contact-eye-blackout');
   let eyeTrigger,videoPriming=false;
-  let requestedEyeTime=0;
-  const seekEyeVideo=time=>{
-    if(!eyeVideo)return;
-    requestedEyeTime=time;
-    // Let Chrome finish decoding the current seek before asking for another
-    // frame. Repeated currentTime writes during fast scroll can cancel seeks.
-    if(eyeVideo.readyState<2||eyeVideo.seeking)return;
-    if(Math.abs(eyeVideo.currentTime-requestedEyeTime)>.04){
-      try{eyeVideo.currentTime=requestedEyeTime;}catch(error){/* retry on the next scroll update */}
-    }
-  };
-  eyeVideo?.addEventListener('seeked',()=>{
-    if(Math.abs(eyeVideo.currentTime-requestedEyeTime)>.04)seekEyeVideo(requestedEyeTime);
-  });
   const primeEyeVideo=()=>{
     if(!eyeVideo||videoPriming||eyeVideo.dataset.primed)return;
     videoPriming=true;
@@ -766,28 +753,28 @@ if(!still&&window.gsap&&window.ScrollTrigger){
   };
   const updateEyeTransition=self=>{
     const progress=self.progress;
-    if(eyeVideo&&eyeVideo.readyState>=1&&Number.isFinite(eyeVideo.duration)){
-      const videoProgress=Math.min(1,progress/.72);
-      const time=Math.min(eyeVideo.duration-.02,videoProgress*eyeVideo.duration);
-      seekEyeVideo(time);
-    }
-    const blackout=document.querySelector('.contact-eye-blackout');
-    if(blackout)blackout.style.opacity=String(Math.max(0,Math.min(1,(progress-.52)/.2)));
     const reveal=Math.max(0,Math.min(1,(progress-.72)/.16));
     if(contactStage){
-      contactStage.style.opacity=String(reveal);
       contactStage.style.pointerEvents=reveal>.98?'auto':'none';
       contactStage.inert=reveal<.98;
       contactStage.setAttribute('aria-hidden',String(reveal<.98));
     }
   };
+  const eyeTimeline=gsap.timeline({scrollTrigger:{trigger:'#contact-eye',start:'top top',end:'+=140%',pin:true,pinSpacing:true,scrub:.7,anticipatePin:1,invalidateOnRefresh:true,onEnter:primeEyeVideo,onUpdate:updateEyeTransition,onRefresh:updateEyeTransition}});
+  eyeTrigger=eyeTimeline.scrollTrigger;
   eyeVideo?.addEventListener('loadedmetadata',()=>{
-    if(eyeTrigger)updateEyeTransition(eyeTrigger);
+    if(Number.isFinite(eyeVideo.duration)&&eyeVideo.duration>0){
+      eyeTimeline
+        .to(eyeVideo,{currentTime:eyeVideo.duration,duration:.72,ease:'none'},0)
+        .fromTo(blackout,{opacity:0},{opacity:1,duration:.2,ease:'none'},.52)
+        .fromTo(contactStage,{opacity:0},{opacity:1,duration:.16,ease:'none'},.72)
+        .to({}, {duration:.12},.88);
+    }
     ScrollTrigger.refresh();
+    if(eyeTrigger)updateEyeTransition(eyeTrigger);
   },{once:true});
   eyeVideo?.addEventListener('loadeddata',()=>{if(eyeTrigger)updateEyeTransition(eyeTrigger);if(eyeTrigger?.isActive)primeEyeVideo();},{once:true});
   eyeVideo?.addEventListener('canplay',()=>{if(eyeTrigger)updateEyeTransition(eyeTrigger);},{once:true});
-  eyeTrigger=ScrollTrigger.create({trigger:'#contact-eye',start:'top top',end:'+=140%',pin:true,pinSpacing:true,scrub:.7,anticipatePin:1,invalidateOnRefresh:true,onEnter:primeEyeVideo,onUpdate:updateEyeTransition,onRefresh:updateEyeTransition});
   eyeVideo?.load();
 
   document.querySelectorAll('a[href="#contact-panel"]').forEach(link=>link.addEventListener('click',event=>{
