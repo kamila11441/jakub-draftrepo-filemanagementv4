@@ -825,20 +825,21 @@ button{font:inherit;color:inherit}
     bottom:calc(14px + env(safe-area-inset-bottom));
     z-index:20;
     padding:6px 14px;
-    flex-wrap:nowrap;
-    justify-content:flex-start;
-    overflow-x:auto;
-    scrollbar-width:none;
+    display:grid;
+    grid-template-columns:repeat(3,max-content);
+    justify-content:center;
+    align-content:center;
+    gap:6px;
+    overflow:visible;
     opacity:0;
     transform:translateY(18px);
     transition:opacity .3s,transform .4s cubic-bezier(.2,.7,.2,1);
   }
 
-  .filters::-webkit-scrollbar{display:none}
-
   .filters.show{
     opacity:1;
     transform:none;
+    pointer-events:auto;
   }
 
   .filters:not(.show) .filter{pointer-events:none}
@@ -874,28 +875,37 @@ button{font:inherit;color:inherit}
 
   .about{padding:36px 0 90px}
 
-  .contact-panel-stage{padding:24px}
+  .contact-panel-stage{padding:0}
 
   .panel{
-    border-radius:24px;
-    min-height:92svh;
-    padding:40px 22px 24px;
+    width:100%;
+    height:100%;
+    min-height:100%;
+    border-radius:0;
+    padding:calc(28px + env(safe-area-inset-top)) 24px calc(22px + env(safe-area-inset-bottom));
   }
+
+  .panel h2{font-size:clamp(56px,14vw,92px);line-height:.9}
+  .contact-kicker{margin-bottom:clamp(28px,7vw,40px)}
+  .panel-row{flex-direction:column;align-items:flex-start;gap:18px;width:100%}
+  .panel p{max-width:100%}
 
   .links{width:100%}
 
   .links a{
     flex:1;
+    min-width:0;
     text-align:center;
-    padding:16px 12px;
+    padding:13px 10px;
   }
 
   .panel-row{margin-top:auto}
 
   .footer{
     flex-direction:column;
-    gap:6px;
-    margin-top:32px;
+    gap:4px;
+    margin-top:clamp(24px,5svh,38px);
+    font-size:12px;
   }
 
   .frame img{height:56svh}
@@ -952,6 +962,10 @@ button{font:inherit;color:inherit}
   .contact-panel-stage{position:relative;inset:auto;min-height:100svh;padding:24px;opacity:1;pointer-events:auto}
   .panel{min-height:calc(100svh - 48px)}
   .work-modal-visual img{transition:none}
+}
+@media(prefers-reduced-motion:reduce) and (max-width:760px){
+  .contact-panel-stage{padding:0}
+  .panel{height:auto;min-height:100svh;padding:calc(28px + env(safe-area-inset-top)) 24px calc(22px + env(safe-area-inset-bottom))}
 }
 [hidden]{display:none!important}
 html.lock{overflow:hidden}
@@ -1055,7 +1069,7 @@ html.lock{overflow:hidden}
 
   <section class="contact" id="contact">
     <div class="contact-eye-scene" id="contact-eye">
-      <video class="contact-eye-video" poster="images/portfolio-iris-transition.jpg" preload="auto" muted playsinline tabindex="-1" aria-hidden="true">
+      <video class="contact-eye-video" poster="images/portfolio-iris-transition.jpg" preload="auto" muted playsinline webkit-playsinline="true" tabindex="-1" aria-hidden="true">
         <source src="images/iris-close.mp4" type="video/mp4">
       </video>
       <span class="contact-eye-blackout" aria-hidden="true"></span>
