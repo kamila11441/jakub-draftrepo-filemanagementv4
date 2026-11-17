@@ -31,7 +31,7 @@ function setLanguage(lang){
   const modelFilter=document.getElementById('workModalModel');if(modelFilter)modelFilter.setAttribute('aria-label',lang==='pl'?'Filtruj według modelu':'Filter by model');
   put('.about h2',t.about);put('#aboutText',t.aboutText);put('.contact-kicker',t.contactKicker);put('.contact h2',t.contact);put('.panel-row p',t.contactText);
   const links=document.querySelectorAll('.links a');if(links[0])links[0].textContent=t.email;if(links[1])links[1].textContent=t.instagram;
-  put('.footer span:nth-child(2)',t.footer);put('#showMore',t.showMore);put('.footer a',t.top);put('.cursor i',t.view);put('.lb-close',t.close);attr('.lb','aria-label',lang==='en'?'Photograph viewer':'Przeglądarka zdjęć');
+  put('#showMore',t.showMore);put('.footer a',t.top);put('.cursor i',t.view);put('.lb-close',t.close);attr('.lb','aria-label',lang==='en'?'Photograph viewer':'Przeglądarka zdjęć');
   try{localStorage.setItem('jk-portfolio-language',document.documentElement.lang);}catch(e){}
   }catch(error){console.error('Language update failed:',error);}
 }
@@ -728,13 +728,30 @@ if(!still&&window.gsap&&window.ScrollTrigger){
 
   const eyeVideo=document.querySelector('.contact-eye-video');
   const contactStage=document.querySelector('.contact-panel-stage');
-  let eyeTrigger;
+  let eyeTrigger,videoPriming=false;
+  const primeEyeVideo=()=>{
+    if(!eyeVideo||videoPriming||eyeVideo.dataset.primed)return;
+    videoPriming=true;
+    const playback=eyeVideo.play();
+    if(playback&&typeof playback.then==='function'){
+      playback.then(()=>{
+        eyeVideo.pause();
+        eyeVideo.dataset.primed='true';
+        videoPriming=false;
+        if(eyeTrigger)updateEyeTransition(eyeTrigger);
+      }).catch(()=>{videoPriming=false;});
+    }else{
+      eyeVideo.pause();
+      eyeVideo.dataset.primed='true';
+      videoPriming=false;
+    }
+  };
   const updateEyeTransition=self=>{
     const progress=self.progress;
     if(eyeVideo&&eyeVideo.readyState>=1&&Number.isFinite(eyeVideo.duration)){
       const videoProgress=Math.min(1,progress/.72);
       const time=Math.min(eyeVideo.duration-.02,videoProgress*eyeVideo.duration);
-      if(Math.abs(eyeVideo.currentTime-time)>.035)eyeVideo.currentTime=time;
+      if(Math.abs(eyeVideo.currentTime-time)>.016)eyeVideo.currentTime=time;
     }
     const blackout=document.querySelector('.contact-eye-blackout');
     if(blackout)blackout.style.opacity=String(Math.max(0,Math.min(1,(progress-.52)/.2)));
@@ -750,9 +767,9 @@ if(!still&&window.gsap&&window.ScrollTrigger){
     if(eyeTrigger)updateEyeTransition(eyeTrigger);
     ScrollTrigger.refresh();
   },{once:true});
-  eyeVideo?.addEventListener('loadeddata',()=>{if(eyeTrigger)updateEyeTransition(eyeTrigger);},{once:true});
+  eyeVideo?.addEventListener('loadeddata',()=>{if(eyeTrigger)updateEyeTransition(eyeTrigger);if(eyeTrigger?.isActive)primeEyeVideo();},{once:true});
   eyeVideo?.addEventListener('canplay',()=>{if(eyeTrigger)updateEyeTransition(eyeTrigger);},{once:true});
-  eyeTrigger=ScrollTrigger.create({trigger:'#contact-eye',start:'top top',end:'+=140%',pin:true,pinSpacing:true,scrub:.7,anticipatePin:1,invalidateOnRefresh:true,onUpdate:updateEyeTransition,onRefresh:updateEyeTransition});
+  eyeTrigger=ScrollTrigger.create({trigger:'#contact-eye',start:'top top',end:'+=140%',pin:true,pinSpacing:true,scrub:.7,anticipatePin:1,invalidateOnRefresh:true,onEnter:primeEyeVideo,onUpdate:updateEyeTransition,onRefresh:updateEyeTransition});
   eyeVideo?.load();
 
   document.querySelectorAll('a[href="#contact-panel"]').forEach(link=>link.addEventListener('click',event=>{
