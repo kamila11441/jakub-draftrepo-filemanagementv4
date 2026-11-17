@@ -6,6 +6,10 @@ const workModalModel=document.getElementById('workModalModel');
 const showMoreButton=document.getElementById('showMore');
 const root=document.documentElement;
 
+// Chrome may restore the browser's previous scroll offset while the pinned
+// intro is being measured, leaving the scrubbed hero in its black end frame.
+if('scrollRestoration' in history)history.scrollRestoration='manual';
+
 let photos=[],active='all',visibleLimit=12,modalEntries=[],modalActive='all',modalActiveModel='';
 
 const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -729,6 +733,20 @@ if(!still&&window.gsap&&window.ScrollTrigger){
   const eyeVideo=document.querySelector('.contact-eye-video');
   const contactStage=document.querySelector('.contact-panel-stage');
   let eyeTrigger,videoPriming=false;
+  let requestedEyeTime=0;
+  const seekEyeVideo=time=>{
+    if(!eyeVideo)return;
+    requestedEyeTime=time;
+    // Let Chrome finish decoding the current seek before asking for another
+    // frame. Repeated currentTime writes during fast scroll can cancel seeks.
+    if(eyeVideo.readyState<2||eyeVideo.seeking)return;
+    if(Math.abs(eyeVideo.currentTime-requestedEyeTime)>.04){
+      try{eyeVideo.currentTime=requestedEyeTime;}catch(error){/* retry on the next scroll update */}
+    }
+  };
+  eyeVideo?.addEventListener('seeked',()=>{
+    if(Math.abs(eyeVideo.currentTime-requestedEyeTime)>.04)seekEyeVideo(requestedEyeTime);
+  });
   const primeEyeVideo=()=>{
     if(!eyeVideo||videoPriming||eyeVideo.dataset.primed)return;
     videoPriming=true;
@@ -751,7 +769,7 @@ if(!still&&window.gsap&&window.ScrollTrigger){
     if(eyeVideo&&eyeVideo.readyState>=1&&Number.isFinite(eyeVideo.duration)){
       const videoProgress=Math.min(1,progress/.72);
       const time=Math.min(eyeVideo.duration-.02,videoProgress*eyeVideo.duration);
-      if(Math.abs(eyeVideo.currentTime-time)>.016)eyeVideo.currentTime=time;
+      seekEyeVideo(time);
     }
     const blackout=document.querySelector('.contact-eye-blackout');
     if(blackout)blackout.style.opacity=String(Math.max(0,Math.min(1,(progress-.52)/.2)));
@@ -782,6 +800,12 @@ if(!still&&window.gsap&&window.ScrollTrigger){
 
   gsap.fromTo('.work-head',{y:48,opacity:0},{y:0,opacity:1,ease:'none',scrollTrigger:{trigger:'.work-head',start:'top 88%',end:'top 50%',scrub:.75,invalidateOnRefresh:true}});
 }
+window.addEventListener('pageshow',()=>{
+  if(location.hash!=='#top')return;
+  if(lenis)lenis.scrollTo(0,{immediate:true});
+  else window.scrollTo(0,0);
+  if(window.ScrollTrigger)requestAnimationFrame(()=>ScrollTrigger.refresh());
+},{once:true});
 if(still||!window.gsap||!window.ScrollTrigger){
   const panel=document.querySelector('.contact-panel-stage');
   const video=document.querySelector('.contact-eye-video');
