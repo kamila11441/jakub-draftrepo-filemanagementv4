@@ -731,7 +731,7 @@ if(!still&&window.gsap&&window.ScrollTrigger){
   let eyeTrigger;
   const updateEyeTransition=self=>{
     const progress=self.progress;
-    if(eyeVideo&&eyeVideo.readyState>=2&&Number.isFinite(eyeVideo.duration)){
+    if(eyeVideo&&eyeVideo.readyState>=1&&Number.isFinite(eyeVideo.duration)){
       const videoProgress=Math.min(1,progress/.72);
       const time=Math.min(eyeVideo.duration-.02,videoProgress*eyeVideo.duration);
       if(Math.abs(eyeVideo.currentTime-time)>.035)eyeVideo.currentTime=time;
@@ -750,7 +750,10 @@ if(!still&&window.gsap&&window.ScrollTrigger){
     if(eyeTrigger)updateEyeTransition(eyeTrigger);
     ScrollTrigger.refresh();
   },{once:true});
+  eyeVideo?.addEventListener('loadeddata',()=>{if(eyeTrigger)updateEyeTransition(eyeTrigger);},{once:true});
+  eyeVideo?.addEventListener('canplay',()=>{if(eyeTrigger)updateEyeTransition(eyeTrigger);},{once:true});
   eyeTrigger=ScrollTrigger.create({trigger:'#contact-eye',start:'top top',end:'+=140%',pin:true,pinSpacing:true,scrub:.7,anticipatePin:1,invalidateOnRefresh:true,onUpdate:updateEyeTransition,onRefresh:updateEyeTransition});
+  eyeVideo?.load();
 
   document.querySelectorAll('a[href="#contact-panel"]').forEach(link=>link.addEventListener('click',event=>{
     event.preventDefault();
