@@ -21,7 +21,12 @@
       "showCaption": true,
       "model": "@ziemeeek_",
       "description": "",
-      "date": ""
+      "date": "summer 25'",
+      "title": "M portrait",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
     },
     {
       "image": "images/1792087840989-qvyub-DSC_0238-2.jpg",
