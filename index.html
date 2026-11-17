@@ -887,7 +887,8 @@ button{font:inherit;color:inherit}
 
   .panel h2{font-size:clamp(56px,14vw,92px);line-height:.9}
   .contact-kicker{margin-bottom:clamp(28px,7vw,40px)}
-  .panel-row{flex-direction:column;align-items:flex-start;gap:18px;width:100%}
+  .contact-head{margin-top:auto;margin-bottom:clamp(28px,6svh,48px)}
+  .panel-row{flex-direction:column;align-items:flex-start;gap:18px;width:100%;margin-top:0}
   .panel p{max-width:100%}
 
   .links{width:100%}
@@ -903,9 +904,11 @@ button{font:inherit;color:inherit}
 
   .footer{
     flex-direction:column;
+    align-items:center;
     gap:4px;
     margin-top:clamp(24px,5svh,38px);
     font-size:12px;
+    text-align:center;
   }
 
   .frame img{height:56svh}
@@ -1070,7 +1073,7 @@ html.lock{overflow:hidden}
   <section class="contact" id="contact">
     <div class="contact-eye-scene" id="contact-eye">
       <video class="contact-eye-video" poster="images/portfolio-iris-transition.jpg" preload="auto" muted playsinline webkit-playsinline="true" tabindex="-1" aria-hidden="true">
-        <source src="images/iris-close.mp4" type="video/mp4">
+        <source src="images/iris-close-v2.mp4" type="video/mp4">
       </video>
       <span class="contact-eye-blackout" aria-hidden="true"></span>
       <div class="contact-panel-stage" id="contact-panel-stage" aria-hidden="true" inert>
@@ -1091,7 +1094,6 @@ html.lock{overflow:hidden}
 
         <footer class="footer">
           <span>© Jakub Kowalski</span>
-          <span>Independent photographer</span>
           <a href="#top">Back to top ↑</a>
         </footer>
         </div>
