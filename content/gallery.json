@@ -514,6 +514,19 @@
       "showCaption": false
     },
     {
+      "image": "images/1794948397949-2vfmo-SCRL_0023.JPG",
+      "alt": "",
+      "category": "people",
+      "title": "",
+      "model": "",
+      "description": "",
+      "date": "",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
+    },
+    {
       "image": "images/1792088038643-0cdq7-IMG_3048.jpg",
       "alt": "IMG 3048",
       "category": "people",
@@ -530,19 +543,6 @@
       "alt": "IMG 4222",
       "category": "editorial",
       "showCaption": false
-    },
-    {
-      "image": "images/1794948397949-2vfmo-SCRL_0023.JPG",
-      "alt": "",
-      "category": "people",
-      "title": "",
-      "model": "",
-      "description": "",
-      "date": "",
-      "showTitle": true,
-      "showModel": true,
-      "showDescription": true,
-      "showDate": true
     },
     {
       "image": "images/1792088936267-gqn4u-DSC_1290.jpg",
