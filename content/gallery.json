@@ -15,6 +15,19 @@
       "showDate": true
     },
     {
+      "image": "images/1794948401986-taqch-SCRL_0024.JPG",
+      "alt": "",
+      "category": "people",
+      "title": "",
+      "model": "",
+      "description": "",
+      "date": "",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
+    },
+    {
       "image": "images/1792087789062-ajksp-90F77E6F-FAF0-4589-A110-2D63B836E881-2.JPG",
       "alt": "",
       "category": "people",
@@ -51,19 +64,6 @@
       "description": "studio",
       "date": "autumn 26'",
       "title": "W portrait",
-      "showTitle": true,
-      "showModel": true,
-      "showDescription": true,
-      "showDate": true
-    },
-    {
-      "image": "images/1794948401986-taqch-SCRL_0024.JPG",
-      "alt": "",
-      "category": "people",
-      "title": "",
-      "model": "",
-      "description": "",
-      "date": "",
       "showTitle": true,
       "showModel": true,
       "showDescription": true,
