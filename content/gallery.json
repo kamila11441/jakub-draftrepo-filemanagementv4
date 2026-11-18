@@ -74,6 +74,20 @@
       "showCaption": false
     },
     {
+      "image": "images/1792089567401-9hdr7-IMG_4513.jpg",
+      "alt": "",
+      "category": "people",
+      "showCaption": false,
+      "model": "@zakkmaja",
+      "description": "studio",
+      "date": "autumn 26'",
+      "title": "W portrait",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
+    },
+    {
       "image": "images/1792019450741-3lg5p-temp_image_86FB89D1-F46E-4C66-BC96-7142E3D96701.jpeg",
       "alt": "temp image 86FB89D1 F46E 4C66 BC96 7142E3D96701",
       "category": "people",
@@ -90,20 +104,6 @@
       "alt": "temp image 5D40B997 B3D9 49AB 9F64 B1795FA03592",
       "category": "people",
       "showCaption": false
-    },
-    {
-      "image": "images/1792089567401-9hdr7-IMG_4513.jpg",
-      "alt": "",
-      "category": "people",
-      "showCaption": false,
-      "model": "@zakkmaja",
-      "description": "studio",
-      "date": "autumn 26'",
-      "title": "W portrait",
-      "showTitle": true,
-      "showModel": true,
-      "showDescription": true,
-      "showDate": true
     },
     {
       "image": "images/1794003166061-djeex-DSC_0080.jpg",
