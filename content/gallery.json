@@ -80,20 +80,6 @@
       "showCaption": false
     },
     {
-      "image": "images/1792087806809-41lxd-DSC_0045.jpg",
-      "alt": "",
-      "category": "people",
-      "showCaption": true,
-      "model": "@ziemeeek_",
-      "description": "nature",
-      "date": "summer 25'",
-      "title": "nostalgic walk",
-      "showTitle": true,
-      "showModel": true,
-      "showDescription": true,
-      "showDate": true
-    },
-    {
       "image": "images/1794003166061-djeex-DSC_0080.jpg",
       "alt": "",
       "category": "people",
@@ -130,6 +116,20 @@
       "showTitle": false,
       "showModel": true,
       "showDescription": false,
+      "showDate": true
+    },
+    {
+      "image": "images/1792087806809-41lxd-DSC_0045.jpg",
+      "alt": "",
+      "category": "people",
+      "showCaption": true,
+      "model": "@ziemeeek_",
+      "description": "nature",
+      "date": "summer 25'",
+      "title": "nostalgic walk",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
       "showDate": true
     },
     {
