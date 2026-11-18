@@ -513,8 +513,16 @@
     {
       "image": "images/1792088795248-xfmhd-0A46427D-8BB8-4338-B439-D06839CD2129.JPG",
       "alt": "0A46427D 8BB8 4338 B439 D06839CD2129",
-      "category": "events",
-      "showCaption": false
+      "category": "editorial",
+      "showCaption": false,
+      "title": "",
+      "showTitle": true,
+      "model": "",
+      "showModel": true,
+      "description": "",
+      "showDescription": true,
+      "date": "",
+      "showDate": true
     },
     {
       "image": "images/1792088936267-gqn4u-DSC_1290.jpg",
