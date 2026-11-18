@@ -339,6 +339,19 @@
       "showCaption": false
     },
     {
+      "image": "images/1794948397949-2vfmo-SCRL_0023.JPG",
+      "alt": "",
+      "category": "people",
+      "title": "",
+      "model": "",
+      "description": "",
+      "date": "",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
+    },
+    {
       "image": "images/1792087868197-uchd9-DSC_0342-2.jpg",
       "alt": "DSC 0342 2",
       "category": "people",
@@ -358,19 +371,6 @@
       "model": "@alleksandra.jozwiak",
       "description": "",
       "date": ""
-    },
-    {
-      "image": "images/1794948397949-2vfmo-SCRL_0023.JPG",
-      "alt": "",
-      "category": "people",
-      "title": "",
-      "model": "",
-      "description": "",
-      "date": "",
-      "showTitle": true,
-      "showModel": true,
-      "showDescription": true,
-      "showDate": true
     },
     {
       "image": "images/1792087892357-rityl-DSC_0361.JPG",
