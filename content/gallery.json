@@ -28,20 +28,6 @@
       "showDate": true
     },
     {
-      "image": "images/1792087806809-41lxd-DSC_0045.jpg",
-      "alt": "",
-      "category": "people",
-      "showCaption": true,
-      "model": "@ziemeeek_",
-      "description": "nature",
-      "date": "summer 25'",
-      "title": "nostalgic walk",
-      "showTitle": true,
-      "showModel": true,
-      "showDescription": true,
-      "showDate": true
-    },
-    {
       "image": "images/1792087789062-ajksp-90F77E6F-FAF0-4589-A110-2D63B836E881-2.JPG",
       "alt": "",
       "category": "people",
@@ -50,6 +36,20 @@
       "description": "nature",
       "date": "summer 25'",
       "title": "M portrait",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
+    },
+    {
+      "image": "images/1792087806809-41lxd-DSC_0045.jpg",
+      "alt": "",
+      "category": "people",
+      "showCaption": true,
+      "model": "@ziemeeek_",
+      "description": "nature",
+      "date": "summer 25'",
+      "title": "nostalgic walk",
       "showTitle": true,
       "showModel": true,
       "showDescription": true,
