@@ -417,8 +417,16 @@
     {
       "image": "images/1792087991568-mp2va-DSC_0963.jpg",
       "alt": "DSC 0963",
-      "category": "events",
-      "showCaption": false
+      "category": "people",
+      "showCaption": false,
+      "title": "",
+      "showTitle": true,
+      "model": "",
+      "showModel": true,
+      "description": "",
+      "showDescription": true,
+      "date": "",
+      "showDate": true
     },
     {
       "image": "images/1792087985751-x3nxe-DSC_0960.jpg",
