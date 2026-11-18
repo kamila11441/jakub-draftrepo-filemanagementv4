@@ -57,6 +57,19 @@
       "showDate": true
     },
     {
+      "image": "images/1794948401986-taqch-SCRL_0024.JPG",
+      "alt": "",
+      "category": "people",
+      "title": "",
+      "model": "",
+      "description": "",
+      "date": "",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
+    },
+    {
       "image": "images/1794003166061-djeex-DSC_0080.jpg",
       "alt": "",
       "category": "people",
@@ -93,19 +106,6 @@
       "showTitle": false,
       "showModel": true,
       "showDescription": false,
-      "showDate": true
-    },
-    {
-      "image": "images/1794948401986-taqch-SCRL_0024.JPG",
-      "alt": "",
-      "category": "people",
-      "title": "",
-      "model": "",
-      "description": "",
-      "date": "",
-      "showTitle": true,
-      "showModel": true,
-      "showDescription": true,
       "showDate": true
     },
     {
