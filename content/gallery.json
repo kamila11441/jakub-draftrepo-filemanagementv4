@@ -360,6 +360,19 @@
       "date": ""
     },
     {
+      "image": "images/1794948397949-2vfmo-SCRL_0023.JPG",
+      "alt": "",
+      "category": "people",
+      "title": "",
+      "model": "",
+      "description": "",
+      "date": "",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
+    },
+    {
       "image": "images/1792087892357-rityl-DSC_0361.JPG",
       "alt": "DSC 0361",
       "category": "people",
@@ -394,19 +407,6 @@
       "alt": "DSC 0838 3",
       "category": "people",
       "showCaption": false
-    },
-    {
-      "image": "images/1794948397949-2vfmo-SCRL_0023.JPG",
-      "alt": "",
-      "category": "people",
-      "title": "",
-      "model": "",
-      "description": "",
-      "date": "",
-      "showTitle": true,
-      "showModel": true,
-      "showDescription": true,
-      "showDate": true
     },
     {
       "image": "images/1792087935923-870o7-DSC_0874-4.jpg",
