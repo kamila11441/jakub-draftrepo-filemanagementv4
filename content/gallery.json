@@ -60,20 +60,6 @@
       "showCaption": false
     },
     {
-      "image": "images/1792087806809-41lxd-DSC_0045.jpg",
-      "alt": "",
-      "category": "people",
-      "showCaption": true,
-      "model": "@ziemeeek_",
-      "description": "nature",
-      "date": "summer 25'",
-      "title": "nostalgic walk",
-      "showTitle": true,
-      "showModel": true,
-      "showDescription": true,
-      "showDate": true
-    },
-    {
       "image": "images/1792089567401-9hdr7-IMG_4513.jpg",
       "alt": "",
       "category": "people",
@@ -82,6 +68,20 @@
       "description": "studio",
       "date": "autumn 26'",
       "title": "W portrait",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
+    },
+    {
+      "image": "images/1792087806809-41lxd-DSC_0045.jpg",
+      "alt": "",
+      "category": "people",
+      "showCaption": true,
+      "model": "@ziemeeek_",
+      "description": "nature",
+      "date": "summer 25'",
+      "title": "nostalgic walk",
       "showTitle": true,
       "showModel": true,
       "showDescription": true,
