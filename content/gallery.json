@@ -514,6 +514,19 @@
       "showCaption": false
     },
     {
+      "image": "images/1794948401986-taqch-SCRL_0024.JPG",
+      "alt": "",
+      "category": "people",
+      "title": "",
+      "model": "",
+      "description": "",
+      "date": "",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
+    },
+    {
       "image": "images/1792088038643-0cdq7-IMG_3048.jpg",
       "alt": "IMG 3048",
       "category": "people",
@@ -547,19 +560,6 @@
       "image": "images/1794948341909-dyaws-DSC_0151.jpg",
       "alt": "",
       "category": "other",
-      "title": "",
-      "model": "",
-      "description": "",
-      "date": "",
-      "showTitle": true,
-      "showModel": true,
-      "showDescription": true,
-      "showDate": true
-    },
-    {
-      "image": "images/1794948401986-taqch-SCRL_0024.JPG",
-      "alt": "",
-      "category": "people",
       "title": "",
       "model": "",
       "description": "",
