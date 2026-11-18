@@ -42,6 +42,12 @@
       "showDate": true
     },
     {
+      "image": "images/1792025226637-v1uv7-IMG_4128.jpeg",
+      "alt": "IMG 4128",
+      "category": "editorial",
+      "showCaption": false
+    },
+    {
       "image": "images/1792087806809-41lxd-DSC_0045.jpg",
       "alt": "",
       "category": "people",
@@ -92,12 +98,6 @@
       "image": "images/1792019450741-3lg5p-temp_image_86FB89D1-F46E-4C66-BC96-7142E3D96701.jpeg",
       "alt": "temp image 86FB89D1 F46E 4C66 BC96 7142E3D96701",
       "category": "people",
-      "showCaption": false
-    },
-    {
-      "image": "images/1792025226637-v1uv7-IMG_4128.jpeg",
-      "alt": "IMG 4128",
-      "category": "editorial",
       "showCaption": false
     },
     {
