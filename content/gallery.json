@@ -258,6 +258,19 @@
       "showCaption": false
     },
     {
+      "image": "images/1794948401986-taqch-SCRL_0024.JPG",
+      "alt": "",
+      "category": "people",
+      "title": "",
+      "model": "",
+      "description": "",
+      "date": "",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
+    },
+    {
       "image": "images/1792087795274-tx2jq-5617E83C-F9D7-4CBD-A763-9D0D24B5058B.JPG",
       "alt": "5617E83C F9D7 4CBD A763 9D0D24B5058B",
       "category": "people",
@@ -277,19 +290,6 @@
       "alt": "DSC 0046",
       "category": "people",
       "showCaption": false
-    },
-    {
-      "image": "images/1794948401986-taqch-SCRL_0024.JPG",
-      "alt": "",
-      "category": "people",
-      "title": "",
-      "model": "",
-      "description": "",
-      "date": "",
-      "showTitle": true,
-      "showModel": true,
-      "showDescription": true,
-      "showDate": true
     },
     {
       "image": "images/1792087856622-dutar-DSC_0310-2.jpg",
