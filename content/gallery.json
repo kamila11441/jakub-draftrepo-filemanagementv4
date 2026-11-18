@@ -378,6 +378,19 @@
       "showCaption": false
     },
     {
+      "image": "images/1794948401986-taqch-SCRL_0024.JPG",
+      "alt": "",
+      "category": "people",
+      "title": "",
+      "model": "",
+      "description": "",
+      "date": "",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
+    },
+    {
       "image": "images/1792087918741-8yli5-DSC_0792-2.JPG",
       "alt": "DSC 0792 2",
       "category": "people",
@@ -412,19 +425,6 @@
       "alt": "DSC 0902 2",
       "category": "people",
       "showCaption": false
-    },
-    {
-      "image": "images/1794948401986-taqch-SCRL_0024.JPG",
-      "alt": "",
-      "category": "people",
-      "title": "",
-      "model": "",
-      "description": "",
-      "date": "",
-      "showTitle": true,
-      "showModel": true,
-      "showDescription": true,
-      "showDate": true
     },
     {
       "image": "images/1792088015105-t730m-DSC_1033-3.jpg",
