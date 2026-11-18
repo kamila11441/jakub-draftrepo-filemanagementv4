@@ -205,6 +205,19 @@
       "showCaption": false
     },
     {
+      "image": "images/1794948401986-taqch-SCRL_0024.JPG",
+      "alt": "",
+      "category": "people",
+      "title": "",
+      "model": "",
+      "description": "",
+      "date": "",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
+    },
+    {
       "image": "images/1792019441588-jk85m-IMG_4120.jpeg",
       "alt": "IMG 4120",
       "category": "people",
@@ -227,19 +240,6 @@
       "model": "@alleksandra.jozwiak",
       "description": "",
       "date": ""
-    },
-    {
-      "image": "images/1794948401986-taqch-SCRL_0024.JPG",
-      "alt": "",
-      "category": "people",
-      "title": "",
-      "model": "",
-      "description": "",
-      "date": "",
-      "showTitle": true,
-      "showModel": true,
-      "showDescription": true,
-      "showDate": true
     },
     {
       "image": "images/1792084712942-f6n2r-DSC_0327.jpg",
