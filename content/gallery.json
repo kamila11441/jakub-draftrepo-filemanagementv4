@@ -145,6 +145,19 @@
       "date": ""
     },
     {
+      "image": "images/1794948401986-taqch-SCRL_0024.JPG",
+      "alt": "",
+      "category": "people",
+      "title": "",
+      "model": "",
+      "description": "",
+      "date": "",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
+    },
+    {
       "image": "images/1792019448965-ticcg-temp_image_06F46D78-A70B-43F9-8DF3-D19010B87E98.jpeg",
       "alt": "temp image 06F46D78 A70B 43F9 8DF3 D19010B87E98",
       "category": "people",
@@ -161,19 +174,6 @@
       "alt": "EF3E74B6 65E0 4DFF 8575 4C4E78BC81A8",
       "category": "people",
       "showCaption": false
-    },
-    {
-      "image": "images/1794948401986-taqch-SCRL_0024.JPG",
-      "alt": "",
-      "category": "people",
-      "title": "",
-      "model": "",
-      "description": "",
-      "date": "",
-      "showTitle": true,
-      "showModel": true,
-      "showDescription": true,
-      "showDate": true
     },
     {
       "image": "images/1792025183864-h86c3-IMG_7926.jpeg",
