@@ -14,6 +14,20 @@
       "showDate": true
     },
     {
+      "image": "images/1792087840989-qvyub-DSC_0238-2.jpg",
+      "alt": "",
+      "category": "people",
+      "showCaption": true,
+      "model": "@alleksandra.jozwiak",
+      "description": "studio",
+      "date": "autumn 26'",
+      "title": "W portrait",
+      "showTitle": true,
+      "showModel": true,
+      "showDescription": true,
+      "showDate": true
+    },
+    {
       "image": "images/1792087806809-41lxd-DSC_0045.jpg",
       "alt": "",
       "category": "people",
@@ -36,20 +50,6 @@
       "description": "nature",
       "date": "summer 25'",
       "title": "M portrait",
-      "showTitle": true,
-      "showModel": true,
-      "showDescription": true,
-      "showDate": true
-    },
-    {
-      "image": "images/1792087840989-qvyub-DSC_0238-2.jpg",
-      "alt": "",
-      "category": "people",
-      "showCaption": true,
-      "model": "@alleksandra.jozwiak",
-      "description": "studio",
-      "date": "autumn 26'",
-      "title": "W portrait",
       "showTitle": true,
       "showModel": true,
       "showDescription": true,
